@@ -48,7 +48,7 @@ public class ObjectManager : MonoBehaviour
         //Loops thorough all objects and calls beginAll() on each one. Basically calls the Begin() function on all effects on all objects.
         for(int i = 0; i < objects.Count; i++)
         {
-            objects[i].beginAll(0f);
+            objects[i].beginAll();
         }
 
         isRunning = true;
@@ -59,7 +59,7 @@ public class ObjectManager : MonoBehaviour
         //Loops thorough all objects and calls stopAll() on each one.
         for (int i = 0; i < objects.Count; i++)
         {
-            objects[i].stopAll(0f);
+            objects[i].stopAll();
         }
 
         isRunning = false;
@@ -70,7 +70,7 @@ public class ObjectManager : MonoBehaviour
         //Loops thorough all objects and calls pauseAll() on each one.
         for (int i = 0; i < objects.Count; i++)
         {
-            objects[i].pauseAll(0f);
+            objects[i].pauseAll();
         }
 
         isRunning = false;
@@ -81,7 +81,7 @@ public class ObjectManager : MonoBehaviour
         //Loops thorough all objects and calls resumeAll() on each one.
         for (int i = 0; i < objects.Count; i++)
         {
-            objects[i].resumeAll(0f);
+            objects[i].resumeAll();
         }
 
         isRunning = true;

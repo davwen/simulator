@@ -9,7 +9,6 @@ public class ModeManager : MonoBehaviour
 {
     public const string MODE_EDIT = "EDIT";
     public const string MODE_SPAWN = "SPAWN";
-    public const string MODE_DESTROY = "DESTROY";
 
     public string currentMode = MODE_SPAWN;
     public string currentLabel;
@@ -19,7 +18,6 @@ public class ModeManager : MonoBehaviour
     [Header("Labels")]
     public string editLabel = "Edit";
     public string spawnLabel = "Spawn";
-    public string destroyLabel = "Destroy";
 
 
     private void Update()
@@ -34,18 +32,18 @@ public class ModeManager : MonoBehaviour
             case MODE_SPAWN:
                 currentLabel = spawnLabel;
                 modeTxt.text = currentLabel;
+                ModeChange();
                 break;
 
             case MODE_EDIT:
                 currentLabel = editLabel;
                 modeTxt.text = currentLabel;
+                ModeChange();
                 break;
 
-            case MODE_DESTROY:
-                currentLabel = destroyLabel;
-                modeTxt.text = currentLabel;
-                break;
-      
+         
+            
+
         }
     }
 
@@ -60,15 +58,29 @@ public class ModeManager : MonoBehaviour
                 break;
 
             case MODE_EDIT:
-                result = MODE_DESTROY;
-                break;
-
-            case MODE_DESTROY:
                 result = MODE_SPAWN;
                 break;
+
+          
+
+           
         }
 
         return result;
+    }
+
+    public virtual void ModeChange() //Calls onModeChange() on every script.
+    {
+
+        GameObject[] gos = (GameObject[])GameObject.FindObjectsOfType(typeof(GameObject));
+        foreach (GameObject go in gos)
+        {
+            if (go && go.transform.parent == null)
+            {
+                go.gameObject.BroadcastMessage("onModeChange", currentMode, SendMessageOptions.DontRequireReceiver);
+            }
+        }
+
     }
 }
 

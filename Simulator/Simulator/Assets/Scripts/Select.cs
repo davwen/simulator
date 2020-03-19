@@ -97,4 +97,14 @@ public class Select : MonoBehaviour
         }
         currentlySelected = null;
     }
+
+    public void onModeChange(string mode)
+    {
+        switch (mode)
+        {
+            case ModeManager.MODE_SPAWN:
+                onDeselect();
+                break;
+        }
+    }
 }

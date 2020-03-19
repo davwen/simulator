@@ -19,7 +19,10 @@ public class Object : MonoBehaviour
 
     private void Update()
     {
-       
+        if (Input.GetKeyUp(KeyCode.G))
+        {
+            beginAll();
+        }
     }
 
     public void addEffect(Type effect)
@@ -44,7 +47,7 @@ public class Object : MonoBehaviour
 
             if (isRunning)
             {
-                beginAll(0f); //If I i don't begin all the newly added component will not start.
+                beginAll(); //If I i don't begin all the newly added component will not start.
 
             }
         }
@@ -65,71 +68,30 @@ public class Object : MonoBehaviour
     }
 
 
-    public void beginAll(float delay)
+    public void beginAll()
     {
-        MonoBehaviour[] allComponents = GetComponents<MonoBehaviour>();
-
-        for(int i = 0; i < allComponents.Length; i++)
-        {
-            try
-            {
-                allComponents[i].Invoke("Begin", delay);
-                isRunning = true;
-            }catch(Exception e) { print(e); }
-            
-        }
+        BroadcastMessage("Begin");
+        isRunning = true;
         
     }
 
-    public void stopAll(float delay)
+    public void stopAll()
     {
-        MonoBehaviour[] allComponents = GetComponents<MonoBehaviour>();
+        BroadcastMessage("Stop");
+        isRunning = false;
+    }
 
-        for (int i = 0; i < allComponents.Length; i++)
-        {
-            try
-            {
-                allComponents[i].Invoke("Stop", delay);
-                isRunning = false;
-            }
-            catch (Exception e) { print(e); }
-
-        }
+    public void pauseAll()
+    {
+        BroadcastMessage("Pause");
+        isRunning = false;
 
     }
 
-    public void pauseAll(float delay)
+    public void resumeAll()
     {
-        MonoBehaviour[] allComponents = GetComponents<MonoBehaviour>();
-
-        for (int i = 0; i < allComponents.Length; i++)
-        {
-            try
-            {
-                allComponents[i].Invoke("Pause", delay);
-                isRunning = false;
-            }
-            catch (Exception e) { print(e); }
-
-        }
-
-    }
-
-    public void resumeAll(float delay)
-    {
-        MonoBehaviour[] allComponents = GetComponents<MonoBehaviour>();
-
-        for (int i = 0; i < allComponents.Length; i++)
-        {
-            try
-            {
-                allComponents[i].Invoke("Resume", delay);
-                isRunning = true;
-            }
-            catch (Exception e) { print(e); }
-
-        }
-
+        BroadcastMessage("Resume");
+        isRunning = true;
     }
 
 

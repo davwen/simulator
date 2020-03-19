@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawningManager : MonoBehaviour
+public class Spawning : MonoBehaviour
 {
     public GameObject objectBase;
 
@@ -24,10 +24,28 @@ public class SpawningManager : MonoBehaviour
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0) && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN)
+        //Sends a raycast to see if any UI is in the way for placing.
+
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, -Vector2.up);
+
+        bool hitUI = false;
+
+        if(hit.collider != null)
+        {
+            print(hit.collider.gameObject.name);
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("UI"))
+            {
+                hitUI = true;
+            }
+        }
+    
+
+        if (Input.GetMouseButtonDown(0) && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN && !hitUI)
         {
             Spawn();
         }
+
+
     }
 
     public void selectNewSObj(SpawnableObj obj)

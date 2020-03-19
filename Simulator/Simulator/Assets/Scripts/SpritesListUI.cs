@@ -18,15 +18,20 @@ public class SpritesListUI : MonoBehaviour
 
     public GameObject parent;
 
-    public SpawningManager spawningManager;
+    public Spawning spawningManager;
+
+    public CanvasGroup canvasGroup;
 
     private void Start()
     {
         SpawnUI(Objects, false);
+        
     }
 
     public void SpawnUI(List<SpawnableObj> Objs, bool removeOld = true)
     {
+       
+
         //Removes all children before inserting any new.
         if (removeOld)
         {
@@ -87,6 +92,21 @@ public class SpritesListUI : MonoBehaviour
     {
         spawningManager.selectNewSObj(Objects[i]);
     }
+
+    public void onModeChange(string mode) //Called from the modeManager script
+    {
+        switch (mode)
+        {
+            case ModeManager.MODE_SPAWN:
+                canvasGroup.alpha = 1;
+                break;
+
+            case ModeManager.MODE_EDIT:
+                canvasGroup.alpha = 0;
+                break;
+        }
+    }
+    
 }
 
 [System.Serializable]
@@ -96,3 +116,4 @@ public class SpawnableObj
     public Sprite sprite;
     public Vector2[] colliderPoints;
 }
+

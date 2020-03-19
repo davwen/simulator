@@ -22,14 +22,14 @@ public class ValuesListUI : MonoBehaviour
 
     public GameObject parent;
 
-    public CanvasGroup ObjectUI;
+    public CanvasGroup canvasGroup;
 
     public string effectDisplayNameKey = "EFFECT_DISPLAY_NAME";
 
     public void makeUIofObj(Object obj)
     {
         SpawnUI(obj.values, obj);
-        ObjectUI.alpha = 1; //Shows the list UI.
+        canvasGroup.alpha = 1; //Shows the list UI.
     }
 
     public void updateList(Object obj)
@@ -47,7 +47,7 @@ public class ValuesListUI : MonoBehaviour
 
         if (hide)
         {
-            ObjectUI.alpha = 0; //Hides the list UI.
+            canvasGroup.alpha = 0; //Hides the list UI.
         }
         
     }
@@ -139,6 +139,8 @@ public class ValuesListUI : MonoBehaviour
            
 
         }
+
+       
     }
 
     private GameObject spawnItem(GameObject ui, int index) //Spawns item in list
@@ -155,5 +157,15 @@ public class ValuesListUI : MonoBehaviour
             parent.transform);
 
         return lastItem;
+    }
+
+    public void onModeChange(string mode)
+    {
+        switch (mode)
+        {
+            case ModeManager.MODE_SPAWN:
+                canvasGroup.alpha = 0;
+                break;
+        }
     }
 }
