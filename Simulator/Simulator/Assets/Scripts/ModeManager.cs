@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 //This script handles all the modes in the game, such as "Edit", "Spawn" and "Destroy".
 
 public class ModeManager : MonoBehaviour
 {
+    
     public const string MODE_EDIT = "EDIT";
     public const string MODE_SPAWN = "SPAWN";
 
@@ -19,14 +21,17 @@ public class ModeManager : MonoBehaviour
     public string editLabel = "Edit";
     public string spawnLabel = "Spawn";
 
+    public InputMaster controls;
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+        controls.Test.changeMode.performed += ctx => currentMode = nextMode(currentMode); //Change mode when pressen change button.
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            currentMode = nextMode(currentMode);
-        }
-
+        
         switch (currentMode) //Set the currentLabel in relation to the currentMode.
         {
             case MODE_SPAWN:
@@ -41,10 +46,17 @@ public class ModeManager : MonoBehaviour
                 ModeChange();
                 break;
 
-         
-            
-
         }
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 
     private string nextMode(string mode) //When the user presses left shift, what mode is the next?

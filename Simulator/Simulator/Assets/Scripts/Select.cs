@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 //This script handles the users ability to select and edit objects when they click on them.
 
@@ -39,7 +40,7 @@ public class Select : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
 
         // If it hits something...
-        if (hit.collider != null)
+        if (hit.collider != null && !EventSystem.current.IsPointerOverGameObject())
         {
             Object obj = hit.transform.gameObject.GetComponent<Object>(); //Gets the Object component only once.
 
@@ -65,7 +66,10 @@ public class Select : MonoBehaviour
     public void onSelect(Object selected) //An object has been selected.
     {
         //adds every item in values list.
+       
         UIList.makeUIofObj(selected);
+        
+        
 
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
 

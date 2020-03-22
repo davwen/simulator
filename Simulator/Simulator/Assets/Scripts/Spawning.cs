@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Spawning : MonoBehaviour
 {
@@ -38,9 +39,10 @@ public class Spawning : MonoBehaviour
                 hitUI = true;
             }
         }
-    
 
-        if (Input.GetMouseButtonDown(0) && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN && !hitUI)
+        print(EventSystem.current.IsPointerOverGameObject());
+
+        if (Input.GetMouseButtonDown(0) && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN && !EventSystem.current.IsPointerOverGameObject())
         {
             Spawn();
         }

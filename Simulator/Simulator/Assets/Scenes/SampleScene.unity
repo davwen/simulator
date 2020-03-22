@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 229136166}
   - component: {fileID: 229136165}
   m_Layer: 0
-  m_Name: Destroying Manager (1)
+  m_Name: Destroying Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -526,8 +526,9 @@ GameObject:
   - component: {fileID: 378545444}
   - component: {fileID: 378545443}
   - component: {fileID: 378545442}
+  - component: {fileID: 378545445}
   m_Layer: 5
-  m_Name: ObjectUI
+  m_Name: Object UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -551,8 +552,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -644.89844, y: 0}
+  m_SizeDelta: {x: -1289.8, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &378545442
 CanvasGroup:
@@ -562,7 +563,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378545440}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -602,6 +603,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378545440}
   m_CullTransparentMesh: 0
+--- !u!114 &378545445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378545440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf296c94c8674d54da61c8506f754a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 378545442}
 --- !u!1 &466603241
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1277.4, y: -122.1}
+  m_AnchoredPosition: {x: -1277.3984, y: -122.09961}
   m_SizeDelta: {x: 1257.4, y: 204.3}
   m_Pivot: {x: 0, y: 0.49999997}
 --- !u!114 &466603243
@@ -803,7 +817,7 @@ GameObject:
   - component: {fileID: 522844305}
   - component: {fileID: 522844304}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Mode Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -827,7 +841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1737.63, y: -976.29}
+  m_AnchoredPosition: {x: 1737.6289, y: -976.28906}
   m_SizeDelta: {x: 233.49, y: 96.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &522844304
@@ -1183,8 +1197,9 @@ GameObject:
   - component: {fileID: 607200716}
   - component: {fileID: 607200717}
   - component: {fileID: 607200718}
+  - component: {fileID: 607200715}
   m_Layer: 5
-  m_Name: SpawnChooser
+  m_Name: Spawn Chooser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1207,9 +1222,22 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 315.1, y: 414.5}
+  m_AnchoredPosition: {x: 315.10156, y: 414.5}
   m_SizeDelta: {x: -630.2, y: -829.1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &607200715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607200713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf296c94c8674d54da61c8506f754a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 607200718}
 --- !u!222 &607200716
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2754,8 +2782,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2081645964}
   m_HandleRect: {fileID: 2081645963}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
