@@ -26,7 +26,9 @@ public class ModeManager : MonoBehaviour
     private void Awake()
     {
         controls = new InputMaster();
-        controls.Test.changeMode.performed += ctx => currentMode = nextMode(currentMode); //Change mode when pressen change button.
+
+        //Change mode action
+        controls.Editor.changeMode.performed += ctx => currentMode = nextMode(currentMode);
     }
 
     private void Update()

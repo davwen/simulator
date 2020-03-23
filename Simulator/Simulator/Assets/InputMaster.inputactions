@@ -2,13 +2,69 @@
     "name": "InputMaster",
     "maps": [
         {
-            "name": "Test",
+            "name": "Editor",
             "id": "eba1b37c-3256-4561-8863-777565522ec1",
             "actions": [
                 {
                     "name": "changeMode",
                     "type": "Button",
                     "id": "5e506849-0773-4aa0-8deb-ea1db86f7ab7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "begin",
+                    "type": "Button",
+                    "id": "957a9930-0f53-406f-b159-1c8c13d99ea1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "stop",
+                    "type": "Button",
+                    "id": "2e4519e4-9570-4090-8bac-d7c60aa5cb6d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "pause",
+                    "type": "Button",
+                    "id": "544aa477-58a2-4823-8c20-f2138830a4d3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "resume",
+                    "type": "Button",
+                    "id": "3e3e00b9-a9cf-4621-96bd-793a4f1bfc1c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "spawn",
+                    "type": "Button",
+                    "id": "ad94b1bc-7f3c-4a7a-8b9b-5c4fbea172e8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "select",
+                    "type": "Button",
+                    "id": "993a25d5-f484-425e-bdba-1c43d7edbcdb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "deselect",
+                    "type": "Button",
+                    "id": "e62e3de7-43ef-4350-91d5-ca04d9ab8c12",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -23,6 +79,83 @@
                     "processors": "",
                     "groups": "windows",
                     "action": "changeMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5309c62b-255f-4d62-bdb4-26d3af752368",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "begin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1b55332-030b-4de9-b3f7-6c81c2c74354",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "stop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87d89f2f-6105-4457-aaff-9ccd19b2c777",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd36c2f8-e9e5-4345-94a4-078908ac9f80",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53132f5e-21f3-4e0f-9071-ee56003ca48c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "spawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "232e6f79-cd55-4fd6-8ff2-6a287cc0a479",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "719313e7-a631-48af-bfc0-c19b7044ac7a",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "deselect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

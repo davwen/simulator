@@ -15,13 +15,28 @@ public class Spawning : MonoBehaviour
 
     public DragDrop dragDropManager;
 
-    void Start()
+    public InputMaster controls;
+
+
+    private void Awake()
     {
-        
+        controls = new InputMaster();
+
+        controls.Editor.spawn.performed += ctx => trySpawn();
     }
 
-    
-    void Update()
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
+
+    void trySpawn()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -40,9 +55,9 @@ public class Spawning : MonoBehaviour
             }
         }
 
-        print(EventSystem.current.IsPointerOverGameObject());
+       
 
-        if (Input.GetMouseButtonDown(0) && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN && !EventSystem.current.IsPointerOverGameObject())
+        if (FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN && !EventSystem.current.IsPointerOverGameObject())
         {
             Spawn();
         }

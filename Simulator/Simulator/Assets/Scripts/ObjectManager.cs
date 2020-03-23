@@ -11,32 +11,31 @@ public class ObjectManager : MonoBehaviour
 
     public bool isRunning;
 
-    void Start()
+    public InputMaster controls;
+
+    private void Awake()
     {
-        //Adds all of the currently existing objects.
-        
+        controls = new InputMaster();
+
+        controls.Editor.begin.performed += ctx => beginAllObjects();
+        controls.Editor.stop.performed += ctx => stopAllObjects();
+        controls.Editor.pause.performed += ctx => pauseAllObjects();
+        controls.Editor.resume.performed += ctx => resumeAllObjects();
     }
 
-    
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
+
     void Update()
     {
-        //Debug
-        if (Input.GetKeyUp("b"))
-        {
-            beginAllObjects();
-        }
-        if (Input.GetKeyUp("s"))
-        {
-            stopAllObjects();
-        }
-        if (Input.GetKeyUp("p"))
-        {
-            pauseAllObjects();
-        }
-        if (Input.GetKeyUp("r"))
-        {
-            resumeAllObjects();
-        }
 
         objects.Clear();
         objects.AddRange(FindObjectsOfType<Object>());

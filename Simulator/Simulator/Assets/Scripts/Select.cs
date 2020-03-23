@@ -16,20 +16,36 @@ public class Select : MonoBehaviour
 
 
     public float deselectedAlpha = 0.5f;
-    
-    
-    void Update()
-    {
-        if (Input.GetMouseButtonUp(0) && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_EDIT)
-        {
-            checkClick();
-        }
 
-        if (Input.GetMouseButtonUp(1))
+    public InputMaster controls;
+
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+
+        controls.Editor.select.performed += ctx =>
         {
-            onDeselect(); //Deselects everything on right click.
-        }
+            if (FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_EDIT)
+            {
+                checkClick();
+            }
+        };
+
+        controls.Editor.deselect.performed += ctx => onDeselect();
+       
     }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
 
     void checkClick()
     {

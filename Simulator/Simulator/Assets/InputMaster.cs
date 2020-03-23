@@ -15,13 +15,69 @@ public class @InputMaster : IInputActionCollection, IDisposable
     ""name"": ""InputMaster"",
     ""maps"": [
         {
-            ""name"": ""Test"",
+            ""name"": ""Editor"",
             ""id"": ""eba1b37c-3256-4561-8863-777565522ec1"",
             ""actions"": [
                 {
                     ""name"": ""changeMode"",
                     ""type"": ""Button"",
                     ""id"": ""5e506849-0773-4aa0-8deb-ea1db86f7ab7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""begin"",
+                    ""type"": ""Button"",
+                    ""id"": ""957a9930-0f53-406f-b159-1c8c13d99ea1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""stop"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e4519e4-9570-4090-8bac-d7c60aa5cb6d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""544aa477-58a2-4823-8c20-f2138830a4d3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""resume"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e3e00b9-a9cf-4621-96bd-793a4f1bfc1c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""spawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""ad94b1bc-7f3c-4a7a-8b9b-5c4fbea172e8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""select"",
+                    ""type"": ""Button"",
+                    ""id"": ""993a25d5-f484-425e-bdba-1c43d7edbcdb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""deselect"",
+                    ""type"": ""Button"",
+                    ""id"": ""e62e3de7-43ef-4350-91d5-ca04d9ab8c12"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -36,6 +92,83 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""windows"",
                     ""action"": ""changeMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5309c62b-255f-4d62-bdb4-26d3af752368"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""begin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1b55332-030b-4de9-b3f7-6c81c2c74354"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""stop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87d89f2f-6105-4457-aaff-9ccd19b2c777"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd36c2f8-e9e5-4345-94a4-078908ac9f80"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53132f5e-21f3-4e0f-9071-ee56003ca48c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""spawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""232e6f79-cd55-4fd6-8ff2-6a287cc0a479"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""719313e7-a631-48af-bfc0-c19b7044ac7a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""deselect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -61,9 +194,16 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Test
-        m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
-        m_Test_changeMode = m_Test.FindAction("changeMode", throwIfNotFound: true);
+        // Editor
+        m_Editor = asset.FindActionMap("Editor", throwIfNotFound: true);
+        m_Editor_changeMode = m_Editor.FindAction("changeMode", throwIfNotFound: true);
+        m_Editor_begin = m_Editor.FindAction("begin", throwIfNotFound: true);
+        m_Editor_stop = m_Editor.FindAction("stop", throwIfNotFound: true);
+        m_Editor_pause = m_Editor.FindAction("pause", throwIfNotFound: true);
+        m_Editor_resume = m_Editor.FindAction("resume", throwIfNotFound: true);
+        m_Editor_spawn = m_Editor.FindAction("spawn", throwIfNotFound: true);
+        m_Editor_select = m_Editor.FindAction("select", throwIfNotFound: true);
+        m_Editor_deselect = m_Editor.FindAction("deselect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -110,38 +250,94 @@ public class @InputMaster : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Test
-    private readonly InputActionMap m_Test;
-    private ITestActions m_TestActionsCallbackInterface;
-    private readonly InputAction m_Test_changeMode;
-    public struct TestActions
+    // Editor
+    private readonly InputActionMap m_Editor;
+    private IEditorActions m_EditorActionsCallbackInterface;
+    private readonly InputAction m_Editor_changeMode;
+    private readonly InputAction m_Editor_begin;
+    private readonly InputAction m_Editor_stop;
+    private readonly InputAction m_Editor_pause;
+    private readonly InputAction m_Editor_resume;
+    private readonly InputAction m_Editor_spawn;
+    private readonly InputAction m_Editor_select;
+    private readonly InputAction m_Editor_deselect;
+    public struct EditorActions
     {
         private @InputMaster m_Wrapper;
-        public TestActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @changeMode => m_Wrapper.m_Test_changeMode;
-        public InputActionMap Get() { return m_Wrapper.m_Test; }
+        public EditorActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @changeMode => m_Wrapper.m_Editor_changeMode;
+        public InputAction @begin => m_Wrapper.m_Editor_begin;
+        public InputAction @stop => m_Wrapper.m_Editor_stop;
+        public InputAction @pause => m_Wrapper.m_Editor_pause;
+        public InputAction @resume => m_Wrapper.m_Editor_resume;
+        public InputAction @spawn => m_Wrapper.m_Editor_spawn;
+        public InputAction @select => m_Wrapper.m_Editor_select;
+        public InputAction @deselect => m_Wrapper.m_Editor_deselect;
+        public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
-        public void SetCallbacks(ITestActions instance)
+        public static implicit operator InputActionMap(EditorActions set) { return set.Get(); }
+        public void SetCallbacks(IEditorActions instance)
         {
-            if (m_Wrapper.m_TestActionsCallbackInterface != null)
+            if (m_Wrapper.m_EditorActionsCallbackInterface != null)
             {
-                @changeMode.started -= m_Wrapper.m_TestActionsCallbackInterface.OnChangeMode;
-                @changeMode.performed -= m_Wrapper.m_TestActionsCallbackInterface.OnChangeMode;
-                @changeMode.canceled -= m_Wrapper.m_TestActionsCallbackInterface.OnChangeMode;
+                @changeMode.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnChangeMode;
+                @changeMode.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnChangeMode;
+                @changeMode.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnChangeMode;
+                @begin.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnBegin;
+                @begin.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnBegin;
+                @begin.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnBegin;
+                @stop.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnStop;
+                @stop.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnStop;
+                @stop.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnStop;
+                @pause.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnPause;
+                @pause.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnPause;
+                @pause.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnPause;
+                @resume.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnResume;
+                @resume.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnResume;
+                @resume.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnResume;
+                @spawn.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnSpawn;
+                @spawn.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnSpawn;
+                @spawn.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnSpawn;
+                @select.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnSelect;
+                @select.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnSelect;
+                @select.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnSelect;
+                @deselect.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnDeselect;
+                @deselect.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnDeselect;
+                @deselect.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnDeselect;
             }
-            m_Wrapper.m_TestActionsCallbackInterface = instance;
+            m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @changeMode.started += instance.OnChangeMode;
                 @changeMode.performed += instance.OnChangeMode;
                 @changeMode.canceled += instance.OnChangeMode;
+                @begin.started += instance.OnBegin;
+                @begin.performed += instance.OnBegin;
+                @begin.canceled += instance.OnBegin;
+                @stop.started += instance.OnStop;
+                @stop.performed += instance.OnStop;
+                @stop.canceled += instance.OnStop;
+                @pause.started += instance.OnPause;
+                @pause.performed += instance.OnPause;
+                @pause.canceled += instance.OnPause;
+                @resume.started += instance.OnResume;
+                @resume.performed += instance.OnResume;
+                @resume.canceled += instance.OnResume;
+                @spawn.started += instance.OnSpawn;
+                @spawn.performed += instance.OnSpawn;
+                @spawn.canceled += instance.OnSpawn;
+                @select.started += instance.OnSelect;
+                @select.performed += instance.OnSelect;
+                @select.canceled += instance.OnSelect;
+                @deselect.started += instance.OnDeselect;
+                @deselect.performed += instance.OnDeselect;
+                @deselect.canceled += instance.OnDeselect;
             }
         }
     }
-    public TestActions @Test => new TestActions(this);
+    public EditorActions @Editor => new EditorActions(this);
     private int m_windowsSchemeIndex = -1;
     public InputControlScheme windowsScheme
     {
@@ -151,8 +347,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_windowsSchemeIndex];
         }
     }
-    public interface ITestActions
+    public interface IEditorActions
     {
         void OnChangeMode(InputAction.CallbackContext context);
+        void OnBegin(InputAction.CallbackContext context);
+        void OnStop(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnResume(InputAction.CallbackContext context);
+        void OnSpawn(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnDeselect(InputAction.CallbackContext context);
     }
 }
