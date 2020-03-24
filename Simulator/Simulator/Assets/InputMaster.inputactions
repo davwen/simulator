@@ -68,6 +68,22 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "drag",
+                    "type": "Button",
+                    "id": "081e87ca-6732-44f5-901f-0b75c461fda6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "destroy",
+                    "type": "Button",
+                    "id": "86222d09-6437-4175-8755-d85ec62c3ff5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -156,6 +172,28 @@
                     "processors": "",
                     "groups": "windows",
                     "action": "deselect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0415d8c-d9bf-4504-a59c-f285a3d400fa",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "drag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cdc4dfba-7e3b-4f93-99c6-31e22d3fb4f4",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "destroy",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

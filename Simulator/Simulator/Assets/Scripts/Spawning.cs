@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+//This script handles the users ability to insert objects to the scene.
+
 public class Spawning : MonoBehaviour
 {
     public GameObject objectBase;
@@ -39,22 +42,6 @@ public class Spawning : MonoBehaviour
     void trySpawn()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //Sends a raycast to see if any UI is in the way for placing.
-
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, -Vector2.up);
-
-        bool hitUI = false;
-
-        if(hit.collider != null)
-        {
-            print(hit.collider.gameObject.name);
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("UI"))
-            {
-                hitUI = true;
-            }
-        }
-
        
 
         if (FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN && !EventSystem.current.IsPointerOverGameObject())
@@ -81,8 +68,9 @@ public class Spawning : MonoBehaviour
             sr.sprite = sObjToSpawn.sprite;
         }
 
-        FindObjectOfType<Select>().onDeselect();
+        lastObj.AddComponent<PolygonCollider2D>().isTrigger = true; //Adds a collider.
 
+        FindObjectOfType<Select>().onDeselect();
 
     }
 }

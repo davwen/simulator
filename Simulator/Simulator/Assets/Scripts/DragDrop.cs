@@ -19,15 +19,44 @@ public class DragDrop : MonoBehaviour
 
     public Select selectionManager;
 
+    public InputMaster controls;
+
+    private bool isMouseDown;
+    private bool isMouseDownCheck;
+
+    private Vector3 offset;
+
+    private void Awake()
+    {
+        controls = new InputMaster();
+
+        controls.Editor.drag.performed += ctx => isMouseDown = true;
+        controls.Editor.drag.canceled += ctx => isMouseDown = false;
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
+
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //Translates the mouse position to a world position.
 
-        isDragging = Input.GetMouseButton(0);
+        isDragging = isMouseDown;
 
-        if (Input.GetMouseButtonDown(0) && selectionManager.currentlySelected != null || Input.GetMouseButtonUp(0)) //A change with the mouse has happened.
+        if (isMouseDownCheck != isMouseDown && selectionManager.currentlySelected != null) //A change with the mouse has happened.
         {
             isMouseInside = isMouseInsideCheck(selectionManager.currentlySelected);
+            offset = new Vector3(mousePos.x, mousePos.y, 0) - selectionManager.currentlySelected.transform.position;
+
+            isMouseDownCheck = isMouseDown;
         }
 
         if (isDragging && selectionManager.currentlySelected != null && isMouseInside && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_EDIT) //Should the selected object go towards the mouse.
@@ -36,7 +65,7 @@ public class DragDrop : MonoBehaviour
 
             stopRigidbody(selectedBody);
 
-            selectionManager.currentlySelected.transform.position += (new Vector3(mousePos.x, mousePos.y, 0) - selectionManager.currentlySelected.transform.position) * Time.deltaTime * speed;
+            selectionManager.currentlySelected.transform.position += ((new Vector3(mousePos.x, mousePos.y, 0) - selectionManager.currentlySelected.transform.position) - offset) * Time.deltaTime * speed;
 
         }
 
@@ -46,6 +75,7 @@ public class DragDrop : MonoBehaviour
 
             selectedBody.isKinematic = false;
         }
+
        
     }
 

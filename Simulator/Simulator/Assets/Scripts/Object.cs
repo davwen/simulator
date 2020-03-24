@@ -141,7 +141,7 @@ public class Object : MonoBehaviour
             {
                 try
                 {
-                    output = float.Parse(values[i].value.Replace(".", ",")); //The float.Parse() function uses the local mark character for parsing decimal numbers. So use , in Sweden. Ex: 19,2 not 19.2
+                    output = float.Parse(values[i].value); //The float.Parse() function uses the local mark character for parsing decimal numbers. So use , in Sweden. Ex: 19,2 not 19.2
                 }
                 catch (FormatException)
                 {

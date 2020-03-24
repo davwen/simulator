@@ -18,15 +18,18 @@ public class Collision : MonoBehaviour
 
     //Second - varaible keys. Always string.
     [Header("Keys")]
+    public const string triggerValueKey = EFFECT_KEY + "_is_trigger";
 
     //Third - variables needed for effect.
     private Collider2D coll;
+    public bool isTrigger = false;
 
     //Fourth - The values the effect needs.
     [Header("Values To Add/Remove")]
+   
 
     [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(0) {};
+    public List<Value> usedValues = new List<Value>(1) {new Value().createValue(triggerValueKey, Value.BOOL_TYPE_KEY, "false", "Enabled")};
 
 
     //Last - isRunning varaible
@@ -50,10 +53,13 @@ public class Collision : MonoBehaviour
     void Update()
     {
         //set all variables
-       
+        isTrigger = objectComp.getBoolValue(triggerValueKey);
 
         //Do loops here if needed
-
+        if (isRunning)
+        {
+            coll.isTrigger = !isTrigger;
+        }
     }
 
     public void Begin()

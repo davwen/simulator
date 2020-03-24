@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 //This script spawns all UI for the sprites chooser (object chooser)
 
@@ -24,20 +25,12 @@ public class SpritesListUI : MonoBehaviour
 
     private void Start()
     {
-        SpawnUI(Objects, false);
+        SpawnUI(Objects);
         
     }
 
-    public void SpawnUI(List<SpawnableObj> Objs, bool removeOld = true)
+    public void SpawnUI(List<SpawnableObj> Objs)
     {
-       
-
-        //Removes all children before inserting any new.
-        if (removeOld)
-        {
-            //removeUIofObj();
-        }
-
 
         List<string> effects = new List<string>();
 
@@ -88,7 +81,7 @@ public class SpritesListUI : MonoBehaviour
         return lastItem;
     }
 
-    public void onItemClick(int i)
+    public void onItemClick(int i) //One Of the items in the list was clicked.
     {
         spawningManager.selectNewSObj(Objects[i]);
     }
@@ -114,6 +107,5 @@ public class SpawnableObj
 {
     public string label;
     public Sprite sprite;
-    public Vector2[] colliderPoints;
 }
 

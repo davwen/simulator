@@ -81,6 +81,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""drag"",
+                    ""type"": ""Button"",
+                    ""id"": ""081e87ca-6732-44f5-901f-0b75c461fda6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""destroy"",
+                    ""type"": ""Button"",
+                    ""id"": ""86222d09-6437-4175-8755-d85ec62c3ff5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -171,6 +187,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""deselect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0415d8c-d9bf-4504-a59c-f285a3d400fa"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""drag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cdc4dfba-7e3b-4f93-99c6-31e22d3fb4f4"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""destroy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -204,6 +242,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Editor_spawn = m_Editor.FindAction("spawn", throwIfNotFound: true);
         m_Editor_select = m_Editor.FindAction("select", throwIfNotFound: true);
         m_Editor_deselect = m_Editor.FindAction("deselect", throwIfNotFound: true);
+        m_Editor_drag = m_Editor.FindAction("drag", throwIfNotFound: true);
+        m_Editor_destroy = m_Editor.FindAction("destroy", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -261,6 +301,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_spawn;
     private readonly InputAction m_Editor_select;
     private readonly InputAction m_Editor_deselect;
+    private readonly InputAction m_Editor_drag;
+    private readonly InputAction m_Editor_destroy;
     public struct EditorActions
     {
         private @InputMaster m_Wrapper;
@@ -273,6 +315,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @spawn => m_Wrapper.m_Editor_spawn;
         public InputAction @select => m_Wrapper.m_Editor_select;
         public InputAction @deselect => m_Wrapper.m_Editor_deselect;
+        public InputAction @drag => m_Wrapper.m_Editor_drag;
+        public InputAction @destroy => m_Wrapper.m_Editor_destroy;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +350,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @deselect.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnDeselect;
                 @deselect.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnDeselect;
                 @deselect.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnDeselect;
+                @drag.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnDrag;
+                @drag.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnDrag;
+                @drag.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnDrag;
+                @destroy.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnDestroy;
+                @destroy.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnDestroy;
+                @destroy.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnDestroy;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -334,6 +384,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @deselect.started += instance.OnDeselect;
                 @deselect.performed += instance.OnDeselect;
                 @deselect.canceled += instance.OnDeselect;
+                @drag.started += instance.OnDrag;
+                @drag.performed += instance.OnDrag;
+                @drag.canceled += instance.OnDrag;
+                @destroy.started += instance.OnDestroy;
+                @destroy.performed += instance.OnDestroy;
+                @destroy.canceled += instance.OnDestroy;
             }
         }
     }
@@ -357,5 +413,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnSpawn(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnDeselect(InputAction.CallbackContext context);
+        void OnDrag(InputAction.CallbackContext context);
+        void OnDestroy(InputAction.CallbackContext context);
     }
 }

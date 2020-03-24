@@ -395,7 +395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -292, y: 785}
+  m_AnchoredPosition: {x: -292, y: 785.00006}
   m_SizeDelta: {x: 584, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &369385309
@@ -1261,19 +1261,8 @@ MonoBehaviour:
   Objects:
   - label: Square
     sprite: {fileID: 21300000, guid: 2f515d1cce518114d902f2ece561b8f2, type: 3}
-    colliderPoints:
-    - {x: -0.5, y: -0.5}
-    - {x: 0.5, y: -0.5}
-    - {x: 0.5, y: 0.5}
-    - {x: -0.5, y: 0.5}
-    - {x: -0.5, y: -0.5}
   - label: Circle
     sprite: {fileID: 21300000, guid: 100607843d1f1274eaad6a7792a5a909, type: 3}
-    colliderPoints:
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
   item: {fileID: 268531703459703799, guid: 3b193fdb1dd598641866bbc10d8e32d0, type: 3}
   offset: {x: 20, y: -20}
   standardScreenWidth: 1920
@@ -2674,7 +2663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.05882353, g: 0.2901961, b: 0.8117647, a: 1}
+  m_Color: {r: 0.2704254, g: 0.48592058, b: 0.9716981, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2782,8 +2771,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2081645964}
   m_HandleRect: {fileID: 2081645963}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2963,10 +2952,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availableEffectsString:
-  - rotation
-  - colour
   - physics
   - collision
+  - colour
+  - rotation
   dropDown: {fileID: 567884310}
   nameKey: EFFECT_DISPLAY_NAME
   selectionManager: {fileID: 1331996022}
@@ -3292,7 +3281,6 @@ MonoBehaviour:
   sObjToSpawn:
     label: 
     sprite: {fileID: 0}
-    colliderPoints: []
   zLevel: 0
   mousePos: {x: 0, y: 0}
   dragDropManager: {fileID: 0}

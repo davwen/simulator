@@ -63,11 +63,11 @@ public class Rotation : MonoBehaviour
         {
             if (!dirRight)
             {
-                transform.Rotate(new Vector3(0, 0, speed)); //It should only rotate on the z-axis.
+                transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime)); //It should only rotate on the z-axis.
             }
             else
             {
-                transform.Rotate(new Vector3(0, 0, -speed)); //It should only rotate on the z-axis.
+                transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime)); //It should only rotate on the z-axis.
             }
             
         }

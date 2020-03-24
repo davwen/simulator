@@ -33,8 +33,12 @@ public class ObjectManager : MonoBehaviour
         controls.Disable();
     }
 
+    private void Update()
+    {
+        UpdateObjectList();
+    }
 
-    void Update()
+    public void UpdateObjectList()
     {
 
         objects.Clear();

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-//This script handles all the modes in the game, such as "Edit", "Spawn" and "Destroy".
+//This script handles all the modes in the game, such as "Edit", "Spawn".
 
 public class ModeManager : MonoBehaviour
 {
