@@ -99,8 +99,6 @@ public class Physics : MonoBehaviour
         isRunning = false;
 
         //Then do needed tasks
-        rb.gravityScale = 0;
-        
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
@@ -110,7 +108,6 @@ public class Physics : MonoBehaviour
         isRunning = false;
 
         //Then do needed tasks
-        rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 

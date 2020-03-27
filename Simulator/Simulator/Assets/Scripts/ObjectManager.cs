@@ -21,6 +21,8 @@ public class ObjectManager : MonoBehaviour
         controls.Editor.stop.performed += ctx => stopAllObjects();
         controls.Editor.pause.performed += ctx => pauseAllObjects();
         controls.Editor.resume.performed += ctx => resumeAllObjects();
+
+        controls.Editor.togglePause.performed += ctx => togglePause();
     }
 
     private void OnEnable()
@@ -88,5 +90,19 @@ public class ObjectManager : MonoBehaviour
         }
 
         isRunning = true;
+    }
+
+    public void togglePause()
+    {
+        switch (isRunning)
+        {
+            case true:
+                stopAllObjects();
+                break;
+
+            case false:
+                beginAllObjects();
+                break;
+        }
     }
 }

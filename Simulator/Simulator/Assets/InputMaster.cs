@@ -97,6 +97,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""togglePause"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0e1bc22-0833-4a82-acba-d2e345d67fd2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -209,6 +217,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""destroy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48aeb649-78c8-4b38-8960-abbbf3712866"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""togglePause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -244,6 +263,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Editor_deselect = m_Editor.FindAction("deselect", throwIfNotFound: true);
         m_Editor_drag = m_Editor.FindAction("drag", throwIfNotFound: true);
         m_Editor_destroy = m_Editor.FindAction("destroy", throwIfNotFound: true);
+        m_Editor_togglePause = m_Editor.FindAction("togglePause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -303,6 +323,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_deselect;
     private readonly InputAction m_Editor_drag;
     private readonly InputAction m_Editor_destroy;
+    private readonly InputAction m_Editor_togglePause;
     public struct EditorActions
     {
         private @InputMaster m_Wrapper;
@@ -317,6 +338,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @deselect => m_Wrapper.m_Editor_deselect;
         public InputAction @drag => m_Wrapper.m_Editor_drag;
         public InputAction @destroy => m_Wrapper.m_Editor_destroy;
+        public InputAction @togglePause => m_Wrapper.m_Editor_togglePause;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -356,6 +378,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @destroy.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnDestroy;
                 @destroy.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnDestroy;
                 @destroy.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnDestroy;
+                @togglePause.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
+                @togglePause.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
+                @togglePause.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -390,6 +415,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @destroy.started += instance.OnDestroy;
                 @destroy.performed += instance.OnDestroy;
                 @destroy.canceled += instance.OnDestroy;
+                @togglePause.started += instance.OnTogglePause;
+                @togglePause.performed += instance.OnTogglePause;
+                @togglePause.canceled += instance.OnTogglePause;
             }
         }
     }
@@ -415,5 +443,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDeselect(InputAction.CallbackContext context);
         void OnDrag(InputAction.CallbackContext context);
         void OnDestroy(InputAction.CallbackContext context);
+        void OnTogglePause(InputAction.CallbackContext context);
     }
 }

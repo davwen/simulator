@@ -7,9 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Select : MonoBehaviour
 {
-#if UNITY_EDITOR
-    [ReadOnly]
-#endif
+
     public Object currentlySelected;
 
     public ValuesListUI UIList;
