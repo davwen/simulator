@@ -37,9 +37,9 @@ public class Colour : MonoBehaviour
     [Header("Values To Add/Remove")]
 
     [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(3) { new Value().createValue(RValueKey, Value.FLOAT_TYPE_KEY, "255", "Red"),
-        new Value().createValue(GValueKey, Value.FLOAT_TYPE_KEY, "255", "Green"),
-        new Value().createValue(BValueKey, Value.FLOAT_TYPE_KEY, "255", "Blue")};
+    public List<Value> usedValues = new List<Value>(3) { new Value(RValueKey, Value.FLOAT_TYPE_KEY, "255", "Red"),
+        new Value(GValueKey, Value.FLOAT_TYPE_KEY, "255", "Green"),
+        new Value(BValueKey, Value.FLOAT_TYPE_KEY, "255", "Blue")};
 
 
     //Last - isRunning varaible

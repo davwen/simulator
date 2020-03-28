@@ -21,15 +21,13 @@ public class pauseUI : MonoBehaviour
 
     void Update()
     {
-        switch (objectManager.isRunning)
+        if (objectManager.isRunning)
         {
-            case true:
-                pauseText.text = runningLabel;
-                break;
-
-            case false:
-                pauseText.text = pausedLabel;
-                break;
+            pauseText.text = runningLabel;
+        }
+        else
+        {
+            pauseText.text = pausedLabel;
         }
     }
 }

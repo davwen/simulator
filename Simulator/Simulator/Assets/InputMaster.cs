@@ -105,6 +105,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""mouseDelta"",
+                    ""type"": ""Button"",
+                    ""id"": ""23a431f9-4eb0-4d78-b6f1-e4880c146c7d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""dragCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e09c615-5571-4d58-b7b4-7c971fa751f0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -213,7 +229,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""windows"",
                     ""action"": ""destroy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -224,8 +240,30 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""windows"",
                     ""action"": ""togglePause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e1bfd22-32ab-4bbf-b7e9-84a1a7afa2a7"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""mouseDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66651214-deef-4e34-abaa-50cf17f82812"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""dragCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -264,6 +302,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Editor_drag = m_Editor.FindAction("drag", throwIfNotFound: true);
         m_Editor_destroy = m_Editor.FindAction("destroy", throwIfNotFound: true);
         m_Editor_togglePause = m_Editor.FindAction("togglePause", throwIfNotFound: true);
+        m_Editor_mouseDelta = m_Editor.FindAction("mouseDelta", throwIfNotFound: true);
+        m_Editor_dragCamera = m_Editor.FindAction("dragCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -324,6 +364,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_drag;
     private readonly InputAction m_Editor_destroy;
     private readonly InputAction m_Editor_togglePause;
+    private readonly InputAction m_Editor_mouseDelta;
+    private readonly InputAction m_Editor_dragCamera;
     public struct EditorActions
     {
         private @InputMaster m_Wrapper;
@@ -339,6 +381,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @drag => m_Wrapper.m_Editor_drag;
         public InputAction @destroy => m_Wrapper.m_Editor_destroy;
         public InputAction @togglePause => m_Wrapper.m_Editor_togglePause;
+        public InputAction @mouseDelta => m_Wrapper.m_Editor_mouseDelta;
+        public InputAction @dragCamera => m_Wrapper.m_Editor_dragCamera;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -381,6 +425,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @togglePause.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
                 @togglePause.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
                 @togglePause.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
+                @mouseDelta.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnMouseDelta;
+                @mouseDelta.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnMouseDelta;
+                @mouseDelta.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnMouseDelta;
+                @dragCamera.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnDragCamera;
+                @dragCamera.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnDragCamera;
+                @dragCamera.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnDragCamera;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -418,6 +468,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @togglePause.started += instance.OnTogglePause;
                 @togglePause.performed += instance.OnTogglePause;
                 @togglePause.canceled += instance.OnTogglePause;
+                @mouseDelta.started += instance.OnMouseDelta;
+                @mouseDelta.performed += instance.OnMouseDelta;
+                @mouseDelta.canceled += instance.OnMouseDelta;
+                @dragCamera.started += instance.OnDragCamera;
+                @dragCamera.performed += instance.OnDragCamera;
+                @dragCamera.canceled += instance.OnDragCamera;
             }
         }
     }
@@ -444,5 +500,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDrag(InputAction.CallbackContext context);
         void OnDestroy(InputAction.CallbackContext context);
         void OnTogglePause(InputAction.CallbackContext context);
+        void OnMouseDelta(InputAction.CallbackContext context);
+        void OnDragCamera(InputAction.CallbackContext context);
     }
 }

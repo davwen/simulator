@@ -31,8 +31,8 @@ public class Physics : MonoBehaviour
     [Header("Values To Add/Remove")]
 
     [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(2) { new Value().createValue(rotateValueKey, Value.BOOL_TYPE_KEY, "true", "Rotation enabled"),
-        new Value().createValue(gravityValueKey, Value.FLOAT_TYPE_KEY, "1", "Gravity strength") };
+    public List<Value> usedValues = new List<Value>(2) { new Value(rotateValueKey, Value.BOOL_TYPE_KEY, "true", "Rotation enabled"),
+        new Value(gravityValueKey, Value.FLOAT_TYPE_KEY, "1", "Gravity strength") };
 
     //Last - isRunning varaible
     [Header("Inspect")]

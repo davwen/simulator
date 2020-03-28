@@ -31,8 +31,8 @@ public class Rotation : MonoBehaviour
     [Header("Values To Add/Remove")]
 
     [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(2) { new Value().createValue(speedValueKey, Value.FLOAT_TYPE_KEY, "10", "Speed"),
-        new Value().createValue(rightValueKey, Value.BOOL_TYPE_KEY, "true", "Rotate to right") };
+    public List<Value> usedValues = new List<Value>(2) { new Value(speedValueKey, Value.FLOAT_TYPE_KEY, "10", "Speed"),
+        new Value(rightValueKey, Value.BOOL_TYPE_KEY, "true", "Rotate to right") };
 
     
     //Last - isRunning variable

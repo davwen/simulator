@@ -92,6 +92,22 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "mouseDelta",
+                    "type": "Button",
+                    "id": "23a431f9-4eb0-4d78-b6f1-e4880c146c7d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "dragCamera",
+                    "type": "Button",
+                    "id": "8e09c615-5571-4d58-b7b4-7c971fa751f0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -200,7 +216,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "windows",
                     "action": "destroy",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -211,8 +227,30 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "windows",
                     "action": "togglePause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e1bfd22-32ab-4bbf-b7e9-84a1a7afa2a7",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "mouseDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "66651214-deef-4e34-abaa-50cf17f82812",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "dragCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
