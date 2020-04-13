@@ -1,0 +1,1 @@
+Open "Assets/Resources/Input/InputMaster.inputactions" inside the Unity Editor to find bindings.

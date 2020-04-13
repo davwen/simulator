@@ -491,7 +491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -292, y: 693.39996}
+  m_AnchoredPosition: {x: -292, y: 693.4}
   m_SizeDelta: {x: 584, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &369385309
@@ -2129,7 +2129,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &869036601
 GameObject:
@@ -3816,7 +3816,7 @@ RectTransform:
   - {fileID: 522844303}
   - {fileID: 1237003865}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3852,7 +3852,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1757805009
 MonoBehaviour:
@@ -4207,8 +4207,8 @@ MonoBehaviour:
   objectBase: {fileID: 5507778767103920105, guid: b65d8629479abe547b397f92fc1a6d9c,
     type: 3}
   sObjToSpawn:
-    label: 
-    sprite: {fileID: 0}
+    label: Square
+    sprite: {fileID: 21300000, guid: f61fd88ffaf4ca04aafdd050c514ba54, type: 3}
   gameObjectToSpawn: {fileID: 0}
   zLevel: 0
   mousePos: {x: 0, y: 0}
@@ -4379,7 +4379,7 @@ Transform:
   m_LocalScale: {x: 19.2, y: 3.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2081645962
 GameObject:
