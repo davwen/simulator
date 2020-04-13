@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/InputMaster.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Resources/Input/InputMaster.inputactions'
 
 using System;
 using System.Collections;
@@ -134,14 +134,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": ""copy"",
                     ""type"": ""Button"",
                     ""id"": ""44a61ec1-d992-4d67-a7fd-9ed21f33637c"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""paste"",
-                    ""type"": ""Button"",
-                    ""id"": ""9734defb-fdd7-4a8f-9b2b-1aba605ec02d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -334,39 +326,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""copy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Button With One Modifier"",
-                    ""id"": ""8da3e45c-b147-42d0-98e4-f9175acc3d54"",
-                    ""path"": ""ButtonWithOneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""paste"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""e06319f9-48f3-4c55-b6a6-a3a4a7df9133"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""windows"",
-                    ""action"": ""paste"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""button"",
-                    ""id"": ""b1229b0d-ff6e-4e62-9199-7e55d01b8139"",
-                    ""path"": ""<Keyboard>/v"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""windows"",
-                    ""action"": ""paste"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -407,7 +366,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Editor_dragCamera = m_Editor.FindAction("dragCamera", throwIfNotFound: true);
         m_Editor_zoom = m_Editor.FindAction("zoom", throwIfNotFound: true);
         m_Editor_copy = m_Editor.FindAction("copy", throwIfNotFound: true);
-        m_Editor_paste = m_Editor.FindAction("paste", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -472,7 +430,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_dragCamera;
     private readonly InputAction m_Editor_zoom;
     private readonly InputAction m_Editor_copy;
-    private readonly InputAction m_Editor_paste;
     public struct EditorActions
     {
         private @InputMaster m_Wrapper;
@@ -492,7 +449,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @dragCamera => m_Wrapper.m_Editor_dragCamera;
         public InputAction @zoom => m_Wrapper.m_Editor_zoom;
         public InputAction @copy => m_Wrapper.m_Editor_copy;
-        public InputAction @paste => m_Wrapper.m_Editor_paste;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -547,9 +503,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @copy.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
                 @copy.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
                 @copy.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
-                @paste.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
-                @paste.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
-                @paste.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -599,9 +552,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @copy.started += instance.OnCopy;
                 @copy.performed += instance.OnCopy;
                 @copy.canceled += instance.OnCopy;
-                @paste.started += instance.OnPaste;
-                @paste.performed += instance.OnPaste;
-                @paste.canceled += instance.OnPaste;
             }
         }
     }
@@ -632,6 +582,5 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDragCamera(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnCopy(InputAction.CallbackContext context);
-        void OnPaste(InputAction.CallbackContext context);
     }
 }

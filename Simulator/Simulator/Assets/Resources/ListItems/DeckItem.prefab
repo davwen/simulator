@@ -222,8 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174069dee585dda43bd2cd34d0c75950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckUIManager: {fileID: 0}
   index: 0
+  deckUIManager: {fileID: 0}
+  image: {fileID: 2060209659643992192}
 --- !u!1 &5930993205845479175
 GameObject:
   m_ObjectHideFlags: 0

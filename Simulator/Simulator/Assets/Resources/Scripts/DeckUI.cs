@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class DeckUI : MonoBehaviour
 {
-    public List<string> Objects = new List<string>();
-    private List<string> ObjectsChecker = new List<string>();
+    public List<DeckItemData> Objects = new List<DeckItemData>();
+    private List<DeckItemData> ObjectsChecker = new List<DeckItemData>();
 
     public GameObject item;
 
@@ -31,14 +31,12 @@ public class DeckUI : MonoBehaviour
 
     }
 
-    public void SpawnUI(List<string> Objs, bool removeOld = true)
+    public void SpawnUI(List<DeckItemData> Objs, bool removeOld = true)
     {
         if (removeOld)
         {
             removeUIofObj();
         }
-
-        List<string> effects = new List<string>();
 
         //Goes through every value in the list to then instantiate an item and then apply all the values to that item as well as instantiating title items.
 
@@ -50,6 +48,14 @@ public class DeckUI : MonoBehaviour
 
             itemComp.deckUIManager = this;
             itemComp.index = i;
+
+
+            Image imageComp = itemComp.image;
+
+            if(imageComp != null)
+            {
+                imageComp.sprite = Objs[i].image;
+            }
         }
     }
 
@@ -102,16 +108,14 @@ public class DeckUI : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void UpdateUI()
     {
         Objects = deckManager.objects;
 
-        if(ObjectsChecker.Count != Objects.Count)
+        if(ObjectsChecker != Objects)
         {
             SpawnUI(Objects);
             print("changed");
-
-            ObjectsChecker = Objects;
         }
     }
 
@@ -120,4 +124,12 @@ public class DeckUI : MonoBehaviour
         Objects = deckManager.objects;
     }
 
+}
+
+[System.Serializable]
+public class DeckItemData
+{
+    public string name;
+    public string data;
+    public Sprite image;
 }

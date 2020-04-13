@@ -107,8 +107,10 @@ public class TextToObjectConverter : Conversion
         obj.currentEffects = Effects;
 
 
-        string pathString = Path.GetFileNameWithoutExtension(getArrays(text)[3].values[0]);
+        string pathString = (Path.GetDirectoryName(getArrays(text)[3].values[0]) + "\\" + Path.GetFileNameWithoutExtension(getArrays(text)[3].values[0])).Replace("Assets\\Resources\\", "");
+        print(pathString);
         Sprite sprite = Resources.Load<Sprite>(pathString);
+        print(sprite);
 
         obj.sprite = sprite;
 
@@ -183,5 +185,45 @@ class TextArray
     public TextArray(string _name)
     {
         name = _name;
+    }
+}
+
+public class GameObjectToTexture : Conversion
+{
+    public static Texture2D Convert(GameObject input)
+    {
+        SnapshotCamera ssc = SnapshotCamera.MakeSnapshotCamera();
+
+        Texture2D output = ssc.TakeObjectSnapshot(input, Color.clear, new Vector3(0, 0, 1), input.transform.rotation, input.transform.localScale);
+        print(output);
+        return output;
+    }
+}
+
+public class GameObjectToSprite : Conversion
+{
+    public static Sprite Convert(GameObject input, Vector2 size)
+    {
+        SnapshotCamera ssc = SnapshotCamera.MakeSnapshotCamera();
+
+        float sizeFactor = 1f;
+
+        if(input.transform.localScale.y > input.transform.localScale.x)
+        {
+            sizeFactor = size.y / input.transform.localScale.y;
+        }
+
+        if (input.transform.localScale.x > input.transform.localScale.y)
+        {
+            sizeFactor = size.x / input.transform.localScale.x;
+        }
+
+        print(sizeFactor);
+
+        Texture2D texture = ssc.TakeObjectSnapshot(input, Color.clear, new Vector3(0, 0, 1), input.transform.rotation, input.transform.localScale * sizeFactor * 2);
+        
+        Sprite output = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 256);
+
+        return output;
     }
 }

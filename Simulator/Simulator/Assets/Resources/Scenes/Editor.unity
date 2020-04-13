@@ -378,10 +378,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Objects:
-  - 
-  - 
+  - name: 
+    data: 
+    image: {fileID: 0}
+  - name: 
+    data: 
+    image: {fileID: 0}
   item: {fileID: 5400645455458792724, guid: 2697d5ac366b9cd45b4b791839bf4690, type: 3}
-  offset: {x: 0, y: 0}
+  offset: {x: 20, y: -20}
   standardScreenWidth: 1920
   parent: {fileID: 492393581}
   deckManager: {fileID: 1634812208}
@@ -491,7 +495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -292, y: 693.4}
+  m_AnchoredPosition: {x: -292, y: 693.39996}
   m_SizeDelta: {x: 584, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &369385309
@@ -3480,52 +3484,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531177858}
   m_CullTransparentMesh: 0
---- !u!1 &1563762197
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1563762199}
-  - component: {fileID: 1563762198}
-  m_Layer: 0
-  m_Name: CopyPaste Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1563762198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563762197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24dd3cae1132c414187c9977e0fb134e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  copiedObj: {fileID: 0}
-  selectionManager: {fileID: 1331996022}
-  spawningManager: {fileID: 1847569310}
---- !u!4 &1563762199
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563762197}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7728082, y: -0.49653763, z: -170.90625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1592192180
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,6 +3664,7 @@ MonoBehaviour:
     position;},orientation_rotation{FLOAT;0;Rotation;},orientation_width{FLOAT;1;Width;},orientation_height{FLOAT;1;Height;},collision_is_trigger{BOOL;true;Enabled;},colour_r{FLOAT;255;Red;},colour_g{FLOAT;00;Green;},colour_b{FLOAT;255;Blue;},];StartEffects[Orientation,Collision,];Effects[Orientation,Collision,Colour,];
   spawningManager: {fileID: 1847569310}
   selectionManager: {fileID: 1331996022}
+  deckUIManager: {fileID: 351350393}
 --- !u!4 &1634812209
 Transform:
   m_ObjectHideFlags: 0
@@ -3718,7 +3677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1741568063
 GameObject:
@@ -4207,8 +4166,8 @@ MonoBehaviour:
   objectBase: {fileID: 5507778767103920105, guid: b65d8629479abe547b397f92fc1a6d9c,
     type: 3}
   sObjToSpawn:
-    label: Square
-    sprite: {fileID: 21300000, guid: f61fd88ffaf4ca04aafdd050c514ba54, type: 3}
+    label: 
+    sprite: {fileID: 0}
   gameObjectToSpawn: {fileID: 0}
   zLevel: 0
   mousePos: {x: 0, y: 0}
@@ -4271,7 +4230,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2013904288
 GameObject:

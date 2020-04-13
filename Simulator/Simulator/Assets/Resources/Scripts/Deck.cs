@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    public List<string> objects = new List<string>();
+    public List<DeckItemData> objects = new List<DeckItemData>();
 
     [Space(10)]
 
@@ -14,6 +14,7 @@ public class Deck : MonoBehaviour
 
     public Spawning spawningManager;
     public Select selectionManager;
+    public DeckUI deckUIManager;
 
 
     public InputMaster controls;
@@ -37,24 +38,32 @@ public class Deck : MonoBehaviour
 
     public void addObject(Object obj)
     {
-        objects.Add(ObjectToTextConverter.Convert(obj));
+        DeckItemData dataToAdd = new DeckItemData();
+
+        dataToAdd.data = ObjectToTextConverter.Convert(obj);
+
+        dataToAdd.image = GameObjectToSprite.Convert(obj.gameObject, deckUIManager.item.transform.localScale);
+
+        objects.Add(dataToAdd);
+        deckUIManager.UpdateUI();
     }
 
     public void removeObject(int index)
     {
         objects.RemoveAt(index);
+        deckUIManager.UpdateUI();
     }
 
     public ObjectData getObject(int index)
     {
-        string objText = objects[index];
+        string objText = objects[index].data;
 
         return TextToObjectConverter.Convert(objText);
     }
 
     public void select(int index)
     {
-        selected = objects[index];
+        selected = objects[index].data;
         spawningManager.ObjectToSpawn = TextToObjectConverter.Convert(selected);
         
     }

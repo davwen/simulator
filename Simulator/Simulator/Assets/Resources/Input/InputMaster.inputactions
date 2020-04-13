@@ -124,14 +124,6 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "paste",
-                    "type": "Button",
-                    "id": "9734defb-fdd7-4a8f-9b2b-1aba605ec02d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -319,39 +311,6 @@
                     "processors": "",
                     "groups": "windows",
                     "action": "copy",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Button With One Modifier",
-                    "id": "8da3e45c-b147-42d0-98e4-f9175acc3d54",
-                    "path": "ButtonWithOneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "paste",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "e06319f9-48f3-4c55-b6a6-a3a4a7df9133",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "windows",
-                    "action": "paste",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "button",
-                    "id": "b1229b0d-ff6e-4e62-9199-7e55d01b8139",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "windows",
-                    "action": "paste",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
