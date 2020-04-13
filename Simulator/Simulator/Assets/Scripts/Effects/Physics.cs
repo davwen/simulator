@@ -12,6 +12,8 @@ public class Physics : MonoBehaviour
     public const string EFFECT_KEY = "physics";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Physics";
+    [HideInInspector]
+    public const string REMOVABLE = "TRUE";
 
     //First - objectComp variable
     private Object objectComp;

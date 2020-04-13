@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
-//This script spawns all UI for the sprites chooser (object chooser)
-
-public class SpritesListUI : MonoBehaviour
+public class DeckUI : MonoBehaviour
 {
-  
-    public List<SpawnableObj> Objects;
+    public List<string> Objects = new List<string>();
+    private List<string> ObjectsChecker = new List<string>();
 
     public GameObject item;
 
@@ -19,20 +16,27 @@ public class SpritesListUI : MonoBehaviour
 
     public GameObject parent;
 
-    public Spawning spawningManager;
+    public Deck deckManager;
 
     public CanvasGroup canvasGroup;
 
     public float offsetBetween;
 
+    public Spawning spawnManager;
+
+
     private void Start()
     {
         SpawnUI(Objects);
-        
+
     }
 
-    public void SpawnUI(List<SpawnableObj> Objs)
+    public void SpawnUI(List<string> Objs, bool removeOld = true)
     {
+        if (removeOld)
+        {
+            removeUIofObj();
+        }
 
         List<string> effects = new List<string>();
 
@@ -42,29 +46,23 @@ public class SpritesListUI : MonoBehaviour
         {
             GameObject lastItem = spawnItem(item, i);
 
-            Image img = lastItem.GetComponentsInChildren<Image>()[1]; //It takes the second in the array because else the bg of the item would change.
+            DeckItem itemComp = lastItem.GetComponent<DeckItem>();
 
-            if(img != null)
-            {
-                img.sprite = Objs[i].sprite;
-            }
-
-            Text label = lastItem.GetComponentInChildren<Text>();
-
-            if (label != null)
-            {
-                label.text = Objs[i].label;
-            }
-
-            SpriteListItem itemScript = lastItem.GetComponent<SpriteListItem>();
-
-            if (itemScript != null)
-            {
-                itemScript.listManager = this;
-                itemScript.index = i;
-            }
-
+            itemComp.deckUIManager = this;
+            itemComp.index = i;
         }
+    }
+
+
+    public void removeUIofObj()
+    {
+        int childs = parent.transform.childCount;
+        for (int i = 0; i < childs; i++)
+        {
+            Destroy(parent.transform.GetChild(i).gameObject); //Destroys every list item.
+        }
+
+     
     }
 
     private GameObject spawnItem(GameObject ui, int index) //Spawns item in list
@@ -74,7 +72,7 @@ public class SpritesListUI : MonoBehaviour
         RectTransform parentRectTrans = parent.GetComponent<RectTransform>();
 
         GameObject lastItem = Instantiate(ui, new Vector2(parentRectTrans.position.x + offset.x +
-             
+
             itemRectTrans.rect.width * index * (Screen.width / standardScreenWidth) + (20 * index), parentRectTrans.position.y - offset.y),
 
             new Quaternion(0, 0, 0, 0), //Sets rotation to zero.
@@ -85,7 +83,9 @@ public class SpritesListUI : MonoBehaviour
 
     public void onItemClick(int i) //One Of the items in the list was clicked.
     {
-        spawningManager.selectNewSObj(Objects[i]);
+        deckManager.select(i);
+
+        spawnManager.clickSpawnMethod = Spawning.SpawnOptions.Object;
     }
 
     public void onModeChange(string mode) //Called from the modeManager script
@@ -101,13 +101,23 @@ public class SpritesListUI : MonoBehaviour
                 break;
         }
     }
-    
-}
 
-[System.Serializable]
-public class SpawnableObj
-{
-    public string label;
-    public Sprite sprite;
-}
+    private void Update()
+    {
+        Objects = deckManager.objects;
 
+        if(ObjectsChecker.Count != Objects.Count)
+        {
+            SpawnUI(Objects);
+            print("changed");
+
+            ObjectsChecker = Objects;
+        }
+    }
+
+    private void Awake()
+    {
+        Objects = deckManager.objects;
+    }
+
+}

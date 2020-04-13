@@ -12,6 +12,8 @@ public class Colour : MonoBehaviour
     public const string EFFECT_KEY = "colour";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Colour";
+    [HideInInspector]
+    public const string REMOVABLE = "TRUE";
 
     //First - objectComp variable
     private Object objectComp;

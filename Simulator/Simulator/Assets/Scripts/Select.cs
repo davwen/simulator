@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 //This script handles the users ability to select and edit objects when they click on them.
 
@@ -12,11 +13,11 @@ public class Select : MonoBehaviour
 
     public ValuesListUI UIList;
 
-
     public float deselectedAlpha = 0.5f;
 
     public InputMaster controls;
 
+    public GameObject baseObj;
 
     private void Awake()
     {
@@ -74,7 +75,6 @@ public class Select : MonoBehaviour
              
             }
         }
-        
     }
 
     public void onSelect(Object selected) //An object has been selected.
@@ -95,7 +95,6 @@ public class Select : MonoBehaviour
                 sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, deselectedAlpha);
             }
         }
-
 
     }
     public void onDeselect() //An object has been selected.

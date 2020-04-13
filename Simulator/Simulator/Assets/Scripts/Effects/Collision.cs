@@ -12,6 +12,8 @@ public class Collision : MonoBehaviour
     public const string EFFECT_KEY = "collision";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Collision";
+    [HideInInspector]
+    public const string REMOVABLE = "TRUE";
 
     //First - objectComp variable
     private Object objectComp;

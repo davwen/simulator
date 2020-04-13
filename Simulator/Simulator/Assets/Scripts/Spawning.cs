@@ -10,22 +10,35 @@ public class Spawning : MonoBehaviour
 {
     public GameObject objectBase;
 
+    [Header("Objects")]
+
     public SpawnableObj sObjToSpawn;
+
+    public GameObject gameObjectToSpawn;
+
+    public ObjectData ObjectToSpawn;
+
+    [Space(10)]
 
     public float zLevel;
 
     public Vector2 mousePos;
 
+    [Space(10)]
+
     public DragDrop dragDropManager;
 
     public InputMaster controls;
+
+    [HideInInspector]
+    public SpawnOptions clickSpawnMethod = SpawnOptions.SpawnableObject;
 
 
     private void Awake()
     {
         controls = new InputMaster();
 
-        controls.Editor.spawn.performed += ctx => trySpawn();
+        controls.Editor.spawn.performed += ctx => trySpawn(clickSpawnMethod);
     }
 
     private void OnEnable()
@@ -39,17 +52,17 @@ public class Spawning : MonoBehaviour
     }
 
 
-    void trySpawn()
+    public void trySpawn(SpawnOptions method, bool isPasting = false)
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
        
-
-        if (FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN && !EventSystem.current.IsPointerOverGameObject())
+        if(FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN || isPasting)
         {
-            Spawn();
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                StartCoroutine(Spawn(method));
+            }
         }
-
-
     }
 
     public void selectNewSObj(SpawnableObj obj)
@@ -57,20 +70,64 @@ public class Spawning : MonoBehaviour
         sObjToSpawn = obj;
     }
 
-    public void Spawn()
+    private IEnumerator Spawn(SpawnOptions method)
     {
-        
-        GameObject lastObj = Instantiate(objectBase, new Vector3(mousePos.x, mousePos.y, zLevel), new Quaternion(0, 0, 0, 0));
-        SpriteRenderer sr = lastObj.GetComponent<SpriteRenderer>();
+        GameObject lastObj = null;
 
-        if(sr != null && sObjToSpawn.sprite != null)
+        switch (method)
         {
-            sr.sprite = sObjToSpawn.sprite;
+            case SpawnOptions.SpawnableObject:
+                lastObj = Instantiate(objectBase, new Vector3(mousePos.x, mousePos.y, zLevel), new Quaternion(0, 0, 0, 0));
+                SpriteRenderer sr = lastObj.GetComponent<SpriteRenderer>();
+
+                if (sr != null && sObjToSpawn.sprite != null)
+                {
+                    sr.sprite = sObjToSpawn.sprite;
+                }
+
+                lastObj.AddComponent<PolygonCollider2D>().isTrigger = true; //Adds a collider.
+
+                FindObjectOfType<Select>().onDeselect();
+                break;
+
+            case SpawnOptions.GameObject:
+                lastObj = Instantiate(gameObjectToSpawn);
+
+                yield return new WaitForEndOfFrame();
+
+                lastObj.transform.position = new Vector3(mousePos.x, mousePos.y, zLevel);
+
+                FindObjectOfType<Select>().onDeselect();
+
+                break;
+
+            case SpawnOptions.Object:
+                lastObj = Instantiate(objectBase, new Vector3(mousePos.x, mousePos.y, zLevel), new Quaternion(0, 0, 0, 0));
+
+                Object objComp = lastObj.GetComponent<Object>();
+
+                objComp.startEffects = ObjectToSpawn.startEffects;
+                objComp.values = ObjectToSpawn.values;
+                objComp.currentEffects = ObjectToSpawn.currentEffects;
+                lastObj.GetComponent<SpriteRenderer>().sprite = ObjectToSpawn.sprite;
+               
+                objComp.setValue(Orientation.xPosValueKey, mousePos.x.ToString());
+                objComp.setValue(Orientation.yPosValueKey, mousePos.y.ToString());
+
+                lastObj.AddComponent<PolygonCollider2D>();
+
+                break;
         }
-
-        lastObj.AddComponent<PolygonCollider2D>().isTrigger = true; //Adds a collider.
-
-        FindObjectOfType<Select>().onDeselect();
+       
 
     }
+
+    public enum SpawnOptions
+    {
+        SpawnableObject,
+        GameObject,
+        Object
+    }
 }
+
+

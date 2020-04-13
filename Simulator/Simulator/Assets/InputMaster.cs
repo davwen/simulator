@@ -107,7 +107,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""mouseDelta"",
+                    ""name"": ""mousePos"",
                     ""type"": ""Button"",
                     ""id"": ""23a431f9-4eb0-4d78-b6f1-e4880c146c7d"",
                     ""expectedControlType"": """",
@@ -118,6 +118,30 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": ""dragCamera"",
                     ""type"": ""Button"",
                     ""id"": ""8e09c615-5571-4d58-b7b4-7c971fa751f0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""zoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""821835e3-453f-4dae-84fc-926f85a666ad"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""copy"",
+                    ""type"": ""Button"",
+                    ""id"": ""44a61ec1-d992-4d67-a7fd-9ed21f33637c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""paste"",
+                    ""type"": ""Button"",
+                    ""id"": ""9734defb-fdd7-4a8f-9b2b-1aba605ec02d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -248,11 +272,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9e1bfd22-32ab-4bbf-b7e9-84a1a7afa2a7"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""windows"",
-                    ""action"": ""mouseDelta"",
+                    ""action"": ""mousePos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -266,6 +290,83 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""dragCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54680b97-27f1-43fb-9a7c-777a19cc0488"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""ba1ea50a-5eb5-4299-b75f-78b74bef92b1"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""copy"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Modifier"",
+                    ""id"": ""0c16a75a-8af4-41f7-9682-570d94f86037"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""copy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button"",
+                    ""id"": ""be6cf3f0-d538-46f4-a9ba-4015ef9efeef"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""copy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""8da3e45c-b147-42d0-98e4-f9175acc3d54"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""paste"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""e06319f9-48f3-4c55-b6a6-a3a4a7df9133"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""paste"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""b1229b0d-ff6e-4e62-9199-7e55d01b8139"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""windows"",
+                    ""action"": ""paste"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -302,8 +403,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Editor_drag = m_Editor.FindAction("drag", throwIfNotFound: true);
         m_Editor_destroy = m_Editor.FindAction("destroy", throwIfNotFound: true);
         m_Editor_togglePause = m_Editor.FindAction("togglePause", throwIfNotFound: true);
-        m_Editor_mouseDelta = m_Editor.FindAction("mouseDelta", throwIfNotFound: true);
+        m_Editor_mousePos = m_Editor.FindAction("mousePos", throwIfNotFound: true);
         m_Editor_dragCamera = m_Editor.FindAction("dragCamera", throwIfNotFound: true);
+        m_Editor_zoom = m_Editor.FindAction("zoom", throwIfNotFound: true);
+        m_Editor_copy = m_Editor.FindAction("copy", throwIfNotFound: true);
+        m_Editor_paste = m_Editor.FindAction("paste", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -364,8 +468,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_drag;
     private readonly InputAction m_Editor_destroy;
     private readonly InputAction m_Editor_togglePause;
-    private readonly InputAction m_Editor_mouseDelta;
+    private readonly InputAction m_Editor_mousePos;
     private readonly InputAction m_Editor_dragCamera;
+    private readonly InputAction m_Editor_zoom;
+    private readonly InputAction m_Editor_copy;
+    private readonly InputAction m_Editor_paste;
     public struct EditorActions
     {
         private @InputMaster m_Wrapper;
@@ -381,8 +488,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @drag => m_Wrapper.m_Editor_drag;
         public InputAction @destroy => m_Wrapper.m_Editor_destroy;
         public InputAction @togglePause => m_Wrapper.m_Editor_togglePause;
-        public InputAction @mouseDelta => m_Wrapper.m_Editor_mouseDelta;
+        public InputAction @mousePos => m_Wrapper.m_Editor_mousePos;
         public InputAction @dragCamera => m_Wrapper.m_Editor_dragCamera;
+        public InputAction @zoom => m_Wrapper.m_Editor_zoom;
+        public InputAction @copy => m_Wrapper.m_Editor_copy;
+        public InputAction @paste => m_Wrapper.m_Editor_paste;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -425,12 +535,21 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @togglePause.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
                 @togglePause.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
                 @togglePause.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnTogglePause;
-                @mouseDelta.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnMouseDelta;
-                @mouseDelta.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnMouseDelta;
-                @mouseDelta.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnMouseDelta;
+                @mousePos.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnMousePos;
+                @mousePos.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnMousePos;
+                @mousePos.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnMousePos;
                 @dragCamera.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnDragCamera;
                 @dragCamera.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnDragCamera;
                 @dragCamera.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnDragCamera;
+                @zoom.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnZoom;
+                @zoom.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnZoom;
+                @zoom.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnZoom;
+                @copy.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
+                @copy.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
+                @copy.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
+                @paste.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
+                @paste.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
+                @paste.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnPaste;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -468,12 +587,21 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @togglePause.started += instance.OnTogglePause;
                 @togglePause.performed += instance.OnTogglePause;
                 @togglePause.canceled += instance.OnTogglePause;
-                @mouseDelta.started += instance.OnMouseDelta;
-                @mouseDelta.performed += instance.OnMouseDelta;
-                @mouseDelta.canceled += instance.OnMouseDelta;
+                @mousePos.started += instance.OnMousePos;
+                @mousePos.performed += instance.OnMousePos;
+                @mousePos.canceled += instance.OnMousePos;
                 @dragCamera.started += instance.OnDragCamera;
                 @dragCamera.performed += instance.OnDragCamera;
                 @dragCamera.canceled += instance.OnDragCamera;
+                @zoom.started += instance.OnZoom;
+                @zoom.performed += instance.OnZoom;
+                @zoom.canceled += instance.OnZoom;
+                @copy.started += instance.OnCopy;
+                @copy.performed += instance.OnCopy;
+                @copy.canceled += instance.OnCopy;
+                @paste.started += instance.OnPaste;
+                @paste.performed += instance.OnPaste;
+                @paste.canceled += instance.OnPaste;
             }
         }
     }
@@ -500,7 +628,10 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDrag(InputAction.CallbackContext context);
         void OnDestroy(InputAction.CallbackContext context);
         void OnTogglePause(InputAction.CallbackContext context);
-        void OnMouseDelta(InputAction.CallbackContext context);
+        void OnMousePos(InputAction.CallbackContext context);
         void OnDragCamera(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
+        void OnCopy(InputAction.CallbackContext context);
+        void OnPaste(InputAction.CallbackContext context);
     }
 }

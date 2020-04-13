@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 222, y: -55}
+  m_AnchoredPosition: {x: 222, y: -50}
   m_SizeDelta: {x: 2891.6, y: 332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8627705101269282589
@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b9e3db21c15b17e448d9564f7a138a0f, type: 3}
-    m_FontSize: 200
+    m_FontSize: 190
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3181876908635063872}
   m_TextComponent: {fileID: 4344321770340965765}
   m_Placeholder: {fileID: 0}
-  m_ContentType: 3
+  m_ContentType: 9
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 2
@@ -398,7 +398,7 @@ MonoBehaviour:
     value: 
   assignedObject: {fileID: 0}
   titleText: {fileID: 6471121788174947929}
-  inputField: {fileID: 0}
+  stringInputField: {fileID: 0}
   toggle: {fileID: 0}
   intInputField: {fileID: 0}
   floatInputField: {fileID: 8618148658416225833}

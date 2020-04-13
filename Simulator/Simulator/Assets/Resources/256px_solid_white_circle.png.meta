@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2f515d1cce518114d902f2ece561b8f2
+guid: 100607843d1f1274eaad6a7792a5a909
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -107,7 +107,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+  spritePackingTag: pack
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 

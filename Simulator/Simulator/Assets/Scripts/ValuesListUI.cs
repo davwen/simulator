@@ -115,8 +115,6 @@ public class ValuesListUI : MonoBehaviour
                 assigner.assignedValue = ValuesToDisplay[i];
             }
           
-            
-            
 
             if(lastTitleItem != null)
             {
@@ -134,13 +132,18 @@ public class ValuesListUI : MonoBehaviour
                     assigner.assignedObject = obj;
                     assigner.assignedEffect = Type.GetType(new Capitalization().Capitalize(effectKey));
                 }
+                
+                Button removeBtn = assigner.removeButton;
+
+                if(removeBtn != null)
+                {
+                    if (assigner.assignedEffect.GetField("REMOVABLE").GetValue(this).ToString() == "FALSE")
+                    {
+                        removeBtn.gameObject.SetActive(false);
+                    }
+                }
             }
-            
-           
-
         }
-
-       
     }
 
     private GameObject spawnItem(GameObject ui, int index) //Spawns item in list

@@ -94,7 +94,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "mouseDelta",
+                    "name": "mousePos",
                     "type": "Button",
                     "id": "23a431f9-4eb0-4d78-b6f1-e4880c146c7d",
                     "expectedControlType": "",
@@ -105,6 +105,30 @@
                     "name": "dragCamera",
                     "type": "Button",
                     "id": "8e09c615-5571-4d58-b7b4-7c971fa751f0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "zoom",
+                    "type": "PassThrough",
+                    "id": "821835e3-453f-4dae-84fc-926f85a666ad",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "copy",
+                    "type": "Button",
+                    "id": "44a61ec1-d992-4d67-a7fd-9ed21f33637c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "paste",
+                    "type": "Button",
+                    "id": "9734defb-fdd7-4a8f-9b2b-1aba605ec02d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -235,11 +259,11 @@
                 {
                     "name": "",
                     "id": "9e1bfd22-32ab-4bbf-b7e9-84a1a7afa2a7",
-                    "path": "<Mouse>/delta",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "windows",
-                    "action": "mouseDelta",
+                    "action": "mousePos",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -253,6 +277,83 @@
                     "action": "dragCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54680b97-27f1-43fb-9a7c-777a19cc0488",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "ba1ea50a-5eb5-4299-b75f-78b74bef92b1",
+                    "path": "ButtonWithOneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "copy",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Modifier",
+                    "id": "0c16a75a-8af4-41f7-9682-570d94f86037",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "copy",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button",
+                    "id": "be6cf3f0-d538-46f4-a9ba-4015ef9efeef",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "copy",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "8da3e45c-b147-42d0-98e4-f9175acc3d54",
+                    "path": "ButtonWithOneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "paste",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "e06319f9-48f3-4c55-b6a6-a3a4a7df9133",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "paste",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "button",
+                    "id": "b1229b0d-ff6e-4e62-9199-7e55d01b8139",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "windows",
+                    "action": "paste",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

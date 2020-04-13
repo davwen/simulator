@@ -13,6 +13,8 @@ public class Rotation : MonoBehaviour
     public const string EFFECT_KEY = "rotation";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Rotation";
+    [HideInInspector]
+    public const string REMOVABLE = "TRUE";
 
 
     //First - objectComp variable
