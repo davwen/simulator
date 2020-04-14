@@ -79,7 +79,7 @@ public class DeckUI : MonoBehaviour
 
         GameObject lastItem = Instantiate(ui, new Vector2(parentRectTrans.position.x + offset.x +
 
-            itemRectTrans.rect.width * index * (Screen.width / standardScreenWidth) + (20 * index), parentRectTrans.position.y - offset.y),
+            itemRectTrans.rect.width * index * (Screen.width / standardScreenWidth) + (offsetBetween * index), parentRectTrans.position.y - offset.y),
 
             new Quaternion(0, 0, 0, 0), //Sets rotation to zero.
             parent.transform);
@@ -92,6 +92,11 @@ public class DeckUI : MonoBehaviour
         deckManager.select(i);
 
         spawnManager.clickSpawnMethod = Spawning.SpawnOptions.Object;
+    }
+
+    public void onItemRemoveClick(int i) //One Of the items in the list was clicked.
+    {
+        deckManager.removeObject(i);
     }
 
     public void onModeChange(string mode) //Called from the modeManager script

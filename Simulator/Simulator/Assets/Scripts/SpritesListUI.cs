@@ -85,6 +85,7 @@ public class SpritesListUI : MonoBehaviour
 
     public void onItemClick(int i) //One Of the items in the list was clicked.
     {
+        spawningManager.clickSpawnMethod = Spawning.SpawnOptions.SpawnableObject;
         spawningManager.selectNewSObj(Objects[i]);
     }
 

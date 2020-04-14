@@ -7,7 +7,6 @@ using System.Linq;
 using System.IO;
 
 using UnityEngine;
-using UnityEditor;
 
 
 public class Conversion : MonoBehaviour
@@ -24,7 +23,7 @@ public class Conversion : MonoBehaviour
 
 public class ObjectToTextConverter : Conversion
 {
-    public static string Convert(Object obj)
+    public static string ConvertToText(Object obj)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -47,7 +46,7 @@ public class ObjectToTextConverter : Conversion
             sb.Append(obj.startEffects[i] + arrayItemSeparator);
         }
 
-        sb.Append(arrayEnd);
+        sb.Append(arrayEnd); 
 
         sb.Append("Effects" + arrayBegin);
 
@@ -61,7 +60,7 @@ public class ObjectToTextConverter : Conversion
 
         sb.Append("Sprite" + arrayBegin);
 
-        sb.Append(AssetDatabase.GetAssetPath(obj.gameObject.GetComponent<SpriteRenderer>().sprite)  + arrayItemSeparator);
+        sb.Append(Convert.ToBase64String(obj.gameObject.GetComponent<SpriteRenderer>().sprite.texture.EncodeToPNG()) + arrayItemSeparator);
 
         sb.Append(arrayEnd);
 
@@ -72,7 +71,7 @@ public class ObjectToTextConverter : Conversion
 
 public class TextToObjectConverter : Conversion
 {
-    public static ObjectData Convert(string text)
+    public static ObjectData ConvertToObject(string text)
     {
         ObjectData obj = new ObjectData();
 
@@ -107,10 +106,10 @@ public class TextToObjectConverter : Conversion
         obj.currentEffects = Effects;
 
 
-        string pathString = (Path.GetDirectoryName(getArrays(text)[3].values[0]) + "\\" + Path.GetFileNameWithoutExtension(getArrays(text)[3].values[0])).Replace("Assets\\Resources\\", "");
-        print(pathString);
-        Sprite sprite = Resources.Load<Sprite>(pathString);
-        print(sprite);
+        byte[] imageBytes = Convert.FromBase64String(getArrays(text)[3].values[0]);
+        Texture2D tex = new Texture2D(1, 1);
+        tex.LoadImage(imageBytes);
+        Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 256);
 
         obj.sprite = sprite;
 
@@ -190,7 +189,7 @@ class TextArray
 
 public class GameObjectToTexture : Conversion
 {
-    public static Texture2D Convert(GameObject input)
+    public static Texture2D ConvertToTexture(GameObject input)
     {
         SnapshotCamera ssc = SnapshotCamera.MakeSnapshotCamera();
 
@@ -202,7 +201,7 @@ public class GameObjectToTexture : Conversion
 
 public class GameObjectToSprite : Conversion
 {
-    public static Sprite Convert(GameObject input, Vector2 size)
+    public static Sprite ConvertToSprite(GameObject input, Vector2 size)
     {
         SnapshotCamera ssc = SnapshotCamera.MakeSnapshotCamera();
 

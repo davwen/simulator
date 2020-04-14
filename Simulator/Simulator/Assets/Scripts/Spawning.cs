@@ -38,7 +38,7 @@ public class Spawning : MonoBehaviour
     {
         controls = new InputMaster();
 
-        controls.Editor.spawn.performed += ctx => trySpawn(clickSpawnMethod);
+        controls.Editor.spawn.performed += ctx => Spawn(clickSpawnMethod);
     }
 
     private void OnEnable()
@@ -52,7 +52,7 @@ public class Spawning : MonoBehaviour
     }
 
 
-    public void trySpawn(SpawnOptions method, bool isPasting = false)
+    public void Spawn(SpawnOptions method, bool isPasting = false)
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
        
@@ -60,7 +60,7 @@ public class Spawning : MonoBehaviour
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                StartCoroutine(Spawn(method));
+                StartCoroutine(SpawnIenu(method));
             }
         }
     }
@@ -70,7 +70,7 @@ public class Spawning : MonoBehaviour
         sObjToSpawn = obj;
     }
 
-    private IEnumerator Spawn(SpawnOptions method)
+    private IEnumerator SpawnIenu(SpawnOptions method)
     {
         GameObject lastObj = null;
 
@@ -118,7 +118,7 @@ public class Spawning : MonoBehaviour
 
                 break;
         }
-       
+        
 
     }
 

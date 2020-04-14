@@ -40,9 +40,9 @@ public class Deck : MonoBehaviour
     {
         DeckItemData dataToAdd = new DeckItemData();
 
-        dataToAdd.data = ObjectToTextConverter.Convert(obj);
+        dataToAdd.data = ObjectToTextConverter.ConvertToText(obj);
 
-        dataToAdd.image = GameObjectToSprite.Convert(obj.gameObject, deckUIManager.item.transform.localScale);
+        dataToAdd.image = GameObjectToSprite.ConvertToSprite(obj.gameObject, deckUIManager.item.transform.localScale);
 
         objects.Add(dataToAdd);
         deckUIManager.UpdateUI();
@@ -58,13 +58,13 @@ public class Deck : MonoBehaviour
     {
         string objText = objects[index].data;
 
-        return TextToObjectConverter.Convert(objText);
+        return TextToObjectConverter.ConvertToObject(objText);
     }
 
     public void select(int index)
     {
         selected = objects[index].data;
-        spawningManager.ObjectToSpawn = TextToObjectConverter.Convert(selected);
+        spawningManager.ObjectToSpawn = TextToObjectConverter.ConvertToObject(selected);
         
     }
 }

@@ -18,4 +18,9 @@ public class DeckItem : MonoBehaviour
     {
         deckUIManager.onItemClick(index);
     }
+
+    public void onRemoveClick()
+    {
+        deckUIManager.onItemRemoveClick(index);
+    }
 }

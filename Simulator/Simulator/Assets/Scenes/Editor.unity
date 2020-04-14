@@ -390,7 +390,7 @@ MonoBehaviour:
   parent: {fileID: 492393581}
   deckManager: {fileID: 1634812208}
   canvasGroup: {fileID: 351350395}
-  offsetBetween: 20
+  offsetBetween: 40
   spawnManager: {fileID: 1847569310}
 --- !u!114 &351350394
 MonoBehaviour:
@@ -495,7 +495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -292, y: 693.39996}
+  m_AnchoredPosition: {x: -292, y: 693.4001}
   m_SizeDelta: {x: 584, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &369385309
@@ -3442,8 +3442,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2081645964}
   m_HandleRect: {fileID: 2081645963}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4268,7 +4268,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 2.56, y: 2.56}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -4320,7 +4320,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

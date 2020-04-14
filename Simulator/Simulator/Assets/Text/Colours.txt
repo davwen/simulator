@@ -3,3 +3,4 @@ These colours should be used in the games UI.
 Accent colour: #3166DD  A: 255
 Background colour (ex: for panels): #000000  A: 230
 UI bg colour: #2E2E2E  A:255
+Red: #D62B2B  A: 255
