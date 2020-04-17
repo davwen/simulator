@@ -9,10 +9,9 @@ using UnityEngine.UI;
 
 public class Select : MonoBehaviour
 {
-
     public Object currentlySelected;
 
-    public ValuesListUI UIList;
+    public ListCreator valuesListCreator;
 
     public float deselectedAlpha = 0.5f;
 
@@ -78,14 +77,8 @@ public class Select : MonoBehaviour
         }
     }
 
-    public void onSelect(Object selected) //An object has been selected.
+    public virtual void onSelect(Object selected) //An object has been selected.
     {
-        //adds every item in values list.
-       
-        UIList.makeUIofObj(selected);
-        
-        
-
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
 
         for(int i = 0; i < objects.Length; i++)
@@ -100,7 +93,6 @@ public class Select : MonoBehaviour
     }
     public void onDeselect() //An object has been selected.
     {
-        UIList.removeUIofObj(true); //removes every item in values list.
 
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
 

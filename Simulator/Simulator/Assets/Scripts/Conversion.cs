@@ -194,7 +194,6 @@ public class GameObjectToTexture : Conversion
         SnapshotCamera ssc = SnapshotCamera.MakeSnapshotCamera();
 
         Texture2D output = ssc.TakeObjectSnapshot(input, Color.clear, new Vector3(0, 0, 1), input.transform.rotation, input.transform.localScale);
-        print(output);
         return output;
     }
 }
@@ -216,8 +215,6 @@ public class GameObjectToSprite : Conversion
         {
             sizeFactor = size.x / input.transform.localScale.x;
         }
-
-        print(sizeFactor);
 
         Texture2D texture = ssc.TakeObjectSnapshot(input, Color.clear, new Vector3(0, 0, 1), input.transform.rotation, input.transform.localScale * sizeFactor * 2);
         

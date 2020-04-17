@@ -102,17 +102,21 @@ public class Spawning : MonoBehaviour
                 break;
 
             case SpawnOptions.Object:
+
                 lastObj = Instantiate(objectBase, new Vector3(mousePos.x, mousePos.y, zLevel), new Quaternion(0, 0, 0, 0));
 
                 Object objComp = lastObj.GetComponent<Object>();
 
-                objComp.startEffects = ObjectToSpawn.startEffects;
+                ObjectToSpawn.setValue(Orientation.xPosValueKey, mousePos.x.ToString());
+                ObjectToSpawn.setValue(Orientation.yPosValueKey, mousePos.y.ToString());
+
                 objComp.values = ObjectToSpawn.values;
+                objComp.startEffects = ObjectToSpawn.startEffects;
                 objComp.currentEffects = ObjectToSpawn.currentEffects;
+
+                yield return new WaitForEndOfFrame();
+
                 lastObj.GetComponent<SpriteRenderer>().sprite = ObjectToSpawn.sprite;
-               
-                objComp.setValue(Orientation.xPosValueKey, mousePos.x.ToString());
-                objComp.setValue(Orientation.yPosValueKey, mousePos.y.ToString());
 
                 lastObj.AddComponent<PolygonCollider2D>();
 

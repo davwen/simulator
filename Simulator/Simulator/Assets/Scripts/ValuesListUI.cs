@@ -133,7 +133,7 @@ public class ValuesListUI : MonoBehaviour
                     assigner.assignedEffect = Type.GetType(new Capitalization().Capitalize(effectKey));
                 }
                 
-                Button removeBtn = assigner.removeButton;
+                /*Button removeBtn = assigner.removeButton;
 
                 if(removeBtn != null)
                 {
@@ -141,7 +141,7 @@ public class ValuesListUI : MonoBehaviour
                     {
                         removeBtn.gameObject.SetActive(false);
                     }
-                }
+                }*/
             }
         }
     }

@@ -208,7 +208,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8038926385560413873}
+      - m_Target: {fileID: 0}
         m_MethodName: setValueToUI
         m_Mode: 1
         m_Arguments:
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 9064037975345215914}
   - component: {fileID: 2607740165833146694}
   - component: {fileID: 8759364194097050273}
-  - component: {fileID: 8038926385560413873}
+  - component: {fileID: 218232195370745684}
   m_Layer: 5
   m_Name: floatUI
   m_TagString: Untagged
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8038926385560413873
+--- !u!114 &218232195370745684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -388,18 +388,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8982405084283881226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9977b755ff7dbd9419d2ce70d06deb58, type: 3}
+  m_Script: {fileID: 11500000, guid: 18bf52018c5dff947a361b92e472ddc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedValue:
-    displayName: Untitled
-    key: 
-    type: 
-    value: 
-  assignedObject: {fileID: 0}
-  titleText: {fileID: 6471121788174947929}
-  stringInputField: {fileID: 0}
-  toggle: {fileID: 0}
-  intInputField: {fileID: 0}
-  floatInputField: {fileID: 8618148658416225833}
-  removeButton: {fileID: 0}
+  index: 0
+  components:
+  - key: text_title
+    Object: {fileID: 2830367932922636752}
+  - key: input
+    Object: {fileID: 3695082928383377642}

@@ -81,8 +81,9 @@ public class Object : MonoBehaviour
 
                 yield return new WaitForEndOfFrame(); //I'm using a delay to be certain that Invoke is done before executing the rest of the code.
             }
-           
-            FindObjectOfType<ValuesListUI>().updateList(this); //Finds the list and calls update.
+
+            FindObjectOfType<ValuesListManager>().UpdateAdapter();
+            FindObjectOfType<ValuesListManager>().UpdateList(); //Finds the list and calls update.
 
             if (isRunning)
             {
@@ -166,7 +167,7 @@ public class Object : MonoBehaviour
 
         for (int i = 0; i < values.Count; i++)
         {
-            if (values[i].key == key && values[i].type == Value.INTEGER_TYPE_KEY)
+            if (values[i].key.Equals(key) && values[i].type.Equals(Value.INTEGER_TYPE_KEY))
             {
                 try
                 {
@@ -192,7 +193,7 @@ public class Object : MonoBehaviour
         for (int i = 0; i < values.Count; i++)
         {
 
-            if (values[i].key == key && values[i].type == Value.FLOAT_TYPE_KEY)
+            if (values[i].key.Equals(key) && values[i].type.Equals(Value.FLOAT_TYPE_KEY))
             {
                 try
                 {
@@ -218,7 +219,7 @@ public class Object : MonoBehaviour
 
         for (int i = 0; i < values.Count; i++)
         {
-            if (values[i].key == key && values[i].type == Value.STRING_TYPE_KEY)
+            if (values[i].key.Equals(key) && values[i].type.Equals(Value.STRING_TYPE_KEY))
             {
                 try
                 {
@@ -241,7 +242,7 @@ public class Object : MonoBehaviour
 
         for (int i = 0; i < values.Count; i++)
         {
-            if (values[i].key == key && values[i].type == Value.BOOL_TYPE_KEY)
+            if (values[i].key.Equals(key) && values[i].type.Equals(Value.BOOL_TYPE_KEY))
             {
                 if (values[i].value.ToUpper() == TRUE_STRING)
                 {
@@ -292,4 +293,15 @@ public class ObjectData
     public List<string> startEffects = new List<string>();
 
     public Sprite sprite;
+
+    public void setValue(string key, string value)
+    {
+        for (int i = 0; i < values.Count; i++)
+        {
+            if (values[i].key == key)
+            {
+                values[i].value = value;
+            }
+        }
+    }
 }

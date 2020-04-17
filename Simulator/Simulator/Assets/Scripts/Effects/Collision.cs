@@ -31,7 +31,7 @@ public class Collision : MonoBehaviour
    
 
     [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(1) {new Value(triggerValueKey, Value.BOOL_TYPE_KEY, "true", "Enabled")};
+    public List<Value> usedValues = new List<Value>(1) {new Value(triggerValueKey, Value.BOOL_TYPE_KEY, Object.TRUE_STRING, "Enabled")};
 
 
     //Last - isRunning varaible

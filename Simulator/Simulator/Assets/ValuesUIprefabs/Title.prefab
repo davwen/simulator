@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5481838974446705023}
   - component: {fileID: 5507737390142190710}
   - component: {fileID: 5912792304169040921}
-  - component: {fileID: 5601362716870982889}
+  - component: {fileID: 908400188898173405}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5601362716870982889
+--- !u!114 &908400188898173405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,21 +85,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1918730445626707877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9977b755ff7dbd9419d2ce70d06deb58, type: 3}
+  m_Script: {fileID: 11500000, guid: 18bf52018c5dff947a361b92e472ddc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedValue:
-    displayName: Untitled
-    key: 
-    type: 
-    value: 
-  assignedObject: {fileID: 0}
-  titleText: {fileID: 8046523693346921353}
-  inputField: {fileID: 0}
-  toggle: {fileID: 0}
-  intInputField: {fileID: 0}
-  floatInputField: {fileID: 0}
-  removeButton: {fileID: 2163157954251294217}
+  index: 0
+  components:
+  - key: text_title
+    Object: {fileID: 5597469339582820832}
 --- !u!1 &2687537976118305520
 GameObject:
   m_ObjectHideFlags: 0
