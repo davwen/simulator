@@ -92,6 +92,8 @@ MonoBehaviour:
   components:
   - key: text_title
     Object: {fileID: 5597469339582820832}
+  - key: button_remove
+    Object: {fileID: 3985536098099186230}
 --- !u!1 &2687537976118305520
 GameObject:
   m_ObjectHideFlags: 0

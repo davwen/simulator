@@ -12,7 +12,7 @@ public class Orientation : MonoBehaviour
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Orientation";
     [HideInInspector]
-    public const string REMOVABLE = "FALSE";
+    public const string EFFECT_REMOVABLE = Object.FALSE_STRING;
 
 
     //First - objectComp variable

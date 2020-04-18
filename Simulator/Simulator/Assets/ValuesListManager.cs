@@ -14,15 +14,18 @@ public class ValuesListManager : Select
     public GameObject boolPrefab;
     public GameObject titlePrefab;
 
-    private ValuesAdapter adapter;
+    [HideInInspector]
+    public ValuesAdapter adapter;
 
     private Object currentlySelectedChecker;
 
     public void Update()
     {
-        if (currentlySelectedChecker != currentlySelected && currentlySelected != null)
+        if (currentlySelectedChecker != currentlySelected /*currentlySelected has changed*/ && currentlySelected != null)
         {
             UpdateAdapter();
+
+            listCreator.RecreateAll(adapter);
 
             currentlySelectedChecker = currentlySelected;
         }
@@ -44,6 +47,5 @@ public class ValuesListManager : Select
         {
             adapter = new ValuesAdapter(currentlySelected.values, currentlySelected, floatPrefab, integerPrefab, boolPrefab, stringPrefab, titlePrefab);
         }
-        
     }
 }

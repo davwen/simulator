@@ -83,7 +83,7 @@ public class Object : MonoBehaviour
             }
 
             FindObjectOfType<ValuesListManager>().UpdateAdapter();
-            FindObjectOfType<ValuesListManager>().UpdateList(); //Finds the list and calls update.
+            FindObjectOfType<ValuesListManager>().UpdateList();
 
             if (isRunning)
             {
@@ -100,13 +100,18 @@ public class Object : MonoBehaviour
     {
         if (GetComponent(effect) != null) //checks if object even has the effect/component.
         {
+            currentEffects.Remove(effect);
+
+            FindObjectOfType<ValuesListManager>().UpdateAdapter();
+            FindObjectOfType<ValuesListManager>().UpdateList();
+
             Destroy(GetComponent(effect));
 
             removeValues(effect.GetField("EFFECT_KEY").GetValue(effect).ToString());
 
-            FindObjectOfType<ValuesListUI>().updateList(this); //Finds the list and calls update.
 
-            currentEffects.Remove(effect);
+
+            
         }
 
     }

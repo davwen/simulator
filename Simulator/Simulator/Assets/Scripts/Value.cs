@@ -26,4 +26,13 @@ public class Value
         value = _value;
         displayName = _displayName;
     }
+
+    public bool Equals(Value other)
+    {
+        return this.key == other.key && this.value == other.value && this.type == other.type && this.displayName == other.displayName;
+    }
+
+    
 }
+
+

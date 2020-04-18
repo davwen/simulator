@@ -166,6 +166,13 @@ public class ListCreator : MonoBehaviour
             Create(adapter);
         }
     }
+
+    /// <summary>Calls RemoveAll(), the Create() immediately after.</summary>
+    public void RecreateAll(ListAdapter adapter, bool informAdapter = true)
+    {
+         RemoveAll(adapter, informAdapter);
+         Create(adapter, informAdapter);
+    }
 }
 
 public class ListItemData

@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +8,7 @@ public class ValuesAdapter : ListAdapter
 {
     public const string TYPE_TITLE = "TITLE";
 
-    public List<Value> values;
+    public List<Value> values = new List<Value>();
     public Object assignedObject;
 
     private List<string> effects = new List<string>();
@@ -21,9 +21,11 @@ public class ValuesAdapter : ListAdapter
 
     public ValuesAdapter(List<Value> _values, Object _assignedObject, GameObject _floatPrefab, GameObject _integerPrefab, GameObject _boolPrefab, GameObject _stringPrefab, GameObject _titlePrefab)
     {
-        values = _values;
+        values.Clear();
+        values.AddRange(_values);
+
         assignedObject = _assignedObject;
-        effects.Clear();
+        
 
         floatPrefab = _floatPrefab;
         integerPrefab = _integerPrefab;
@@ -31,14 +33,24 @@ public class ValuesAdapter : ListAdapter
         stringPrefab = _stringPrefab;
         titlePrefab = _titlePrefab;
 
-        for(int i = 0; i < values.Count; i++)
+        effects.Clear();
+
+        for (int i = 0; i < values.Count; i++)
         {
-            string effectName = values[i].key.Split('_')[0];
+            string effectName = "";
+            try
+            {
+                effectName = new Capitalization().Capitalize(values[i].key.Split('_')[0]);
+            }
+            catch (ArgumentOutOfRangeException) { }
+            
 
             if (!effects.Contains(effectName))
             {
                 effects.Add(effectName);
-                values.Insert(i, new Value("", TYPE_TITLE, "", Type.GetType(new Capitalization().Capitalize(effectName)).GetField("EFFECT_DISPLAY_NAME").GetValue(this).ToString()));
+               
+                values.Insert(i, new Value("", TYPE_TITLE, "", Type.GetType(effectName).GetField("EFFECT_DISPLAY_NAME").GetValue(this).ToString()));
+                
             }
         }
     }
@@ -50,6 +62,7 @@ public class ValuesAdapter : ListAdapter
 
     public override void OnItemInsert(ListItemData data)
     {
+
         data.GetComponent<Text>("text_title").text = values[data.index].displayName;
 
         if (values[data.index].type.Equals(Value.BOOL_TYPE_KEY))
@@ -65,7 +78,20 @@ public class ValuesAdapter : ListAdapter
             data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { assignedObject.setValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
         }
 
-      
+        if (values[data.index].type.Equals(TYPE_TITLE))
+        {
+            Type effect = Type.GetType(values[data.index].displayName);
+
+            if (effect.GetField("EFFECT_REMOVABLE").GetValue(this).ToString() == Object.TRUE_STRING)
+            {
+                data.GetComponent<Button>("button_remove").onClick.AddListener(delegate { assignedObject.removeEffect(effect); });
+            }
+            else
+            {
+                data.GetComponent<Button>("button_remove").gameObject.SetActive(false);
+            }
+            
+        }
     }
 
     public override void OnItemRemove(int index)

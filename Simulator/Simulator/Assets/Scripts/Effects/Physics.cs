@@ -13,7 +13,7 @@ public class Physics : MonoBehaviour
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Physics";
     [HideInInspector]
-    public const string REMOVABLE = "TRUE";
+    public const string EFFECT_REMOVABLE = Object.TRUE_STRING;
 
     //First - objectComp variable
     private Object objectComp;
