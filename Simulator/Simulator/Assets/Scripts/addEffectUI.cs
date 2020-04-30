@@ -7,7 +7,7 @@ using System;
 //This function is used to make the user able to add effects to objects via the games UI.
 //It contains stuff like: adding options ("items") to the drop down, add functionality to the "Add" button.
 
-public class addEffectUI : MonoBehaviour
+public class AddEffectUI : MonoBehaviour
 {
     [Tooltip("Write the name of the Class that holds the effect. Ex: \"rotation\".")]
     public List<string> availableEffectsString = new List<string>();
@@ -19,8 +19,6 @@ public class addEffectUI : MonoBehaviour
     public Type currentlySelectedEffect;
 
     public string nameKey = "EFFECT_DISPLAY_NAME";
-
-    public Select selectionManager; //Used for finding which object is selected by the user.
 
     void Start()
     {
@@ -61,13 +59,10 @@ public class addEffectUI : MonoBehaviour
 
     public void onAddBtnClick()
     {
-        if(selectionManager != null)
+        foreach(Object obj in SelectionManager.Instance.currentlySelected)
         {
-            selectionManager.currentlySelected.addEffect(currentlySelectedEffect);
+            obj.AddEffect(currentlySelectedEffect);
         }
-        else
-        {
-            print("You need to assign the \"selectionManager\" variable to the \"addEffectUI\" script.");
-        }
+        
     }
 }

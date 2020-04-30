@@ -29,7 +29,7 @@ public class Object : MonoBehaviour
 
         for (int i = 0; i < startEffects.Count; i++)
         {
-            addEffect(Type.GetType(startEffects[i]));
+            AddEffect(Type.GetType(startEffects[i]));
         }
 
 
@@ -46,7 +46,7 @@ public class Object : MonoBehaviour
 
         Effects = Effects.Distinct().ToList();
 
-        values = values.Distinct().ToList();
+        values = values.GroupBy(Value => Value.key).Select(g => g.Last()).ToList();
 
         try
         {
@@ -54,14 +54,14 @@ public class Object : MonoBehaviour
             {
                 if (GetComponent(type) == null)
                 {
-                    addEffect(type, false);
+                    AddEffect(type, false);
                 }
             }
         } catch (InvalidOperationException) { }
         
     }
 
-    public void addEffect(Type effect, bool addValues = true)
+    public void AddEffect(Type effect, bool addValues = true)
     {
         StartCoroutine(addEffectIenu(effect, addValues)); //Uses coroutine to be able to use a delay between Invoke and the rest.
 

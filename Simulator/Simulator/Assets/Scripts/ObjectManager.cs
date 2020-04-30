@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -7,13 +8,15 @@ using UnityEditor;
 
 public class ObjectManager : MonoBehaviour
 {
+    public static ObjectManager Instance { get; private set; }
+
     public List<Object> objects = new List<Object>();
 
     public bool isRunning;
 
     public InputMaster controls;
 
-    private void Awake()
+    public void Awake()
     {
         controls = new InputMaster();
 
@@ -23,6 +26,55 @@ public class ObjectManager : MonoBehaviour
         controls.Editor.resume.performed += ctx => resumeAllObjects();
 
         controls.Editor.togglePause.performed += ctx => togglePause();
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else { Destroy(gameObject); }
+    }
+
+    private void Start()
+    {
+        SelectionManager.Instance.onSelect += delegate
+        {
+            for (int i = 0; i < objects.Count; i++)
+            {
+                float alpha = 1f;
+
+                if (!SelectionManager.Instance.currentlySelected.Contains(objects[i]))
+                {
+                    alpha = 0.5f;
+                }
+
+                SpriteRenderer sr = objects[i].GetComponent<SpriteRenderer>();
+
+                Color currentColour = sr.color;
+                currentColour.a = alpha;
+                sr.color = currentColour;
+            }
+        };
+
+        SelectionManager.Instance.onDeselect += delegate
+        {
+            try
+            {
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    float alpha = 1f;
+
+                    SpriteRenderer sr = objects[i].GetComponent<SpriteRenderer>();
+
+                    Color currentColour = sr.color;
+                    currentColour.a = alpha;
+                    sr.color = currentColour;
+                }
+            }catch(MissingReferenceException) { }
+           
+
+        };
     }
 
     private void OnEnable()

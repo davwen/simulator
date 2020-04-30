@@ -29,6 +29,19 @@ public class DeckUI : MonoBehaviour
     {
         SpawnUI(Objects);
 
+        ModeManager.Instance.onModeChange += delegate
+        {
+            switch (ModeManager.Instance.currentMode)
+            {
+                case ModeManager.MODE_SPAWN:
+                    canvasGroup.alpha = 1;
+                    break;
+
+                case ModeManager.MODE_EDIT:
+                    canvasGroup.alpha = 0;
+                    break;
+            }
+        };
     }
 
     public void SpawnUI(List<DeckItemData> Objs, bool removeOld = true)
@@ -89,28 +102,14 @@ public class DeckUI : MonoBehaviour
 
     public void onItemClick(int i) //One Of the items in the list was clicked.
     {
-        deckManager.select(i);
+        deckManager.Select(i);
 
         spawnManager.clickSpawnMethod = Spawning.SpawnOptions.Object;
     }
 
     public void onItemRemoveClick(int i) //One Of the items in the list was clicked.
     {
-        deckManager.removeObject(i);
-    }
-
-    public void onModeChange(string mode) //Called from the modeManager script
-    {
-        switch (mode)
-        {
-            case ModeManager.MODE_SPAWN:
-                canvasGroup.alpha = 1;
-                break;
-
-            case ModeManager.MODE_EDIT:
-                canvasGroup.alpha = 0;
-                break;
-        }
+        deckManager.RemoveObject(i);
     }
 
     public void UpdateUI()

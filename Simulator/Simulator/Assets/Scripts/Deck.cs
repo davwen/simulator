@@ -13,17 +13,20 @@ public class Deck : MonoBehaviour
     [Space(10)]
 
     public Spawning spawningManager;
-    public Select selectionManager;
     public DeckUI deckUIManager;
 
 
     public InputMaster controls;
 
-    private void Awake()
+    public void Awake()
     {
         controls = new InputMaster();
 
-        controls.Editor.copy.performed += _ => addObject(selectionManager.currentlySelected);
+        foreach(Object obj in SelectionManager.Instance.currentlySelected)
+        {
+            controls.Editor.copy.performed += _ => AddObject(obj);
+        }
+        
     }
 
     private void OnEnable()
@@ -36,7 +39,7 @@ public class Deck : MonoBehaviour
         controls.Disable();
     }
 
-    public void addObject(Object obj)
+    public void AddObject(Object obj)
     {
         DeckItemData dataToAdd = new DeckItemData();
 
@@ -48,20 +51,20 @@ public class Deck : MonoBehaviour
         deckUIManager.UpdateUI();
     }
 
-    public void removeObject(int index)
+    public void RemoveObject(int index)
     {
         objects.RemoveAt(index);
         deckUIManager.UpdateUI();
     }
 
-    public ObjectData getObject(int index)
+    public ObjectData GetObject(int index)
     {
         string objText = objects[index].data;
 
         return TextToObjectConverter.ConvertToObject(objText);
     }
 
-    public void select(int index)
+    public void Select(int index)
     {
         selected = objects[index].data;
         spawningManager.ObjectToSpawn = TextToObjectConverter.ConvertToObject(selected);

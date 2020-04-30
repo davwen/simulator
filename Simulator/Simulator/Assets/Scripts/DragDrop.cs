@@ -1,30 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
 
 //This script is used to handle the Drag n' Drop system (for GameObjects).
 
 public class DragDrop : MonoBehaviour
 {
-    
+    public static DragDrop Instance { get; private set; }
+
     public bool isDragging = false;
 
-    [HideInInspector]
-    public bool isMouseInside = false;
-
-    [HideInInspector]
-    public Vector2 mousePos;
-
     public float speed;
-
-    public Select selectionManager;
 
     public InputMaster controls;
 
     private bool isMouseDown;
     private bool isMouseDownCheck;
 
-    private Vector3 offset;
+    public Vector3[] offsets;
+    public Rigidbody2D[] bodies;
 
     private void Awake()
     {
@@ -32,6 +25,14 @@ public class DragDrop : MonoBehaviour
 
         controls.Editor.drag.performed += ctx => isMouseDown = true;
         controls.Editor.drag.canceled += ctx => isMouseDown = false;
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else { Destroy(gameObject); }
     }
 
     private void OnEnable()
@@ -47,45 +48,75 @@ public class DragDrop : MonoBehaviour
 
     void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //Translates the mouse position to a world position.
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        isDragging = isMouseDown;
-
-        if (isMouseDownCheck != isMouseDown && selectionManager.currentlySelected != null) //A change with the mouse has happened.
+        if (isMouseDownCheck == false && isMouseDown == true) //Mouse pressed inside object
         {
-            isMouseInside = isMouseInsideCheck(selectionManager.currentlySelected);
-            offset = new Vector3(mousePos.x, mousePos.y, 0) - selectionManager.currentlySelected.transform.position;
+            foreach (Object selectedObj in SelectionManager.Instance.currentlySelected)
+            {
+                if (IsMouseInsideObject(selectedObj, mousePosition))
+                {
+                    offsets = new Vector3[0];
 
-            isMouseDownCheck = isMouseDown;
+                    bodies = new Rigidbody2D[0];
+
+                    foreach (Object obj in SelectionManager.Instance.currentlySelected)
+                    {
+                        offsets = AddToArray(offsets, obj.transform.position - mousePosition);
+
+                        bodies = AddToArray(bodies, obj.GetComponent<Rigidbody2D>());
+
+                        isDragging = true;
+                    }
+                }
+            }
+        }
+        
+        if(isMouseDownCheck == true && isMouseDown == false) //Mouse released
+        {
+            isDragging = false;
+
+            foreach (Object selectedObj in SelectionManager.Instance.currentlySelected)
+            {
+                Rigidbody2D body = selectedObj.GetComponent<Rigidbody2D>();
+
+                if (!FindObjectOfType<ObjectManager>().isRunning)
+                {
+                    body.constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+
+
+                body.isKinematic = false;
+            }
+           
         }
 
-        if (isDragging && selectionManager.currentlySelected != null && isMouseInside && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_EDIT) //Should the selected object go towards the mouse.
+        if (isDragging)
         {
-            Rigidbody2D selectedBody = selectionManager.currentlySelected.gameObject.GetComponent<Rigidbody2D>();
+            for (int i = 0; offsets.Length > i && bodies.Length > i; i++)
+            {
+                Vector3 targetVelocity = SelectionManager.Instance.currentlySelected[i].transform.position - (mousePosition + offsets[i]);
 
-            stopRigidbody(selectedBody);
+                Rigidbody2D body = bodies[i];
 
-            selectionManager.currentlySelected.transform.position += ((new Vector3(mousePos.x, mousePos.y, 0) - selectionManager.currentlySelected.transform.position) - offset) * Time.deltaTime * speed;
+                body.constraints = RigidbodyConstraints2D.None;
 
+                body.isKinematic = true;
+
+                body.velocity = targetVelocity * -speed;
+            }
         }
 
-        if (!isDragging && selectionManager.currentlySelected != null) //The user is not draging anymore. Switch to dynamic rigidbody.
-        {
-            Rigidbody2D selectedBody = selectionManager.currentlySelected.gameObject.GetComponent<Rigidbody2D>();
-
-            selectedBody.isKinematic = false;
-        }
-
-       
+        isMouseDownCheck = isMouseDown;
     }
 
-    private void stopRigidbody(Rigidbody2D body)
+    private void StopRigidbody(Rigidbody2D body)
     {
         body.isKinematic = true;
         body.velocity = Vector2.zero;
     }
 
-    private bool isMouseInsideCheck(Object obj) //Is the mouse inside the object?
+    private bool IsMouseInsideObject(Object obj, Vector3 mousePosition) //Is the mouse inside the object?
     {
         bool result = false;
 
@@ -93,11 +124,16 @@ public class DragDrop : MonoBehaviour
         {
             SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
 
-            result = mousePos.x > sr.bounds.min.x && mousePos.x < sr.bounds.max.x
-                && mousePos.y > sr.bounds.min.y && mousePos.y < sr.bounds.max.y;
+            result = mousePosition.x > sr.bounds.min.x && mousePosition.x < sr.bounds.max.x
+                && mousePosition.y > sr.bounds.min.y && mousePosition.y < sr.bounds.max.y;
         }
 
         return result;
       
+    }
+
+    private T[] AddToArray<T>(T[] input, T valueToAdd)
+    {
+        return input.Concat(new T[] { valueToAdd }).ToArray();
     }
 }

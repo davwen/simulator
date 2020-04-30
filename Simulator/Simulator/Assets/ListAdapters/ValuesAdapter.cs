@@ -9,7 +9,7 @@ public class ValuesAdapter : ListAdapter
     public const string TYPE_TITLE = "TITLE";
 
     public List<Value> values = new List<Value>();
-    public Object assignedObject;
+    public Object[] assignedObjects;
 
     private List<string> effects = new List<string>();
 
@@ -19,12 +19,12 @@ public class ValuesAdapter : ListAdapter
     GameObject stringPrefab;
     GameObject titlePrefab;
 
-    public ValuesAdapter(List<Value> _values, Object _assignedObject, GameObject _floatPrefab, GameObject _integerPrefab, GameObject _boolPrefab, GameObject _stringPrefab, GameObject _titlePrefab)
+    public ValuesAdapter(List<Value> _values, Object[] _assignedObjects, GameObject _floatPrefab, GameObject _integerPrefab, GameObject _boolPrefab, GameObject _stringPrefab, GameObject _titlePrefab)
     {
         values.Clear();
         values.AddRange(_values);
 
-        assignedObject = _assignedObject;
+        assignedObjects = _assignedObjects;
         
 
         floatPrefab = _floatPrefab;
@@ -65,17 +65,45 @@ public class ValuesAdapter : ListAdapter
 
         data.GetComponent<Text>("text_title").text = values[data.index].displayName;
 
-        if (values[data.index].type.Equals(Value.BOOL_TYPE_KEY))
+        if (values[data.index].type == Value.BOOL_TYPE_KEY)
         {
-            data.GetComponent<Toggle>("toggle").isOn = values[data.index].value == Object.TRUE_STRING;
+            for(int i = 0; i < assignedObjects.Length; i++)
+            {
+                Object objectToChange = assignedObjects[i];
 
-            data.GetComponent<Toggle>("toggle").onValueChanged.AddListener(delegate { assignedObject.setValue(values[data.index].key, data.GetComponent<Toggle>("toggle").isOn.ToString().ToUpper()); });
+                if (values[data.index].key.Split('_')[0] != Orientation.EFFECT_KEY || values[data.index].key.Split('_')[0] == Orientation.EFFECT_KEY && assignedObjects.Length == 1)
+                {
+                    data.GetComponent<Toggle>("toggle").isOn = values[data.index].value == Object.TRUE_STRING;
+                    data.GetComponent<Toggle>("toggle").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<Toggle>("toggle").isOn.ToString().ToUpper()); });
+                }
+                
+            }
         }
 
-        if (values[data.index].type.Equals(Value.FLOAT_TYPE_KEY) || values[data.index].type.Equals(Value.INTEGER_TYPE_KEY) || values[data.index].type.Equals(Value.STRING_TYPE_KEY))
+        if (values[data.index].type == Value.FLOAT_TYPE_KEY || values[data.index].type == Value.INTEGER_TYPE_KEY || values[data.index].type == Value.STRING_TYPE_KEY)
         {
-            data.GetComponent<InputField>("input").text = values[data.index].value;
-            data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { assignedObject.setValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
+            List<Value> allValues = new List<Value>();
+
+            for(int i = 0; i < assignedObjects.Length; i++)
+            {
+                allValues.AddRange(assignedObjects[i].values);
+            }
+
+            for(int i = 0; i < assignedObjects.Length; i++)
+            {
+                Object objectToChange = assignedObjects[i];
+
+                if (ValuesListManager.GetOccurences(values[data.index], allValues, true) >= SelectionManager.Instance.currentlySelected.Count)
+                {
+                    data.GetComponent<InputField>("input").text = values[data.index].value;
+                    data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
+                }
+                else
+                {
+                    data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
+                }
+
+            }
         }
 
         if (values[data.index].type.Equals(TYPE_TITLE))
@@ -84,7 +112,7 @@ public class ValuesAdapter : ListAdapter
 
             if (effect.GetField("EFFECT_REMOVABLE").GetValue(this).ToString() == Object.TRUE_STRING)
             {
-                data.GetComponent<Button>("button_remove").onClick.AddListener(delegate { assignedObject.removeEffect(effect); });
+                data.GetComponent<Button>("button_remove").onClick.AddListener(delegate { assignedObjects[0].removeEffect(effect); });
             }
             else
             {

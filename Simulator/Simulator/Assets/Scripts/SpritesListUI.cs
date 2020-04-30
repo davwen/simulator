@@ -28,7 +28,20 @@ public class SpritesListUI : MonoBehaviour
     private void Start()
     {
         SpawnUI(Objects);
-        
+
+        ModeManager.Instance.onModeChange += delegate
+        {
+            switch (ModeManager.Instance.currentMode)
+            {
+                case ModeManager.MODE_SPAWN:
+                    canvasGroup.alpha = 1;
+                    break;
+
+                case ModeManager.MODE_EDIT:
+                    canvasGroup.alpha = 0;
+                    break;
+            }
+        };
     }
 
     public void SpawnUI(List<SpawnableObj> Objs)
@@ -87,20 +100,6 @@ public class SpritesListUI : MonoBehaviour
     {
         spawningManager.clickSpawnMethod = Spawning.SpawnOptions.SpawnableObject;
         spawningManager.selectNewSObj(Objects[i]);
-    }
-
-    public void onModeChange(string mode) //Called from the modeManager script
-    {
-        switch (mode)
-        {
-            case ModeManager.MODE_SPAWN:
-                canvasGroup.alpha = 1;
-                break;
-
-            case ModeManager.MODE_EDIT:
-                canvasGroup.alpha = 0;
-                break;
-        }
     }
     
 }

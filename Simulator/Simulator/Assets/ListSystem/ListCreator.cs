@@ -23,6 +23,8 @@ public class ListCreator : MonoBehaviour
 
     public GameObject parent;
 
+    public CanvasGroup canvasGroup;
+
     public Vector2 offset;
 
     [Space(10)]

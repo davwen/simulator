@@ -841,7 +841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.9000244, y: 126.399994}
+  m_AnchoredPosition: {x: 4.8984375, y: 126.40039}
   m_SizeDelta: {x: -30.2, y: -292.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &430077361
@@ -862,6 +862,7 @@ MonoBehaviour:
   horizontalStartPoint: 0
   verticalStartPoint: 1
   parent: {fileID: 292203431}
+  canvasGroup: {fileID: 378545442}
   offset: {x: -500, y: 100}
   offsetBetweenItems: 150
   defaultScreenDimensions: {x: 1920, y: 1080}
@@ -913,10 +914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd8d3256bd5714284e6f5aa22db13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentlySelected: {fileID: 0}
-  valuesListCreator: {fileID: 0}
-  deselectedAlpha: 0.5
-  baseObj: {fileID: 0}
   listCreator: {fileID: 430077361}
   floatPrefab: {fileID: 8982405084283881226, guid: 0b28ddfc2e4fb15488685d05dddb6684,
     type: 3}
@@ -3011,8 +3008,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1331996023}
-  - component: {fileID: 1331996022}
   - component: {fileID: 1331996024}
+  - component: {fileID: 1331996022}
   m_Layer: 0
   m_Name: Selection Manager
   m_TagString: manager
@@ -3029,13 +3026,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1331996021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c58b2c3c71eddc439b4c14f19befac8, type: 3}
+  m_Script: {fileID: 11500000, guid: 16dd29452bbf33e49b8764f93eddd5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentlySelected: {fileID: 0}
-  valuesListCreator: {fileID: 430077361}
-  deselectedAlpha: 0.5
-  baseObj: {fileID: 5507778767103920105, guid: b65d8629479abe547b397f92fc1a6d9c, type: 3}
+  currentlySelected: []
+  canvas: {fileID: 1741568066}
+  baseColour: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0.4745098}
+  backgroundImage: {fileID: 21300000, guid: f61fd88ffaf4ca04aafdd050c514ba54, type: 3}
 --- !u!4 &1331996023
 Transform:
   m_ObjectHideFlags: 0
@@ -3063,10 +3060,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
-  isMouseInside: 0
-  mousePos: {x: 0, y: 0}
   speed: 15
-  selectionManager: {fileID: 1331996022}
+  offsets: []
+  bodies: []
 --- !u!1 &1338567309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3742,7 +3738,6 @@ MonoBehaviour:
   - rotation
   dropDown: {fileID: 567884310}
   nameKey: EFFECT_DISPLAY_NAME
-  selectionManager: {fileID: 1331996022}
 --- !u!1 &1634812207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3776,7 +3771,6 @@ MonoBehaviour:
   selected: Values[orientation_x_pos{FLOAT;5.787;X position;},orientation_y_pos{FLOAT;-0.823;Y
     position;},orientation_rotation{FLOAT;0;Rotation;},orientation_width{FLOAT;1;Width;},orientation_height{FLOAT;1;Height;},collision_is_trigger{BOOL;true;Enabled;},colour_r{FLOAT;255;Red;},colour_g{FLOAT;00;Green;},colour_b{FLOAT;255;Blue;},];StartEffects[Orientation,Collision,];Effects[Orientation,Collision,Colour,];
   spawningManager: {fileID: 1847569310}
-  selectionManager: {fileID: 1331996022}
   deckUIManager: {fileID: 351350393}
 --- !u!4 &1634812209
 Transform:

@@ -87,7 +87,7 @@ public class Spawning : MonoBehaviour
 
                 lastObj.AddComponent<PolygonCollider2D>().isTrigger = true; //Adds a collider.
 
-                FindObjectOfType<Select>().onDeselect();
+                SelectionManager.Instance.DeselectAll();
                 break;
 
             case SpawnOptions.GameObject:
@@ -97,7 +97,7 @@ public class Spawning : MonoBehaviour
 
                 lastObj.transform.position = new Vector3(mousePos.x, mousePos.y, zLevel);
 
-                FindObjectOfType<Select>().onDeselect();
+                SelectionManager.Instance.DeselectAll();
 
                 break;
 

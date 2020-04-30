@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 //This script handles all the modes in the game, such as "Edit", "Spawn".
 
 public class ModeManager : MonoBehaviour
 {
-    
+    public static ModeManager Instance { get; private set; }
+
     public const string MODE_EDIT = "EDIT";
     public const string MODE_SPAWN = "SPAWN";
 
@@ -23,12 +22,22 @@ public class ModeManager : MonoBehaviour
 
     public InputMaster controls;
 
+    public UnityAction onModeChange;
+
     private void Awake()
     {
         controls = new InputMaster();
 
         //Change mode action
         controls.Editor.changeMode.performed += ctx => currentMode = nextMode(currentMode);
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else { Destroy(gameObject); }
     }
 
     private void Update()
@@ -39,13 +48,13 @@ public class ModeManager : MonoBehaviour
             case MODE_SPAWN:
                 currentLabel = spawnLabel;
                 modeTxt.text = currentLabel;
-                ModeChange();
+                onModeChange();
                 break;
 
             case MODE_EDIT:
                 currentLabel = editLabel;
                 modeTxt.text = currentLabel;
-                ModeChange();
+                onModeChange();
                 break;
 
         }
@@ -74,28 +83,12 @@ public class ModeManager : MonoBehaviour
             case MODE_EDIT:
                 result = MODE_SPAWN;
                 break;
-
-          
-
-           
         }
 
         return result;
     }
 
-    public virtual void ModeChange() //Calls onModeChange() on every script.
-    {
-
-        GameObject[] gos = (GameObject[])GameObject.FindObjectsOfType(typeof(GameObject));
-        foreach (GameObject go in gos)
-        {
-            if (go && go.transform.parent == null)
-            {
-                go.gameObject.BroadcastMessage("onModeChange", currentMode, SendMessageOptions.DontRequireReceiver);
-            }
-        }
-
-    }
+    
 }
 
 

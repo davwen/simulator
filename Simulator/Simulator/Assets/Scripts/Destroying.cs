@@ -37,7 +37,7 @@ public class Destroying : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
 
         // If it hits something...
-        if (hit.collider != null && !EventSystem.current.IsPointerOverGameObject() && FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN)
+        if (hit.collider != null && !EventSystem.current.IsPointerOverGameObject() && ModeManager.Instance.currentMode == ModeManager.MODE_SPAWN)
         {
             Object obj = hit.transform.gameObject.GetComponent<Object>(); //Gets the Object component only once.
 
