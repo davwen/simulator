@@ -34,11 +34,11 @@ public class SpritesListUI : MonoBehaviour
             switch (ModeManager.Instance.currentMode)
             {
                 case ModeManager.MODE_SPAWN:
-                    canvasGroup.alpha = 1;
+                    LeanTween.scale(canvasGroup.gameObject, new Vector3(1, 1, 1), 0.3f);
                     break;
 
                 case ModeManager.MODE_EDIT:
-                    canvasGroup.alpha = 0;
+                    LeanTween.scale(canvasGroup.gameObject, new Vector3(0, 0, 0), 0.3f);
                     break;
             }
         };
@@ -46,7 +46,6 @@ public class SpritesListUI : MonoBehaviour
 
     public void SpawnUI(List<SpawnableObj> Objs)
     {
-
         List<string> effects = new List<string>();
 
         //Goes through every value in the list to then instantiate an item and then apply all the values to that item as well as instantiating title items.
@@ -99,7 +98,7 @@ public class SpritesListUI : MonoBehaviour
     public void onItemClick(int i) //One Of the items in the list was clicked.
     {
         spawningManager.clickSpawnMethod = Spawning.SpawnOptions.SpawnableObject;
-        spawningManager.selectNewSObj(Objects[i]);
+        spawningManager.SelectNewSObj(Objects[i]);
     }
     
 }

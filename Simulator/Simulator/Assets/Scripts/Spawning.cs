@@ -16,7 +16,7 @@ public class Spawning : MonoBehaviour
 
     public GameObject gameObjectToSpawn;
 
-    public ObjectData ObjectToSpawn;
+    public ObjectData objectToSpawn;
 
     [Space(10)]
 
@@ -56,7 +56,7 @@ public class Spawning : MonoBehaviour
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
        
-        if(FindObjectOfType<ModeManager>().currentMode == ModeManager.MODE_SPAWN || isPasting)
+        if(ModeManager.Instance.currentMode == ModeManager.MODE_SPAWN || isPasting)
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
@@ -65,7 +65,7 @@ public class Spawning : MonoBehaviour
         }
     }
 
-    public void selectNewSObj(SpawnableObj obj)
+    public void SelectNewSObj(SpawnableObj obj)
     {
         sObjToSpawn = obj;
     }
@@ -107,16 +107,16 @@ public class Spawning : MonoBehaviour
 
                 Object objComp = lastObj.GetComponent<Object>();
 
-                ObjectToSpawn.setValue(Orientation.xPosValueKey, mousePos.x.ToString());
-                ObjectToSpawn.setValue(Orientation.yPosValueKey, mousePos.y.ToString());
+                objectToSpawn.setValue(Orientation.xPosValueKey, mousePos.x.ToString());
+                objectToSpawn.setValue(Orientation.yPosValueKey, mousePos.y.ToString());
 
-                objComp.values = ObjectToSpawn.values;
-                objComp.startEffects = ObjectToSpawn.startEffects;
-                objComp.currentEffects = ObjectToSpawn.currentEffects;
+                objComp.values = objectToSpawn.values;
+                objComp.startEffects = objectToSpawn.startEffects;
+                objComp.currentEffects = objectToSpawn.currentEffects;
 
                 yield return new WaitForEndOfFrame();
 
-                lastObj.GetComponent<SpriteRenderer>().sprite = ObjectToSpawn.sprite;
+                lastObj.GetComponent<SpriteRenderer>().sprite = objectToSpawn.sprite;
 
                 lastObj.AddComponent<PolygonCollider2D>();
 

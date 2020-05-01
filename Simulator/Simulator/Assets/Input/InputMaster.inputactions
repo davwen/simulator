@@ -124,6 +124,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "multiSelect",
+                    "type": "Button",
+                    "id": "32a1016d-5513-4482-9417-5dbe06374bc7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -313,6 +321,17 @@
                     "action": "copy",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8322b52a-d74a-482b-8d92-023c5327b7df",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "multiSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

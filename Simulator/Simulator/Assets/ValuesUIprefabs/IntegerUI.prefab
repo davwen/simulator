@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 3911130839508545253}
   - component: {fileID: 8879030365501512714}
   - component: {fileID: 743530923919693446}
+  - component: {fileID: 8330343031561395095}
   m_Layer: 5
   m_Name: Title
   m_TagString: UIListTitle
@@ -226,6 +227,21 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Title
+--- !u!114 &8330343031561395095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991128503748343251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fad06b0e378504eb10b7d145a8f1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 743530923919693446}
+  fontKey: title
+  font: {fileID: 0}
 --- !u!1 &4083155138705953970
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +253,7 @@ GameObject:
   - component: {fileID: 5380920007572543693}
   - component: {fileID: 4204155062206951356}
   - component: {fileID: 860196663719614669}
+  - component: {fileID: 2725294059960735254}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -303,6 +320,21 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &2725294059960735254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4083155138705953970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fad06b0e378504eb10b7d145a8f1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 860196663719614669}
+  fontKey: input
+  font: {fileID: 0}
 --- !u!1 &5750146231786542926
 GameObject:
   m_ObjectHideFlags: 0

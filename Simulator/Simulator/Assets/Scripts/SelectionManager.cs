@@ -24,11 +24,13 @@ public class SelectionManager : MonoBehaviour
     public InputMaster controls;
 
     public UnityAction onSelect;
-    public UnityAction onDeselect;
+    public UnityAction onDeselected;
+    public UnityAction beforeDeselected;
+    public UnityAction onDeselectedAll;
     public UnityAction onMultiSelectDone;
 
-    private bool buttonDown;
-    private bool buttonDownChecker;
+    private bool multiButtonDown;
+    private bool multiButtonDownChecker;
 
     private GameObject selectionBox;
 
@@ -39,8 +41,8 @@ public class SelectionManager : MonoBehaviour
         controls = new InputMaster();
 
         controls.Editor.select.performed += _ => SelectWithMouse();
-        controls.Editor.select.performed += _ => buttonDown = true;
-        controls.Editor.select.canceled += _ => buttonDown = false;
+        controls.Editor.multiSelect.performed += _ => multiButtonDown = true;
+        controls.Editor.multiSelect.canceled += _ => multiButtonDown = false;
 
         controls.Editor.deselect.performed += _ => DeselectAll();
 
@@ -69,11 +71,11 @@ public class SelectionManager : MonoBehaviour
 
     private void Update()
     {
-        if (!DragDrop.Instance.isDragging && ModeManager.Instance.currentMode == ModeManager.MODE_EDIT)
+        if (!DragDrop.Instance.isDragging && ModeManager.Instance.currentMode == ModeManager.MODE_EDIT && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (buttonDownChecker != buttonDown)
+            if (multiButtonDownChecker != multiButtonDown)
             {
-                if (buttonDown)
+                if (multiButtonDown)
                 {
                     startPos = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);
                 }
@@ -81,35 +83,33 @@ public class SelectionManager : MonoBehaviour
                 {
                     onMultiSelectDone();
                 }
-                buttonDownChecker = buttonDown;
+                multiButtonDownChecker = multiButtonDown;
             }
 
-            try
+
+            if (multiButtonDown)
             {
-                if (buttonDown)
+                if (selectionBox == null)
                 {
-                    if (selectionBox == null)
-                    {
-                        CreateUIRectangle(startPos, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0));
-                    }
-
-                    if (selectionBox != null)
-                    {
-                        CreateUIRectangle(startPos, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0), selectionBox);
-
-                        selectionBox.SetActive(true);
-                    }
+                    CreateUIRectangle(startPos, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0));
                 }
-                else
+
+                if (selectionBox != null)
                 {
+                    CreateUIRectangle(startPos, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0), selectionBox);
 
-                    selectionBox.SetActive(false);
-
+                    selectionBox.SetActive(true);
                 }
             }
-            catch (NullReferenceException) { }
         }
-        
+       
+        if(!multiButtonDown)
+        {
+            if(selectionBox != null)
+            {
+                selectionBox.SetActive(false);
+            }
+        }
     }
 
     public void SelectWithMouse()
@@ -132,24 +132,35 @@ public class SelectionManager : MonoBehaviour
 
 
 
-    public void DeselectOne(Object objectToRemove)
+    public void DeselectOne(Object objectToRemove, bool report = true)
     {
+        if(beforeDeselected != null && report)
+        {
+            beforeDeselected();
+        }
+
         currentlySelected.Remove(objectToRemove);
 
-        if (onDeselect != null)
+        if (onDeselected != null && report)
         {
-            onDeselect();
+            onDeselected();
         }
     }
 
     public void DeselectAll()
     {
+        for (int i = 0; i < currentlySelected.Count; i++)
+        {
+            try
+            {
+                DeselectOne(currentlySelected[i]);
+            }
+            catch (ArgumentOutOfRangeException) { }
+        }
+
         currentlySelected.Clear();
 
-        if (onDeselect != null)
-        {
-            onDeselect();
-        }
+        onDeselectedAll();
     }
 
     private void OnEnable()
@@ -179,6 +190,11 @@ public class SelectionManager : MonoBehaviour
         if (hit.collider != null && !EventSystem.current.IsPointerOverGameObject())
         {
             Object obj = hit.transform.gameObject.GetComponent<Object>();
+
+            if (!currentlySelected.Contains(obj))
+            {
+                DeselectAll();
+            }
 
             SelectOne(obj);
             

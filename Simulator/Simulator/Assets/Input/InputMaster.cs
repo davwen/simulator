@@ -137,6 +137,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""multiSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""32a1016d-5513-4482-9417-5dbe06374bc7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -326,6 +334,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""copy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8322b52a-d74a-482b-8d92-023c5327b7df"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""multiSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -366,6 +385,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Editor_dragCamera = m_Editor.FindAction("dragCamera", throwIfNotFound: true);
         m_Editor_zoom = m_Editor.FindAction("zoom", throwIfNotFound: true);
         m_Editor_copy = m_Editor.FindAction("copy", throwIfNotFound: true);
+        m_Editor_multiSelect = m_Editor.FindAction("multiSelect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -430,6 +450,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_dragCamera;
     private readonly InputAction m_Editor_zoom;
     private readonly InputAction m_Editor_copy;
+    private readonly InputAction m_Editor_multiSelect;
     public struct EditorActions
     {
         private @InputMaster m_Wrapper;
@@ -449,6 +470,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @dragCamera => m_Wrapper.m_Editor_dragCamera;
         public InputAction @zoom => m_Wrapper.m_Editor_zoom;
         public InputAction @copy => m_Wrapper.m_Editor_copy;
+        public InputAction @multiSelect => m_Wrapper.m_Editor_multiSelect;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -503,6 +525,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @copy.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
                 @copy.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
                 @copy.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnCopy;
+                @multiSelect.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnMultiSelect;
+                @multiSelect.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnMultiSelect;
+                @multiSelect.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnMultiSelect;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -552,6 +577,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @copy.started += instance.OnCopy;
                 @copy.performed += instance.OnCopy;
                 @copy.canceled += instance.OnCopy;
+                @multiSelect.started += instance.OnMultiSelect;
+                @multiSelect.performed += instance.OnMultiSelect;
+                @multiSelect.canceled += instance.OnMultiSelect;
             }
         }
     }
@@ -582,5 +610,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDragCamera(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnCopy(InputAction.CallbackContext context);
+        void OnMultiSelect(InputAction.CallbackContext context);
     }
 }

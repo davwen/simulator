@@ -180,7 +180,7 @@ public class Object : MonoBehaviour
                 }
                 catch (FormatException)
                 {
-                    print("No input for " + "(" + values[i].type + ") " + "\"" + values[i].displayName + "\" (\"" + values[i].key + "\")" + ". Output will be: " + output.ToString());
+                    print("No input for " + values[i].type + " \"" + values[i].displayName + "\" (\"" + values[i].key + "\")" + ". Output will be: " + output.ToString());
                 }
             }
         }
@@ -206,7 +206,7 @@ public class Object : MonoBehaviour
                 }
                 catch (FormatException)
                 {
-                    print("No input for " + "(" + values[i].type + ") " + "\"" + values[i].displayName + "\" (\"" + values[i].key + "\")" + ". Output will be: " + output.ToString());
+                    print("No input for " + values[i].type + " \"" + values[i].displayName + "\" (\"" + values[i].key + "\")" + ". Output will be: " + output.ToString());
                 }
 
             }
@@ -232,7 +232,7 @@ public class Object : MonoBehaviour
                 }
                 catch (FormatException)
                 {
-                    print("No input for " + "(" + values[i].type + ") " + "\"" + values[i].displayName + "\" (\"" + values[i].key + "\")" + "\". Output will be: " + output.ToString());
+                    print("No input for " + values[i].type + " \"" + values[i].displayName + "\" (\"" + values[i].key + "\")" + "\". Output will be: " + output.ToString());
                 }
 
             }
@@ -261,7 +261,7 @@ public class Object : MonoBehaviour
                 {
                     if (output != true)
                     {
-                        print("No input for " + "(" + values[i].type + ") " + "\"" + values[i].displayName + "\" (\"" + values[i].key + "\")" + "\". Output will be: " + output.ToString());
+                        print("No input for " + values[i].type + " \"" + values[i].displayName + "\" (\"" + values[i].key + "\")" + "\". Output will be: " + output.ToString());
                     }
                 }
             }

@@ -22,11 +22,12 @@ public class Deck : MonoBehaviour
     {
         controls = new InputMaster();
 
-        foreach(Object obj in SelectionManager.Instance.currentlySelected)
-        {
-            controls.Editor.copy.performed += _ => AddObject(obj);
-        }
-        
+        controls.Editor.copy.performed += _ => {
+            foreach (Object obj in SelectionManager.Instance.currentlySelected)
+            {
+                AddObject(obj);
+            }
+        };
     }
 
     private void OnEnable()
@@ -67,7 +68,7 @@ public class Deck : MonoBehaviour
     public void Select(int index)
     {
         selected = objects[index].data;
-        spawningManager.ObjectToSpawn = TextToObjectConverter.ConvertToObject(selected);
+        spawningManager.objectToSpawn = TextToObjectConverter.ConvertToObject(selected);
         
     }
 }

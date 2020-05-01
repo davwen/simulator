@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ListOrientation { LeftToRight, RightToLeft, UpToDown, DownToUp }
 public enum HorizontalStartPoint { Middle, Left, Right }
@@ -34,6 +35,10 @@ public class ListCreator : MonoBehaviour
     public Vector2 defaultScreenDimensions;
 
     private List<GameObject> currentItems = new List<GameObject>();
+
+    [Space(10)]
+
+    public AnimationCurve curve;
 
     /// <summary>Spawns items onto a parent in order to create a list.</summary>
     public void Create(ListAdapter adapter, bool informAdapter = true)
@@ -112,6 +117,9 @@ public class ListCreator : MonoBehaviour
             {
                 adapter.OnItemInsert(new ListItemData(i, itemData.components));
             }
+
+            lastItem.transform.localScale = new Vector3(0, 0, 0);
+            LeanTween.scale(lastItem.GetComponent<RectTransform>(), new Vector3(1, 1, 1), 0.5f).setDelay((i + 1) * 0.1f).setEase(curve);
         }
     }
 

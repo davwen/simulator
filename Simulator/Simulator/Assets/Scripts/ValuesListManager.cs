@@ -18,31 +18,16 @@ public class ValuesListManager : MonoBehaviour
     [HideInInspector]
     public ValuesAdapter adapter;
 
-    private List<Object> currentlySelectedChecker = new List<Object>();
-
-    public void Update()
-    {
-        if (currentlySelectedChecker != SelectionManager.Instance.currentlySelected /*currentlySelected has changed*/ && SelectionManager.Instance.currentlySelected != null)
-        {
-            UpdateAdapter();
-
-            if(adapter != null)
-            {
-                listCreator.RecreateAll(adapter);
-
-                currentlySelectedChecker = SelectionManager.Instance.currentlySelected;
-            }
-        }
-
-        UpdateList();
-    }
+    private List<Value> adapterValuesChecker;
 
     private void Start()
     {
         SelectionManager.Instance.onSelect += ShowList;
         SelectionManager.Instance.onSelect += UpdateAdapter;
-        SelectionManager.Instance.onDeselect += HideList;
-        SelectionManager.Instance.onDeselect += UpdateAdapter;
+        SelectionManager.Instance.onDeselectedAll += HideList;
+        SelectionManager.Instance.onDeselected += UpdateAdapter;
+        SelectionManager.Instance.onDeselected += UpdateList;
+
 
         ModeManager.Instance.onModeChange += delegate
         {
@@ -52,6 +37,17 @@ public class ValuesListManager : MonoBehaviour
                 SelectionManager.Instance.DeselectAll();
             }
         };
+    }
+
+    private void Update()
+    {
+        if (adapter != null && adapterValuesChecker != adapter.values)
+        {
+            UpdateAdapter();
+            UpdateList();
+
+            adapterValuesChecker = adapter.values;
+        }
     }
 
     public void UpdateList()
@@ -79,8 +75,6 @@ public class ValuesListManager : MonoBehaviour
         values = values.DistinctBy(x => x.key).ToList();
 
         adapter = new ValuesAdapter(values, SelectionManager.Instance.currentlySelected.ToArray(), floatPrefab, integerPrefab, boolPrefab, stringPrefab, titlePrefab);
-
-
     }
 
     public static int GetOccurences(Value search, List<Value> list, bool controlWithValue = false)
@@ -117,11 +111,12 @@ public class ValuesListManager : MonoBehaviour
 
     public void HideList()
     {
-        listCreator.canvasGroup.alpha = 0f;
+        TweeningManager.Instance.ScaleOut(listCreator.canvasGroup.gameObject, TweeningManager.Instance.GetAnimation("scale"));
     }
 
     public void ShowList()
     {
-        listCreator.canvasGroup.alpha = 1f;
+        TweeningManager.Instance.ScaleIn(listCreator.canvasGroup.gameObject, TweeningManager.Instance.GetAnimation("retarding_scale"));
+        TweeningManager.Instance.FadeIn(listCreator.canvasGroup, TweeningManager.Instance.GetAnimation("fade"));
     }
 }

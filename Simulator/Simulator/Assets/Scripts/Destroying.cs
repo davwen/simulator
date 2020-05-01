@@ -46,11 +46,6 @@ public class Destroying : MonoBehaviour
                 Destroy(obj.gameObject);
                 
             }
-            
-        }
-
-        
+        } 
     }
-
-
 }

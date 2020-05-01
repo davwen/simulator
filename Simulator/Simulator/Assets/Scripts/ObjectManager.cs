@@ -57,7 +57,7 @@ public class ObjectManager : MonoBehaviour
             }
         };
 
-        SelectionManager.Instance.onDeselect += delegate
+        SelectionManager.Instance.onDeselected += delegate
         {
             try
             {

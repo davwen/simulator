@@ -67,16 +67,26 @@ public class ValuesAdapter : ListAdapter
 
         if (values[data.index].type == Value.BOOL_TYPE_KEY)
         {
-            for(int i = 0; i < assignedObjects.Length; i++)
+
+            List<Value> allValues = new List<Value>();
+
+            for (int i = 0; i < assignedObjects.Length; i++)
+            {
+                allValues.AddRange(assignedObjects[i].values);
+            }
+
+            data.GetComponent<Toggle>("toggle").onValueChanged.RemoveAllListeners();
+
+            for (int i = 0; i < assignedObjects.Length; i++)
             {
                 Object objectToChange = assignedObjects[i];
 
-                if (values[data.index].key.Split('_')[0] != Orientation.EFFECT_KEY || values[data.index].key.Split('_')[0] == Orientation.EFFECT_KEY && assignedObjects.Length == 1)
+                if (ValuesListManager.GetOccurences(values[data.index], allValues, true) >= SelectionManager.Instance.currentlySelected.Count)
                 {
                     data.GetComponent<Toggle>("toggle").isOn = values[data.index].value == Object.TRUE_STRING;
-                    data.GetComponent<Toggle>("toggle").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<Toggle>("toggle").isOn.ToString().ToUpper()); });
                 }
-                
+
+                data.GetComponent<Toggle>("toggle").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<Toggle>("toggle").isOn.ToString().ToUpper()); });
             }
         }
 
@@ -89,20 +99,22 @@ public class ValuesAdapter : ListAdapter
                 allValues.AddRange(assignedObjects[i].values);
             }
 
-            for(int i = 0; i < assignedObjects.Length; i++)
+            data.GetComponent<InputField>("input").onValueChanged.RemoveAllListeners();
+
+            for (int i = 0; i < assignedObjects.Length; i++)
             {
                 Object objectToChange = assignedObjects[i];
 
                 if (ValuesListManager.GetOccurences(values[data.index], allValues, true) >= SelectionManager.Instance.currentlySelected.Count)
                 {
                     data.GetComponent<InputField>("input").text = values[data.index].value;
-                    data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
                 }
                 else
                 {
-                    data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
+                    data.GetComponent<InputField>("input").text = "-";
                 }
 
+                data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
             }
         }
 
