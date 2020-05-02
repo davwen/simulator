@@ -34,11 +34,13 @@ public class DeckUI : MonoBehaviour
             switch (ModeManager.Instance.currentMode)
             {
                 case ModeManager.MODE_SPAWN:
-                    canvasGroup.alpha = 1;
+                    TweeningManager.Instance.Animate(canvasGroup.gameObject, AnimationType.ScaleIn, "bouncy", 0.3f, 0f);
+                    TweeningManager.Instance.Animate(canvasGroup.gameObject, AnimationType.FadeInWithCanvasGroup, "linear", 0.1f, 0.2f);
                     break;
 
                 case ModeManager.MODE_EDIT:
-                    canvasGroup.alpha = 0;
+                    TweeningManager.Instance.Animate(canvasGroup.gameObject, AnimationType.ScaleOut, "linear", 0.3f, 0f);
+                    TweeningManager.Instance.Animate(canvasGroup.gameObject, AnimationType.FadeOutWithCanvasGroup, "linear", 0.1f, 0f);
                     break;
             }
         };
@@ -48,7 +50,7 @@ public class DeckUI : MonoBehaviour
     {
         if (removeOld)
         {
-            removeUIofObj();
+            RemoveUIofObj();
         }
 
         //Goes through every value in the list to then instantiate an item and then apply all the values to that item as well as instantiating title items.
@@ -73,7 +75,7 @@ public class DeckUI : MonoBehaviour
     }
 
 
-    public void removeUIofObj()
+    public void RemoveUIofObj()
     {
         int childs = parent.transform.childCount;
         for (int i = 0; i < childs; i++)

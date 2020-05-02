@@ -34,11 +34,13 @@ public class SpritesListUI : MonoBehaviour
             switch (ModeManager.Instance.currentMode)
             {
                 case ModeManager.MODE_SPAWN:
-                    LeanTween.scale(canvasGroup.gameObject, new Vector3(1, 1, 1), 0.3f);
+                    TweeningManager.Instance.Animate(canvasGroup.gameObject, AnimationType.ScaleIn, "bouncy", 0.3f, 0f);
+                    TweeningManager.Instance.Animate(canvasGroup.gameObject, AnimationType.FadeInWithCanvasGroup, "linear", 0.1f, 0.2f);
                     break;
 
                 case ModeManager.MODE_EDIT:
-                    LeanTween.scale(canvasGroup.gameObject, new Vector3(0, 0, 0), 0.3f);
+                    TweeningManager.Instance.Animate(canvasGroup.gameObject, AnimationType.ScaleOut, "linear", 0.3f, 0f);
+                    TweeningManager.Instance.Animate(canvasGroup.gameObject, AnimationType.FadeOutWithCanvasGroup, "linear", 0.1f, 0f);
                     break;
             }
         };

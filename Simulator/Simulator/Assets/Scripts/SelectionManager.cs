@@ -40,7 +40,15 @@ public class SelectionManager : MonoBehaviour
     {
         controls = new InputMaster();
 
-        controls.Editor.select.performed += _ => SelectWithMouse();
+        controls.Editor.select.performed += _ =>
+        {
+            if (ModeManager.Instance.currentMode == ModeManager.MODE_EDIT)
+            {
+                SelectWithMouse();
+            }
+            
+        };
+
         controls.Editor.multiSelect.performed += _ => multiButtonDown = true;
         controls.Editor.multiSelect.canceled += _ => multiButtonDown = false;
 

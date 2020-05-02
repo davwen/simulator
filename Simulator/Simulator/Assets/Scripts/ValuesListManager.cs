@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MoreLinq;
+
+using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ValuesListManager : MonoBehaviour
 {
@@ -20,11 +21,17 @@ public class ValuesListManager : MonoBehaviour
 
     private List<Value> adapterValuesChecker;
 
+    public bool editable;
+
+    public Button editButton;
+
     private void Start()
     {
-        SelectionManager.Instance.onSelect += ShowList;
+        SelectionManager.Instance.onSelect += delegate { if (SelectionManager.Instance.currentlySelected.Count != 0) { MakeEditAvailable(); } };
         SelectionManager.Instance.onSelect += UpdateAdapter;
+
         SelectionManager.Instance.onDeselectedAll += HideList;
+        SelectionManager.Instance.onDeselectedAll += MakeEditInavailable;
         SelectionManager.Instance.onDeselected += UpdateAdapter;
         SelectionManager.Instance.onDeselected += UpdateList;
 
@@ -50,6 +57,22 @@ public class ValuesListManager : MonoBehaviour
         }
     }
 
+    private void MakeEditInavailable()
+    {
+        editable = false;
+
+        TweeningManager.Instance.Animate(editButton.gameObject, AnimationType.ScaleOut, "bouncy", 0.3f, 0f);
+        TweeningManager.Instance.Animate(editButton.gameObject, AnimationType.FadeOutWithImage, "linear", 0.1f, 0.2f);
+    }
+
+    private void MakeEditAvailable()
+    {
+        editable = true;
+
+        TweeningManager.Instance.Animate(editButton.gameObject, AnimationType.ScaleIn, "bouncy", 0.3f, 0f);
+        TweeningManager.Instance.Animate(editButton.gameObject, AnimationType.FadeInWithImage, "linear", 0.1f, 0.2f);
+    }
+
     public void UpdateList()
     {
         if (adapter != null)
@@ -60,7 +83,6 @@ public class ValuesListManager : MonoBehaviour
 
     public void UpdateAdapter()
     {
-
         List<Value> values = new List<Value>();
 
         foreach (Object obj in SelectionManager.Instance.currentlySelected)
@@ -87,7 +109,6 @@ public class ValuesListManager : MonoBehaviour
             {
                 occurences++;
             }
-            
         }
 
         return occurences;
@@ -111,12 +132,13 @@ public class ValuesListManager : MonoBehaviour
 
     public void HideList()
     {
-        TweeningManager.Instance.ScaleOut(listCreator.canvasGroup.gameObject, TweeningManager.Instance.GetAnimation("scale"));
+        TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.ScaleOut, "linear", 0.3f, 0f);
+        TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.FadeOutWithCanvasGroup, "linear", 0.1f, 0f);
     }
 
     public void ShowList()
     {
-        TweeningManager.Instance.ScaleIn(listCreator.canvasGroup.gameObject, TweeningManager.Instance.GetAnimation("retarding_scale"));
-        TweeningManager.Instance.FadeIn(listCreator.canvasGroup, TweeningManager.Instance.GetAnimation("fade"));
+        TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.ScaleIn, "bouncy", 0.3f, 0f);
+        TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.FadeInWithCanvasGroup, "linear", 0.1f, 0.2f);
     }
 }

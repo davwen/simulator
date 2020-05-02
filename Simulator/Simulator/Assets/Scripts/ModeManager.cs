@@ -12,6 +12,7 @@ public class ModeManager : MonoBehaviour
     public const string MODE_SPAWN = "SPAWN";
 
     public string currentMode = MODE_SPAWN;
+    public string currentModeChecker;
     public string currentLabel;
 
     public Text modeTxt;
@@ -29,7 +30,7 @@ public class ModeManager : MonoBehaviour
         controls = new InputMaster();
 
         //Change mode action
-        controls.Editor.changeMode.performed += ctx => currentMode = nextMode(currentMode);
+        controls.Editor.changeMode.performed += ctx => currentMode = NextMode(currentMode);
 
         if (Instance == null)
         {
@@ -48,13 +49,27 @@ public class ModeManager : MonoBehaviour
             case MODE_SPAWN:
                 currentLabel = spawnLabel;
                 modeTxt.text = currentLabel;
-                onModeChange();
+
+                if (currentModeChecker != currentMode)
+                {
+                    onModeChange();
+
+                    currentModeChecker = currentMode;
+                }
+                
                 break;
 
             case MODE_EDIT:
                 currentLabel = editLabel;
                 modeTxt.text = currentLabel;
-                onModeChange();
+
+                if (currentModeChecker != currentMode)
+                {
+                    onModeChange();
+
+                    currentModeChecker = currentMode;
+                }
+
                 break;
 
         }
@@ -70,7 +85,7 @@ public class ModeManager : MonoBehaviour
         controls.Disable();
     }
 
-    private string nextMode(string mode) //When the user presses left shift, what mode is the next?
+    private string NextMode(string mode) //When the user presses left shift, what mode is the next?
     {
         string result = mode;
 

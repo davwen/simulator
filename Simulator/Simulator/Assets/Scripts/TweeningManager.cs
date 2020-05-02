@@ -1,35 +1,73 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TweeningManager : MonoBehaviour
 {
     public static TweeningManager Instance { get; private set; }
 
-    public List<AnimationData> animations = new List<AnimationData>();
+    public List<Curve> curves = new List<Curve>();
 
     void Awake()
     {
         if (Instance == null)
         {
-            Instance = this;
+            Instance = this; 
             DontDestroyOnLoad(gameObject);
 
         }
         else { Destroy(gameObject); }
     }
 
-    public AnimationData GetAnimation(string key)
+    public Curve GetCurve(string key)
     {
-        for(int i = 0; i < animations.Count; i++)
+        for(int i = 0; i < curves.Count; i++)
         {
-            if(animations[i].key == key)
+            if(curves[i].key == key)
             {
-                return animations[i];
+                return curves[i];
             }
         }
 
         return default;
+    }
+
+    public void Animate(GameObject obj, AnimationType type, string curveKey, float duration, float delay)
+    {
+        AnimationCurve curve = GetCurve(curveKey).curve;
+
+        AnimationData data = new AnimationData();
+
+        data.duration = duration;
+
+        data.curve = curve;
+
+        data.delay = delay;
+
+        data.type = type;
+
+        switch (type)
+        {
+            case AnimationType.ScaleIn:
+                ScaleIn(obj, data);
+                break;
+            case AnimationType.ScaleOut:
+                ScaleOut(obj, data);
+                break;
+            case AnimationType.FadeInWithImage:
+                FadeIn(obj.GetComponent<Image>(), data);
+                break;
+            case AnimationType.FadeOutWithImage:
+                FadeOut(obj.GetComponent<Image>(), data);
+                break;
+            case AnimationType.FadeInWithCanvasGroup:
+                FadeIn(obj.GetComponent<CanvasGroup>(), data);
+                break;
+            case AnimationType.FadeOutWithCanvasGroup:
+                FadeOut(obj.GetComponent<CanvasGroup>(), data);
+                break;
+        }
     }
 
     public void ScaleIn(GameObject obj, AnimationData data)
@@ -46,13 +84,52 @@ public class TweeningManager : MonoBehaviour
     {
         LeanTween.value(0f, 1f, data.duration).setOnUpdate((float val) => {obj.alpha = val;}).setEase(data.curve);
     }
+
+    public void FadeOut(CanvasGroup obj, AnimationData data)
+    {
+        LeanTween.value(1f, 0f, data.duration).setOnUpdate((float val) => { obj.alpha = val; }).setEase(data.curve);
+    }
+
+    public void FadeIn(Image obj, AnimationData data)
+    {
+        float fromAlpha = data.curve.keys[0].value;
+        float toAlpha = data.curve.keys[data.curve.length - 1].value;
+
+        LeanTween.value(fromAlpha, toAlpha, data.duration).setOnUpdate((float val) => { obj.color = new Color(obj.color.r, obj.color.g, obj.color.b, val); }).setEase(data.curve);
+    }
+
+    public void FadeOut(Image obj, AnimationData data)
+    {
+        float fromAlpha = 1 - data.curve.keys[0].value;
+        float toAlpha = 1 - data.curve.keys[data.curve.length - 1].value;
+
+        LeanTween.value(fromAlpha, toAlpha, data.duration).setOnUpdate((float val) => { obj.color = new Color(obj.color.r, obj.color.g, obj.color.b, val); }).setEase(data.curve);
+    }
 }
 
 [System.Serializable]
 public class AnimationData
 {
     public string key = "";
+    public AnimationType type;
     public AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 0.3f, 1);
     public float duration = 0.3f;
     public float delay = 0f;
+}
+
+[System.Serializable]
+public class Curve
+{
+    public string key;
+    public AnimationCurve curve;
+}
+
+public enum AnimationType
+{
+    ScaleIn,
+    ScaleOut,
+    FadeInWithImage,
+    FadeOutWithImage,
+    FadeInWithCanvasGroup,
+    FadeOutWithCanvasGroup
 }
