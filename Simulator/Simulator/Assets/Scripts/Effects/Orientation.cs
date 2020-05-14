@@ -5,18 +5,29 @@ using UnityEngine;
 //The orientation effect component.
 
 
-public class Orientation : MonoBehaviour
+public class Orientation : Effect
 {
     [HideInInspector]
     public const string EFFECT_KEY = "orientation";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Orientation";
     [HideInInspector]
-    public const string EFFECT_REMOVABLE = Object.FALSE_STRING;
+    public const bool EFFECT_REMOVABLE = false;
 
+    public override string GetEffectKey()
+    {
+        return EFFECT_KEY;
+    }
 
-    //First - objectComp variable
-    private Object objectComp;
+    public override string GetEffectDisplayName()
+    {
+        return EFFECT_DISPLAY_NAME;
+    }
+
+    public override bool GetEffectRemovable()
+    {
+        return EFFECT_REMOVABLE;
+    }
 
     //Second - varaible keys. Always string.
     [Header("Keys")]
@@ -51,23 +62,15 @@ public class Orientation : MonoBehaviour
 
     private const int checkRate = 7;
 
-    //Fourth - The values the effect needs.
-    [Header("Values To Add/Remove")]
-
-    [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(5) {
+    public override List<Value> GetNecessaryValues()
+    {
+        return new List<Value>(5) {
         new Value(xPosValueKey, Value.FLOAT_TYPE_KEY, "0", "X position"),
         new Value(yPosValueKey, Value.FLOAT_TYPE_KEY, "0", "Y position"),
         new Value(rotValueKey, Value.FLOAT_TYPE_KEY, "0", "Rotation"),
         new Value(widthValueKey, Value.FLOAT_TYPE_KEY, "1", "Width"),
         new Value(heightValueKey, Value.FLOAT_TYPE_KEY, "1", "Height")};
-
-
-    //Last - isRunning variable
-    [Header("Inspect")]
-    public bool isRunning = false;
-
-   
+    }
 
     void Start()
     {
@@ -85,13 +88,13 @@ public class Orientation : MonoBehaviour
     {
         
         //set all variables
-        xPos = objectComp.getFloatValue(xPosValueKey);
-        yPos = objectComp.getFloatValue(yPosValueKey);
+        xPos = objectComp.GetFloatValue(xPosValueKey);
+        yPos = objectComp.GetFloatValue(yPosValueKey);
 
-        rot = objectComp.getFloatValue(rotValueKey);
+        rot = objectComp.GetFloatValue(rotValueKey);
 
-        width = objectComp.getFloatValue(widthValueKey);
-        height = objectComp.getFloatValue(heightValueKey);
+        width = objectComp.GetFloatValue(widthValueKey);
+        height = objectComp.GetFloatValue(heightValueKey);
 
         //Do loops here if needed
 
@@ -99,21 +102,21 @@ public class Orientation : MonoBehaviour
         {
             if (transScaleChecker != transform.localScale)
             {
-                objectComp.setValue(widthValueKey, transform.localScale.x.ToString("f1"));
-                objectComp.setValue(heightValueKey, transform.localScale.y.ToString("f1"));
+                objectComp.SetValue(widthValueKey, transform.localScale.x.ToString("f1"));
+                objectComp.SetValue(heightValueKey, transform.localScale.y.ToString("f1"));
                 transScaleChecker = transform.localScale;
             }
 
             if (transRotChecker != transform.eulerAngles)
             {
-                objectComp.setValue(rotValueKey, transform.eulerAngles.z.ToString("f1"));
+                objectComp.SetValue(rotValueKey, transform.eulerAngles.z.ToString("f1"));
                 transRotChecker = transform.eulerAngles;
             }
 
             if (transPosChecker != transform.position)
             {
-                objectComp.setValue(xPosValueKey, transform.position.x.ToString("f3"));
-                objectComp.setValue(yPosValueKey, transform.position.y.ToString("f3"));
+                objectComp.SetValue(xPosValueKey, transform.position.x.ToString("f3"));
+                objectComp.SetValue(yPosValueKey, transform.position.y.ToString("f3"));
                 transPosChecker = transform.position;
             }
         }
@@ -165,7 +168,7 @@ public class Orientation : MonoBehaviour
 
     }
 
-    public void Begin()
+    public override void Begin()
     {
         //set isRunning variable
         isRunning = true;
@@ -173,7 +176,7 @@ public class Orientation : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Stop()
+    public override void Stop()
     {
         //set isRunning variable
         isRunning = false;
@@ -181,7 +184,7 @@ public class Orientation : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Pause()
+    public override void Pause()
     {
         //set isRunning variable
         isRunning = false;
@@ -189,17 +192,11 @@ public class Orientation : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Resume()
+    public override void Resume()
     {
         //set isRunning variable
         isRunning = true;
 
         //Then do needed tasks
-    }
-
-    //Adds the values used for effect.
-    public void AddUsedValues()
-    {
-        objectComp.addValues(usedValues);
     }
 }

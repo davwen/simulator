@@ -9,8 +9,6 @@ using System.Linq;
 
 public class Object : MonoBehaviour
 {
-    public const string TRUE_STRING = "TRUE";
-    public const string FALSE_STRING = "FALSE";
 
 
     public List<Value> values;
@@ -22,64 +20,37 @@ public class Object : MonoBehaviour
 
     public List<Type> currentEffects = new List<Type>();
 
-    public List<string> Effects = new List<string>();
+    public List<string> effects = new List<string>();
    
     private void Awake()
     {
-
         for (int i = 0; i < startEffects.Count; i++)
         {
             AddEffect(Type.GetType(startEffects[i]));
         }
-
-
     }
 
     private void Update()
     {
-        Effects.Clear();
 
-        foreach(Type type in currentEffects)
-        {
-            Effects.Add(type.ToString());
-        }
-
-        Effects = Effects.Distinct().ToList();
-
-        values = values.GroupBy(Value => Value.key).Select(g => g.Last()).ToList();
-
-        try
-        {
-            foreach (Type type in currentEffects)
-            {
-                if (GetComponent(type) == null)
-                {
-                    AddEffect(type, false);
-                }
-            }
-        } catch (InvalidOperationException) { }
         
     }
 
     public void AddEffect(Type effect, bool addValues = true)
     {
-        StartCoroutine(addEffectIenu(effect, addValues)); //Uses coroutine to be able to use a delay between Invoke and the rest.
-
+        StartCoroutine(AddEffectIenu(effect, addValues));
     }
 
-    private IEnumerator addEffectIenu(Type effect, bool addValues)
+    private IEnumerator AddEffectIenu(Type effect, bool addValues)
     {
-        if (GetComponent(effect) == null) //checks if object already has the effect/component.
+        if (Effect.GetFromType(effect, gameObject) == null)
         {
             gameObject.AddComponent(effect);
 
-            MonoBehaviour comp = GetComponent(effect) as MonoBehaviour;
-
-            if (addValues)
+            if (addValues && gameObject != null)
             {
-                comp.Invoke("AddUsedValues", 0f); 
-
-                yield return new WaitForEndOfFrame(); //I'm using a delay to be certain that Invoke is done before executing the rest of the code.
+                yield return new WaitForEndOfFrame();
+                Effect.GetFromType(effect, gameObject).AddNecessaryValues();
             }
 
             FindObjectOfType<ValuesListManager>().UpdateAdapter();
@@ -87,16 +58,15 @@ public class Object : MonoBehaviour
 
             if (isRunning)
             {
-                beginAll(); //If I i don't begin all the newly added component will not start.
-
+                BeginAll();
             }
 
-            currentEffects.Add(effect);
+            currentEffects.Add(effect.GetType());
         }
 
     }
 
-    public void removeEffect(Type effect)
+    public void RemoveEffect(Type effect)
     {
         if (GetComponent(effect) != null) //checks if object even has the effect/component.
         {
@@ -107,7 +77,7 @@ public class Object : MonoBehaviour
 
             Destroy(GetComponent(effect));
 
-            removeValues(effect.GetField("EFFECT_KEY").GetValue(effect).ToString());
+            RemoveValues(effect.GetField("EFFECT_KEY").GetValue(effect).ToString());
 
 
 
@@ -117,33 +87,33 @@ public class Object : MonoBehaviour
     }
 
 
-    public void beginAll()
+    public void BeginAll()
     {
         BroadcastMessage("Begin", SendMessageOptions.DontRequireReceiver);
         isRunning = true;
     }
 
-    public void stopAll()
+    public void StopAll()
     {
         BroadcastMessage("Stop", SendMessageOptions.DontRequireReceiver);
         isRunning = false;
     }
 
-    public void pauseAll()
+    public void PauseAll()
     {
         BroadcastMessage("Pause", SendMessageOptions.DontRequireReceiver);
         isRunning = false;
 
     }
 
-    public void resumeAll()
+    public void ResumeAll()
     {
         BroadcastMessage("Resume", SendMessageOptions.DontRequireReceiver);
         isRunning = true;
     }
 
 
-    public void setValue(string key, Value value)
+    public void SetValue(string key, Value value)
     {
         for (int i = 0; i < values.Count; i++)
         {
@@ -154,7 +124,7 @@ public class Object : MonoBehaviour
         }
     }
 
-    public void setValue(string key, string value)
+    public void SetValue(string key, string value)
     {
         for (int i = 0; i < values.Count; i++)
         {
@@ -166,7 +136,7 @@ public class Object : MonoBehaviour
     }
 
 
-    public int getIntValue(string key)
+    public int GetIntValue(string key)
     {
         int output = 0;
 
@@ -190,7 +160,7 @@ public class Object : MonoBehaviour
 
 
 
-    public float getFloatValue(string key, float baseVal = 0f)
+    public float GetFloatValue(string key, float baseVal = 0f)
     {
         float output = baseVal;
 
@@ -218,7 +188,7 @@ public class Object : MonoBehaviour
 
 
 
-    public string getStringValue(string key)
+    public string GetStringValue(string key)
     {
         string output = "";
 
@@ -241,7 +211,7 @@ public class Object : MonoBehaviour
         return output;
     }
 
-    public bool getBoolValue(string key)
+    public bool GetBoolValue(string key)
     {
         bool output = false;
 
@@ -249,11 +219,11 @@ public class Object : MonoBehaviour
         {
             if (values[i].key.Equals(key) && values[i].type.Equals(Value.BOOL_TYPE_KEY))
             {
-                if (values[i].value.ToUpper() == TRUE_STRING)
+                if (values[i].value.ToUpper() == Value.TRUE_STRING)
                 {
                     output = true;
                 }
-                if (values[i].value.ToUpper() == FALSE_STRING)
+                if (values[i].value.ToUpper() == Value.FALSE_STRING)
                 {
                     output = false;
                 }
@@ -270,7 +240,7 @@ public class Object : MonoBehaviour
         return output;
     }
 
-    public void addValues(List<Value> valuesToAdd)
+    public void AddValues(List<Value> valuesToAdd)
     {
         for (int i = 0; i < valuesToAdd.Count; i++)
         {
@@ -281,7 +251,7 @@ public class Object : MonoBehaviour
         }
     }
 
-    public void removeValues(string effectKey)
+    public void RemoveValues(string effectKey)
     {
         values.RemoveAll(item => item.key.StartsWith(effectKey)); //Removes every value that starts with specific EFFECT_KEY value
     }

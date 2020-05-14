@@ -120,6 +120,5 @@ MonoBehaviour:
   isRunning: 0
   startEffects:
   - Orientation
-  - Collision
   - Physics
-  Effects: []
+  effects: []

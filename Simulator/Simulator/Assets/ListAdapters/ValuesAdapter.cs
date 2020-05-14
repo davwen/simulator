@@ -49,7 +49,7 @@ public class ValuesAdapter : ListAdapter
             {
                 effects.Add(effectName);
                
-                values.Insert(i, new Value("", TYPE_TITLE, "", Type.GetType(effectName).GetField("EFFECT_DISPLAY_NAME").GetValue(this).ToString()));
+                values.Insert(i, new Value("", TYPE_TITLE, "", Effect.GetFromType(Type.GetType(effectName), assignedObjects[0].gameObject).GetEffectDisplayName()));
                 
             }
         }
@@ -83,10 +83,10 @@ public class ValuesAdapter : ListAdapter
 
                 if (ValuesListManager.GetOccurences(values[data.index], allValues, true) >= SelectionManager.Instance.currentlySelected.Count)
                 {
-                    data.GetComponent<Toggle>("toggle").isOn = values[data.index].value == Object.TRUE_STRING;
+                    data.GetComponent<Toggle>("toggle").isOn = values[data.index].value == Value.TRUE_STRING;
                 }
 
-                data.GetComponent<Toggle>("toggle").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<Toggle>("toggle").isOn.ToString().ToUpper()); });
+                data.GetComponent<Toggle>("toggle").onValueChanged.AddListener(delegate { objectToChange.SetValue(values[data.index].key, data.GetComponent<Toggle>("toggle").isOn.ToString().ToUpper()); });
             }
         }
 
@@ -114,7 +114,7 @@ public class ValuesAdapter : ListAdapter
                     data.GetComponent<InputField>("input").text = "-";
                 }
 
-                data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { objectToChange.setValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
+                data.GetComponent<InputField>("input").onValueChanged.AddListener(delegate { objectToChange.SetValue(values[data.index].key, data.GetComponent<InputField>("input").text); });
             }
         }
 
@@ -122,9 +122,9 @@ public class ValuesAdapter : ListAdapter
         {
             Type effect = Type.GetType(values[data.index].displayName);
 
-            if (effect.GetField("EFFECT_REMOVABLE").GetValue(this).ToString() == Object.TRUE_STRING)
+            if (Effect.GetFromType(effect, assignedObjects[0].gameObject).GetEffectRemovable())
             {
-                data.GetComponent<Button>("button_remove").onClick.AddListener(delegate { assignedObjects[0].removeEffect(effect); });
+                data.GetComponent<Button>("button_remove").onClick.AddListener(delegate { assignedObjects[0].RemoveEffect(effect); });
             }
             else
             {

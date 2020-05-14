@@ -6,18 +6,29 @@ using UnityEngine;
 
 //The colour effect component.
 
-public class Colour : MonoBehaviour
+public class Colour : Effect
 {
     [HideInInspector]
     public const string EFFECT_KEY = "colour";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Colour";
     [HideInInspector]
-    public const string EFFECT_REMOVABLE = Object.TRUE_STRING;
+    public const bool EFFECT_REMOVABLE = true;
 
-    //First - objectComp variable
-    private Object objectComp;
+    public override string GetEffectKey()
+    {
+        return EFFECT_KEY;
+    }
 
+    public override string GetEffectDisplayName()
+    {
+        return EFFECT_DISPLAY_NAME;
+    }
+
+    public override bool GetEffectRemovable()
+    {
+        return EFFECT_REMOVABLE;
+    }
 
     //Second - varaible keys. Always string.
     [Header("Keys")]
@@ -35,18 +46,12 @@ public class Colour : MonoBehaviour
     [HideInInspector]
     public bool considerIsRunning = false;
 
-    //Fourth - The values the effect needs.
-    [Header("Values To Add/Remove")]
-
-    [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(3) { new Value(RValueKey, Value.FLOAT_TYPE_KEY, "255", "Red"),
+    public override List<Value> GetNecessaryValues()
+    {
+        return new List<Value>(1) { new Value(RValueKey, Value.FLOAT_TYPE_KEY, "255", "Red"),
         new Value(GValueKey, Value.FLOAT_TYPE_KEY, "255", "Green"),
         new Value(BValueKey, Value.FLOAT_TYPE_KEY, "255", "Blue")};
-
-
-    //Last - isRunning varaible
-    [Header("Inspect")]
-    public bool isRunning = false;
+    }
 
     void Start()
     {
@@ -65,9 +70,9 @@ public class Colour : MonoBehaviour
     void Update()
     {
         //set all variables
-        R = objectComp.getFloatValue(RValueKey);
-        G = objectComp.getFloatValue(GValueKey);
-        B = objectComp.getFloatValue(BValueKey);
+        R = objectComp.GetFloatValue(RValueKey);
+        G = objectComp.GetFloatValue(GValueKey);
+        B = objectComp.GetFloatValue(BValueKey);
 
         //Do loops here if needed
         if (isRunning || !considerIsRunning)
@@ -77,7 +82,7 @@ public class Colour : MonoBehaviour
         }
     }
 
-    public void Begin()
+    public override void Begin()
     {
         //set isRunning variable
         isRunning = true;
@@ -85,7 +90,7 @@ public class Colour : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Stop()
+    public override void Stop()
     {
         //set isRunning variable
         isRunning = false;
@@ -93,7 +98,7 @@ public class Colour : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Pause()
+    public override void Pause()
     {
         //set isRunning variable
         isRunning = false;
@@ -101,17 +106,11 @@ public class Colour : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Resume()
+    public override void Resume()
     {
         //set isRunning variable
         isRunning = true;
 
         //Then do needed tasks
-    }
-
-    //Adds the values used for effect.
-    public void AddUsedValues()
-    {
-        objectComp.addValues(usedValues);
     }
 }

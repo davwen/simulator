@@ -7,18 +7,31 @@ using UnityEngine;
 //The rotation effect component.
 
 
-public class Rotation : MonoBehaviour
+public class Rotation : Effect
 {
     [HideInInspector]
     public const string EFFECT_KEY = "rotation";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Rotation";
     [HideInInspector]
-    public const string EFFECT_REMOVABLE = Object.TRUE_STRING;
+    public const bool EFFECT_REMOVABLE = true;
 
+    public override string GetEffectKey()
+    {
+        return EFFECT_KEY;
+    }
+
+    public override string GetEffectDisplayName()
+    {
+        return EFFECT_DISPLAY_NAME;
+    }
+
+    public override bool GetEffectRemovable()
+    {
+        return EFFECT_REMOVABLE;
+    }
 
     //First - objectComp variable
-    private Object objectComp;
 
     //Second - varaible keys. Always string.
     [Header("Keys")]
@@ -29,19 +42,14 @@ public class Rotation : MonoBehaviour
     private float speed;
     private bool dirRight;
 
-    //Fourth - The values the effect needs.
-    [Header("Values To Add/Remove")]
+    private Rigidbody2D r;
 
-    [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(2) { new Value(speedValueKey, Value.FLOAT_TYPE_KEY, "10", "Speed"),
+    public override List<Value> GetNecessaryValues()
+    {
+        return new List<Value>(2) { new Value(speedValueKey, Value.FLOAT_TYPE_KEY, "10", "Speed"),
         new Value(rightValueKey, Value.BOOL_TYPE_KEY, "true", "Rotate to right") };
+    }
 
-    
-    //Last - isRunning variable
-    [Header("Inspect")]
-    public bool isRunning = false;
-
-  
     void Start()
     {
         //Get the object component only once in the start for better performance.
@@ -51,31 +59,33 @@ public class Rotation : MonoBehaviour
         {
             print("You need an Object component attached to the object " + "\"" + gameObject.name + "\".");
         }
+
+        r = GetComponent<Rigidbody2D>();
     }
 
     
     void Update()
     {
         //set all variables
-        speed = objectComp.getFloatValue(speedValueKey);
-        dirRight = objectComp.getBoolValue(rightValueKey);
+        speed = objectComp.GetFloatValue(speedValueKey);
+        dirRight = objectComp.GetBoolValue(rightValueKey);
 
         //Do loops here if needed
         if (isRunning)
         {
             if (!dirRight)
             {
-                transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime)); //It should only rotate on the z-axis.
+                r.MoveRotation(transform.eulerAngles.z + speed);
             }
             else
             {
-                transform.Rotate(new Vector3(0, 0, -speed * Time.deltaTime)); //It should only rotate on the z-axis.
+                r.MoveRotation(transform.eulerAngles.z + -speed);
             }
             
         }
     }
 
-    public void Begin()
+    public override void Begin()
     {
         //set isRunning variable
         isRunning = true;
@@ -83,7 +93,7 @@ public class Rotation : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Stop()
+    public override void Stop()
     {
         //set isRunning variable
         isRunning = false;
@@ -91,7 +101,7 @@ public class Rotation : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Pause()
+    public override void Pause()
     {
         //set isRunning variable
         isRunning = false;
@@ -99,17 +109,11 @@ public class Rotation : MonoBehaviour
         //Then do needed tasks
     }
 
-    public void Resume()
+    public override void Resume()
     {
         //set isRunning variable
         isRunning = true;
 
         //Then do needed tasks
-    }
-
-    //Adds the values used for effect.
-    public void AddUsedValues()
-    {
-        objectComp.addValues(usedValues);
     }
 }

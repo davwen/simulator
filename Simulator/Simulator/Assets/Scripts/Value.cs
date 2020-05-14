@@ -32,7 +32,8 @@ public class Value
         return this.key == other.key && this.value == other.value && this.type == other.type && this.displayName == other.displayName;
     }
 
-    
+    public const string TRUE_STRING = "TRUE";
+    public const string FALSE_STRING = "FALSE";
 }
 
 

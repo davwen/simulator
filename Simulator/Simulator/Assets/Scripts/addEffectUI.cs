@@ -18,14 +18,12 @@ public class AddEffectUI : MonoBehaviour
     public Dropdown dropDown;
     public Type currentlySelectedEffect;
 
-    public string nameKey = "EFFECT_DISPLAY_NAME";
-
     void Start()
     {
-        addEffectsToDropDown();
+        AddEffectsToDropDown();
     }
      
-    public void addEffectsToDropDown()
+    public void AddEffectsToDropDown()
     {
         //This function first adds all effects from the "availableEffectsString" list as Monobehaviours to the "availableEffects" list. 
         //Then it gets the "EFFECT_KEY" variable in all of those Monobehaviours in order to add them to the dropdown.
@@ -40,7 +38,7 @@ public class AddEffectUI : MonoBehaviour
         {
             Dropdown.OptionData option = new Dropdown.OptionData();
 
-            option.text = availableEffects[i].GetField(nameKey).GetValue(availableEffects[i]).ToString();
+            option.text = Effect.GetDisplayName(availableEffects[i]);
 
             ddOptions.Add(option);
         }

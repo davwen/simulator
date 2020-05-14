@@ -1774,7 +1774,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1613167190}
+      - m_Target: {fileID: 1613167187}
         m_MethodName: onDropDownChange
         m_Mode: 1
         m_Arguments:
@@ -2719,7 +2719,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1613167190}
+      - m_Target: {fileID: 1613167187}
         m_MethodName: onAddBtnClick
         m_Mode: 1
         m_Arguments:
@@ -3090,8 +3090,9 @@ GameObject:
   - component: {fileID: 1157432251}
   - component: {fileID: 1157432250}
   - component: {fileID: 1157432249}
+  - component: {fileID: 1157432252}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Edit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3114,7 +3115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -794.59845, y: -446.20078}
+  m_AnchoredPosition: {x: -784, y: -432.95}
   m_SizeDelta: {x: 220.9, y: 82.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1157432249
@@ -3140,7 +3141,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.19241722, g: 0.40106234, b: 0.8679245, a: 1}
     m_HighlightedColor: {r: 0.19241722, g: 0.40106234, b: 0.8679245, a: 1}
     m_PressedColor: {r: 0.19241722, g: 0.40106234, b: 0.8679245, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.19241722, g: 0.40106234, b: 0.8679245, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3207,6 +3208,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157432247}
   m_CullTransparentMesh: 0
+--- !u!114 &1157432252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157432247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1237003864
 GameObject:
   m_ObjectHideFlags: 0
@@ -3615,11 +3631,11 @@ RectTransform:
   m_Father: {fileID: 430077360}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444, y: -0.000011444}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.19921875}
   m_SizeDelta: {x: 600, y: 695.6}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1380487957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4263,7 +4279,7 @@ GameObject:
   - component: {fileID: 1613167186}
   - component: {fileID: 1613167189}
   - component: {fileID: 1613167188}
-  - component: {fileID: 1613167190}
+  - component: {fileID: 1613167187}
   m_Layer: 5
   m_Name: AddEffectUI
   m_TagString: Untagged
@@ -4292,6 +4308,24 @@ RectTransform:
   m_AnchoredPosition: {x: 20, y: 20}
   m_SizeDelta: {x: 600, y: 235}
   m_Pivot: {x: -0.000000035390258, y: 0.000000067055225}
+--- !u!114 &1613167187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613167185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da6a75a0408a484ab48cf591ae3075f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableEffectsString:
+  - Physics
+  - Collision
+  - Colour
+  - Rotation
+  dropDown: {fileID: 567884310}
 --- !u!114 &1613167188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4328,25 +4362,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613167185}
   m_CullTransparentMesh: 0
---- !u!114 &1613167190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613167185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da6a75a0408a484ab48cf591ae3075f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  availableEffectsString:
-  - physics
-  - collision
-  - colour
-  - rotation
-  dropDown: {fileID: 567884310}
-  nameKey: EFFECT_DISPLAY_NAME
 --- !u!1 &1634812207
 GameObject:
   m_ObjectHideFlags: 0

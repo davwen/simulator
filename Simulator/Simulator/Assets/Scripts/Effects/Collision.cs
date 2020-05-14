@@ -6,37 +6,42 @@ using UnityEngine;
 
 //The rotation effect component.
 
-public class Collision : MonoBehaviour
+public class Collision : Effect
 {
     [HideInInspector]
     public const string EFFECT_KEY = "collision";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Collision";
     [HideInInspector]
-    public const string EFFECT_REMOVABLE = Object.TRUE_STRING;
+    public const bool EFFECT_REMOVABLE = true;
 
-    //First - objectComp variable
-    private Object objectComp;
+    public override string GetEffectKey()
+    {
+        return EFFECT_KEY;
+    }
 
-    //Second - varaible keys. Always string.
+    public override string GetEffectDisplayName()
+    {
+        return EFFECT_DISPLAY_NAME;
+    }
+
+    public override bool GetEffectRemovable()
+    {
+        return EFFECT_REMOVABLE;
+    }
+
+
     [Header("Keys")]
     public const string triggerValueKey = EFFECT_KEY + "_is_trigger";
 
-    //Third - variables needed for effect.
+
     private Collider2D coll;
     public bool isTrigger = false;
 
-    //Fourth - The values the effect needs.
-    [Header("Values To Add/Remove")]
-   
-
-    [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(1) {new Value(triggerValueKey, Value.BOOL_TYPE_KEY, Object.TRUE_STRING, "Enabled")};
-
-
-    //Last - isRunning varaible
-    [Header("Inspect")]
-    public bool isRunning = false;
+    public override List<Value> GetNecessaryValues()
+    {
+        return new List<Value>(1) { new Value(triggerValueKey, Value.BOOL_TYPE_KEY, Value.TRUE_STRING, "Enabled") };
+    }
 
     void Start()
     {
@@ -55,7 +60,7 @@ public class Collision : MonoBehaviour
     void Update()
     {
         //set all variables
-        isTrigger = objectComp.getBoolValue(triggerValueKey);
+        isTrigger = objectComp.GetBoolValue(triggerValueKey);
 
         //Do loops here if needed
         if (isRunning)
@@ -64,7 +69,7 @@ public class Collision : MonoBehaviour
         }
     }
 
-    public void Begin()
+    public override void Begin()
     {
         //set isRunning variable
         isRunning = true;
@@ -73,7 +78,7 @@ public class Collision : MonoBehaviour
         coll.isTrigger = false;
     }
 
-    public void Stop()
+    public override void Stop()
     {
         //set isRunning variable
         isRunning = false;
@@ -82,7 +87,7 @@ public class Collision : MonoBehaviour
         coll.isTrigger = true;
     }
 
-    public void Pause()
+    public override void Pause()
     {
         //set isRunning variable
         isRunning = false;
@@ -91,18 +96,12 @@ public class Collision : MonoBehaviour
         coll.isTrigger = true;
     }
 
-    public void Resume()
+    public override void Resume()
     {
         //set isRunning variable
         isRunning = true;
 
         //Then do needed tasks
         coll.isTrigger = false;
-    }
-
-    //Adds the values used for effect.
-    public void AddUsedValues()
-    {
-        objectComp.addValues(usedValues);
     }
 }

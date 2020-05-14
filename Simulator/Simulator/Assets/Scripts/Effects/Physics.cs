@@ -6,39 +6,54 @@ using UnityEngine;
 
 //The rotation effect component.
 
-public class Physics : MonoBehaviour
+public class Physics : Effect
 {
     [HideInInspector]
     public const string EFFECT_KEY = "physics";
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Physics";
     [HideInInspector]
-    public const string EFFECT_REMOVABLE = Object.TRUE_STRING;
+    public const bool EFFECT_REMOVABLE = false;
 
-    //First - objectComp variable
-    private Object objectComp;
+    public override string GetEffectKey()
+    {
+        return EFFECT_KEY;
+    }
+
+    public override string GetEffectDisplayName()
+    {
+        return EFFECT_DISPLAY_NAME;
+    }
+
+    public override bool GetEffectRemovable()
+    {
+        return EFFECT_REMOVABLE;
+    }
 
 
     //Second - varaible keys. Always string.
     [Header("Keys")]
-    public const string rotateValueKey = EFFECT_KEY + "_rotation_enabled";
     public const string gravityValueKey = EFFECT_KEY + "_gravity_strength";
 
+    public const string restrictXValueKey = EFFECT_KEY + "_restrict_x";
+    public const string restrictYValueKey = EFFECT_KEY + "_restrict_y";
+    public const string restrictRotationValueKey = EFFECT_KEY + "_restrict_rotation";
+
     //Third - variables needed for effect.
-    private bool rotateEnabled;
+    private bool restrictX;
+    private bool restrictY;
+    private bool restrictRotation;
     private float gravityStrength;
     private Rigidbody2D rb;
 
-    //Fourth - The values the effect needs.
-    [Header("Values To Add/Remove")]
-
-    [Tooltip("Values used by effect")]
-    public List<Value> usedValues = new List<Value>(2) { new Value(rotateValueKey, Value.BOOL_TYPE_KEY, "true", "Rotation enabled"),
-        new Value(gravityValueKey, Value.FLOAT_TYPE_KEY, "1", "Gravity strength") };
-
-    //Last - isRunning varaible
-    [Header("Inspect")]
-    public bool isRunning = false;
+    public override List<Value> GetNecessaryValues()
+    {
+        return new List<Value>(2) {
+        new Value(gravityValueKey, Value.FLOAT_TYPE_KEY, "1", "Gravity strength"), 
+        new Value(restrictXValueKey, Value.BOOL_TYPE_KEY, Value.FALSE_STRING, "Restrict X"),
+        new Value(restrictYValueKey, Value.BOOL_TYPE_KEY, Value.FALSE_STRING, "Restrict Y"),
+        new Value(restrictRotationValueKey, Value.BOOL_TYPE_KEY, Value.FALSE_STRING, "Restrict Rotation") };
+    }
 
     void Start()
     {
@@ -57,34 +72,34 @@ public class Physics : MonoBehaviour
     void Update()
     {
         //set all variables
-        rotateEnabled = objectComp.getBoolValue(rotateValueKey);
-        gravityStrength = objectComp.getFloatValue(gravityValueKey);
+        restrictRotation = objectComp.GetBoolValue(restrictRotationValueKey);
+        restrictX = objectComp.GetBoolValue(restrictXValueKey);
+        restrictY = objectComp.GetBoolValue(restrictYValueKey);
+
+        gravityStrength = objectComp.GetFloatValue(gravityValueKey);
 
         //Do loops here if needed
-        rb.freezeRotation = !isRunning;
 
         if (isRunning)
         {
             rb.gravityScale = gravityStrength;
-            if (!rotateEnabled)
+            if (restrictRotation)
             {
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
-            else
-            {
-                rb.constraints = RigidbodyConstraints2D.None;
-            }
+            
+           
         }
         
     }
 
-    public void Begin()
+    public override void Begin()
     {
         //set isRunning variable
         isRunning = true;
 
         //Then do needed tasks
-        if (rotateEnabled)
+        if (restrictRotation)
         {
             rb.constraints = RigidbodyConstraints2D.None;
         }
@@ -95,7 +110,7 @@ public class Physics : MonoBehaviour
 
     }
 
-    public void Stop()
+    public override void Stop()
     {
         //set isRunning variable
         isRunning = false;
@@ -104,7 +119,7 @@ public class Physics : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    public void Pause()
+    public override void Pause()
     {
         //set isRunning variable
         isRunning = false;
@@ -113,13 +128,13 @@ public class Physics : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    public void Resume()
+    public override void Resume()
     {
         //set isRunning variable
         isRunning = true;
 
         //Then do needed tasks
-        if (rotateEnabled)
+        if (restrictRotation)
         {
             rb.constraints = RigidbodyConstraints2D.None;
         }
@@ -127,11 +142,5 @@ public class Physics : MonoBehaviour
         {
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-    }
-
-    //Adds the values used for effect.
-    public void AddUsedValues()
-    {
-        objectComp.addValues(usedValues);
     }
 }
