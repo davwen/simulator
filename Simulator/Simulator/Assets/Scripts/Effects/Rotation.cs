@@ -64,7 +64,7 @@ public class Rotation : Effect
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         //set all variables
         speed = objectComp.GetFloatValue(speedValueKey);
@@ -73,13 +73,17 @@ public class Rotation : Effect
         //Do loops here if needed
         if (isRunning)
         {
-            if (!dirRight)
+            if (dirRight)
             {
-                r.MoveRotation(transform.eulerAngles.z + speed);
+                if(r.angularVelocity > -speed){
+                    r.AddTorque(-speed);
+                }
             }
             else
             {
-                r.MoveRotation(transform.eulerAngles.z + -speed);
+                if(r.angularVelocity < speed){
+                    r.AddTorque(speed);
+                }
             }
             
         }

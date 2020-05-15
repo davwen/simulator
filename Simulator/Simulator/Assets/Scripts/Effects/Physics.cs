@@ -83,14 +83,42 @@ public class Physics : Effect
         if (isRunning)
         {
             rb.gravityScale = gravityStrength;
-            if (restrictRotation)
-            {
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            }
-            
            
+            if(!DragDrop.Instance.isDragging){
+                if (!restrictRotation && !restrictX && !restrictY)
+                {
+                    rb.constraints = RigidbodyConstraints2D.None;
+                }
+                if (restrictRotation && restrictX && restrictY)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+                if (restrictRotation && !restrictX && !restrictY)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                }
+                if (!restrictRotation && restrictX && !restrictY)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+                }
+                if (!restrictRotation && !restrictX && restrictY)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+                }
+                if (!restrictRotation && restrictX && restrictY)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                }
+                if (restrictRotation && restrictX && !restrictY)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                }
+                if (restrictRotation && !restrictX && restrictY)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                }
+            }
         }
-        
     }
 
     public override void Begin()
@@ -107,7 +135,6 @@ public class Physics : Effect
         {
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-
     }
 
     public override void Stop()

@@ -19,6 +19,8 @@ public class DragDrop : MonoBehaviour
     public Vector3[] offsets;
     public Rigidbody2D[] bodies;
 
+    public RigidbodyConstraints2D[] constraintsBeforeDrag;
+
     private void Awake()
     {
         controls = new InputMaster();
@@ -60,11 +62,15 @@ public class DragDrop : MonoBehaviour
 
                     bodies = new Rigidbody2D[0];
 
+                    constraintsBeforeDrag = new RigidbodyConstraints2D[0];
+
                     foreach (Object obj in SelectionManager.Instance.currentlySelected)
                     {
                         offsets = AddToArray(offsets, obj.transform.position - mousePosition);
 
                         bodies = AddToArray(bodies, obj.GetComponent<Rigidbody2D>());
+
+                        constraintsBeforeDrag = AddToArray(constraintsBeforeDrag, obj.GetComponent<Rigidbody2D>().constraints);
 
                         isDragging = true;
                     }
@@ -76,6 +82,7 @@ public class DragDrop : MonoBehaviour
         {
             isDragging = false;
 
+            int i = 0;
             foreach (Object selectedObj in SelectionManager.Instance.currentlySelected)
             {
                 Rigidbody2D body = selectedObj.GetComponent<Rigidbody2D>();
@@ -84,10 +91,18 @@ public class DragDrop : MonoBehaviour
                 {
                     body.constraints = RigidbodyConstraints2D.FreezeAll;
                 }
+                else{
+                    body.velocity = Vector3.zero;
+                    body.constraints = constraintsBeforeDrag[i];
+                }
+               
 
 
                 body.isKinematic = false;
+                i++;
             }
+
+            isMouseDownCheck = isMouseDown;
            
         }
 
