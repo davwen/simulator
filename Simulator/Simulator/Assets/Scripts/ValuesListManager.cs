@@ -48,9 +48,11 @@ public class ValuesListManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateAdapter();
+
         if (adapter != null && adapterValuesChecker != adapter.values)
         {
-            UpdateAdapter();
+            
             UpdateList();
 
             adapterValuesChecker = adapter.values;

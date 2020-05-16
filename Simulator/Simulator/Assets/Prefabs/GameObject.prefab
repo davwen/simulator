@@ -121,4 +121,5 @@ MonoBehaviour:
   startEffects:
   - Orientation
   - Physics
+  - Collision
   effects: []

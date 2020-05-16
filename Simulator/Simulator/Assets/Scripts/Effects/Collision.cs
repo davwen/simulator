@@ -13,7 +13,7 @@ public class Collision : Effect
     [HideInInspector]
     public const string EFFECT_DISPLAY_NAME = "Collision";
     [HideInInspector]
-    public const bool EFFECT_REMOVABLE = true;
+    public const bool EFFECT_REMOVABLE = false;
 
     public override string GetEffectKey()
     {

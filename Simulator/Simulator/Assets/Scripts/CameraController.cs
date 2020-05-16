@@ -27,6 +27,8 @@ public class CameraController : MonoBehaviour
 
     private Vector3 offset;
 
+    public List<SpawnableObj> objs = new List<SpawnableObj>();
+
     private void Awake()
     {
         controls = new InputMaster();

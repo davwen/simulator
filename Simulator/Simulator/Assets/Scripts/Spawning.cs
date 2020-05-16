@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 
 public class Spawning : MonoBehaviour
 {
+    public static Spawning Instance {get; private set;}
+
     public GameObject objectBase;
 
     [Header("Objects")]
@@ -33,12 +35,19 @@ public class Spawning : MonoBehaviour
     [HideInInspector]
     public SpawnOptions clickSpawnMethod = SpawnOptions.SpawnableObject;
 
-
     private void Awake()
     {
         controls = new InputMaster();
 
         controls.Editor.spawn.performed += ctx => Spawn(clickSpawnMethod);
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else { Destroy(gameObject); }
     }
 
     private void OnEnable()

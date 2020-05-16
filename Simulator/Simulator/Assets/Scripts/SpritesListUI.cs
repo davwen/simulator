@@ -105,10 +105,3 @@ public class SpritesListUI : MonoBehaviour
     
 }
 
-[System.Serializable]
-public class SpawnableObj
-{
-    public string label;
-    public Sprite sprite;
-}
-

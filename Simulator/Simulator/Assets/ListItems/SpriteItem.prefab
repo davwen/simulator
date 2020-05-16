@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2150720105430042398}
   - component: {fileID: 2646461357744993062}
   - component: {fileID: 1015123691312061813}
-  - component: {fileID: 2453948990114976707}
   - component: {fileID: 4129209480317878305}
+  - component: {fileID: 6724135679159643569}
   m_Layer: 5
   m_Name: SpriteItem
   m_TagString: Untagged
@@ -36,11 +36,11 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 16.15}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 85, y: 85}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2646461357744993062
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -77,20 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2453948990114976707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268531703459703799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5d346342092b174299dfe416ddabb3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listManager: {fileID: 0}
-  index: 0
 --- !u!114 &4129209480317878305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,18 +119,27 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1015123691312061813}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2453948990114976707}
-        m_MethodName: onClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &6724135679159643569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268531703459703799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bf52018c5dff947a361b92e472ddc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  components:
+  - key: text_label
+    Object: {fileID: 5086645206831492338}
+  - key: image_sprite
+    Object: {fileID: 1947781143365112292}
+  - key: button_select
+    Object: {fileID: 268531703459703799}
 --- !u!1 &1947781143365112292
 GameObject:
   m_ObjectHideFlags: 0
