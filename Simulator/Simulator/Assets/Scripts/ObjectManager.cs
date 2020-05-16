@@ -42,18 +42,12 @@ public class ObjectManager : MonoBehaviour
         {
             for (int i = 0; i < objects.Count; i++)
             {
-                float alpha = 1f;
-
                 if (!SelectionManager.Instance.currentlySelected.Contains(objects[i]))
                 {
-                    alpha = 0.5f;
+                    objects[i].GetComponent<Outline>().HideOutline();
+                }else{
+                    objects[i].GetComponent<Outline>().ShowOutline();
                 }
-
-                SpriteRenderer sr = objects[i].GetComponent<SpriteRenderer>();
-
-                Color currentColour = sr.color;
-                currentColour.a = alpha;
-                sr.color = currentColour;
             }
         };
 
@@ -63,13 +57,7 @@ public class ObjectManager : MonoBehaviour
             {
                 for (int i = 0; i < objects.Count; i++)
                 {
-                    float alpha = 1f;
-
-                    SpriteRenderer sr = objects[i].GetComponent<SpriteRenderer>();
-
-                    Color currentColour = sr.color;
-                    currentColour.a = alpha;
-                    sr.color = currentColour;
+                    objects[i].GetComponent<Outline>().HideOutline();
                 }
             }catch(MissingReferenceException) { }
            
