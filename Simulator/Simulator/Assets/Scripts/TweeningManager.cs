@@ -35,7 +35,14 @@ public class TweeningManager : MonoBehaviour
 
     public void Animate(GameObject obj, AnimationType type, string curveKey, float duration, float delay)
     {
-        AnimationCurve curve = GetCurve(curveKey).curve;
+        AnimationCurve curve = new AnimationCurve();
+
+        if(curveKey != ""){
+            curve = GetCurve(curveKey).curve;
+        }else{
+           curve = AnimationCurve.Linear(0, 0, duration, 1);
+        }
+       
 
         AnimationData data = new AnimationData();
 
