@@ -343,60 +343,146 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curves:
-  - key: bounce
+  - key: linear
     curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 3.7155159
-        outSlope: 3.7155159
-        tangentMode: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.37507093
-      - serializedVersion: 3
-        time: 0.15140186
-        value: 1.0036232
-        inSlope: -2.5199256
-        outSlope: -2.5199256
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.076913774
-      - serializedVersion: 3
-        time: 0.4007561
-        value: 1.0017902
-        inSlope: 0.94565034
-        outSlope: 0.94565034
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.19240583
-        outWeight: 0.38137463
-      - serializedVersion: 3
-        time: 0.62666285
-        value: 0.9995962
-        inSlope: -0.44809502
-        outSlope: -0.44809502
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.5083639
-      - serializedVersion: 3
-        time: 0.83053845
-        value: 1.0049014
-        inSlope: 0.65436316
-        outSlope: 0.65436316
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.5298462
+        outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: -0.02892343
-        outSlope: -0.02892343
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - key: bouncy
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 3.4603279
+        outSlope: 3.4603279
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.2961076
+        value: 1.0246294
+        inSlope: -1.0290804
+        outSlope: -1.0290804
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.07602373
+      - serializedVersion: 3
+        time: 0.47748905
+        value: 0.96482575
+        inSlope: 0.9183517
+        outSlope: 0.9183517
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.12648322
+      - serializedVersion: 3
+        time: 0.6093119
+        value: 0.99841774
+        inSlope: -0.86618
+        outSlope: -0.86618
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.21807659
+      - serializedVersion: 3
+        time: 0.8506427
+        value: 1.0066024
+        inSlope: 0.38781926
+        outSlope: 0.38781926
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.3802422
+        outWeight: 0.42033714
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: -0.044205442
+        outSlope: -0.044205442
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - key: bounce
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0074766353
+        value: 1.0055405
+        inSlope: -0.018321518
+        outSlope: -0.018321518
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.29423842
+        value: 1.0002866
+        inSlope: -2.3827524
+        outSlope: -2.3827524
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.12004859
+        outWeight: 0.07602373
+      - serializedVersion: 3
+        time: 0.47001243
+        value: 1.002276
+        inSlope: 1.5312718
+        outSlope: 1.5312718
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.4366757
+      - serializedVersion: 3
+        time: 0.6093119
+        value: 0.99841774
+        inSlope: -0.70577806
+        outSlope: -0.70577806
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.6438341
+        outWeight: 0.21807659
+      - serializedVersion: 3
+        time: 0.7945679
+        value: 1.0028573
+        inSlope: 0.52182406
+        outSlope: 0.52182406
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.3802422
+        outWeight: 0.42678377
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: -0.013908864
+        outSlope: -0.013908864
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -518,7 +604,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -679.72, y: -254}
+  m_AnchoredPosition: {x: -679.71875, y: -254}
   m_SizeDelta: {x: 1935, y: 1127.1}
   m_Pivot: {x: 0.30250522, y: 0.9181022}
 --- !u!114 &525751942
@@ -556,6 +642,97 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525751940}
+  m_CullTransparentMesh: 0
+--- !u!1 &526146644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 526146645}
+  - component: {fileID: 526146648}
+  - component: {fileID: 526146647}
+  - component: {fileID: 526146646}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &526146645
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526146644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 1}
+  m_Children: []
+  m_Father: {fileID: 656123868}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 1080}
+  m_Pivot: {x: 0.5, y: -0.000000024214387}
+--- !u!114 &526146646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526146644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a54bb685707d034394c6df3aae8afe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  duration: 0.4
+  delay: 0.3
+  curve: 
+  playOnStart: 0
+--- !u!114 &526146647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526146644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: f61fd88ffaf4ca04aafdd050c514ba54, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &526146648
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526146644}
   m_CullTransparentMesh: 0
 --- !u!1 &656123864
 GameObject:
@@ -649,6 +826,7 @@ RectTransform:
   m_Children:
   - {fileID: 525751941}
   - {fileID: 2107771448}
+  - {fileID: 526146645}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -670,6 +848,7 @@ GameObject:
   - component: {fileID: 2107771450}
   - component: {fileID: 2107771449}
   - component: {fileID: 2107771452}
+  - component: {fileID: 2107771453}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -694,7 +873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 154.5, y: -277.2}
+  m_AnchoredPosition: {x: 154.5, y: -277.19922}
   m_SizeDelta: {x: 344.44, y: 117.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2107771449
@@ -741,6 +920,28 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2107771452}
+        m_MethodName: Animate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2107771453}
+        m_MethodName: switchScene
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.9
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 526146646}
         m_MethodName: Animate
         m_Mode: 1
         m_Arguments:
@@ -803,3 +1004,17 @@ MonoBehaviour:
   duration: 0.3
   delay: 0
   curve: bounce
+  playOnStart: 0
+--- !u!114 &2107771453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107771447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71e9a88881a7814aafd5550c3167be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneIndex: 1

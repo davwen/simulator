@@ -89,12 +89,12 @@ public class TweeningManager : MonoBehaviour
 
     public void FadeIn(CanvasGroup obj, AnimationData data)
     {
-        LeanTween.value(0f, 1f, data.duration).setOnUpdate((float val) => {obj.alpha = val;}).setEase(data.curve);
+        LeanTween.value(0f, 1f, data.duration).setOnUpdate((float val) => {obj.alpha = val;}).setEase(data.curve).setDelay(data.delay);
     }
 
     public void FadeOut(CanvasGroup obj, AnimationData data)
     {
-        LeanTween.value(1f, 0f, data.duration).setOnUpdate((float val) => { obj.alpha = val; }).setEase(data.curve);
+        LeanTween.value(1f, 0f, data.duration).setOnUpdate((float val) => { obj.alpha = val; }).setEase(data.curve).setDelay(data.delay);
     }
 
     public void FadeIn(Image obj, AnimationData data)
@@ -102,7 +102,7 @@ public class TweeningManager : MonoBehaviour
         float fromAlpha = data.curve.keys[0].value;
         float toAlpha = data.curve.keys[data.curve.length - 1].value;
 
-        LeanTween.value(fromAlpha, toAlpha, data.duration).setOnUpdate((float val) => { obj.color = new Color(obj.color.r, obj.color.g, obj.color.b, val); }).setEase(data.curve);
+        LeanTween.value(fromAlpha, toAlpha, data.duration).setOnUpdate((float val) => { obj.color = new Color(obj.color.r, obj.color.g, obj.color.b, val); }).setEase(data.curve).setDelay(data.delay);
     }
 
     public void FadeOut(Image obj, AnimationData data)
@@ -110,7 +110,7 @@ public class TweeningManager : MonoBehaviour
         float fromAlpha = 1 - data.curve.keys[0].value;
         float toAlpha = 1 - data.curve.keys[data.curve.length - 1].value;
 
-        LeanTween.value(fromAlpha, toAlpha, data.duration).setOnUpdate((float val) => { obj.color = new Color(obj.color.r, obj.color.g, obj.color.b, val); }).setEase(data.curve);
+        LeanTween.value(fromAlpha, toAlpha, data.duration).setOnUpdate((float val) => { obj.color = new Color(obj.color.r, obj.color.g, obj.color.b, val); }).setEase(data.curve).setDelay(data.delay);
     }
 }
 
