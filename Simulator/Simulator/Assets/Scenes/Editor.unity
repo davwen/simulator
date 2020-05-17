@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -913,7 +913,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378545440}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1001,10 +1001,10 @@ RectTransform:
   m_Father: {fileID: 378545441}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.8984375, y: -19.999512}
-  m_SizeDelta: {x: -30.2, y: -292.8}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 320, y: 474.21}
+  m_SizeDelta: {x: 600, y: 695.2}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &430077361
 MonoBehaviour:
@@ -1655,6 +1655,7 @@ GameObject:
   - component: {fileID: 567884312}
   - component: {fileID: 567884311}
   - component: {fileID: 567884310}
+  - component: {fileID: 567884313}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -1752,6 +1753,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 567884313}
+        m_MethodName: removeFocus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0
 --- !u!114 &567884311
 MonoBehaviour:
@@ -1789,6 +1801,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567884308}
   m_CullTransparentMesh: 0
+--- !u!114 &567884313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567884308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bb0e927760e8345a3e120dc004891f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &579947774
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,6 +2471,7 @@ GameObject:
   - component: {fileID: 929856831}
   - component: {fileID: 929856830}
   - component: {fileID: 929856833}
+  - component: {fileID: 929856834}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2539,6 +2564,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 929856834}
+        m_MethodName: removeFocus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &929856831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2590,8 +2626,20 @@ MonoBehaviour:
   type: 0
   duration: 0.3
   delay: 0
-  curve: bouncy
+  curve: bounce
   playOnStart: 0
+--- !u!114 &929856834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929856828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bb0e927760e8345a3e120dc004891f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1061753673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2800,6 +2848,7 @@ GameObject:
   - component: {fileID: 1157432250}
   - component: {fileID: 1157432249}
   - component: {fileID: 1157432252}
+  - component: {fileID: 1157432253}
   m_Layer: 5
   m_Name: Edit Button
   m_TagString: Untagged
@@ -2822,10 +2871,10 @@ RectTransform:
   m_Father: {fileID: 1741568067}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -784, y: -432.95}
-  m_SizeDelta: {x: 220.9, y: 82.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 182.57, y: 98.7}
+  m_SizeDelta: {x: 220.90002, y: 82.70001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1157432249
 MonoBehaviour:
@@ -2872,6 +2921,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 430077364}
         m_MethodName: ShowList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1157432253}
+        m_MethodName: removeFocus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2932,6 +2992,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &1157432253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157432247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bb0e927760e8345a3e120dc004891f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1237003864
 GameObject:
   m_ObjectHideFlags: 0

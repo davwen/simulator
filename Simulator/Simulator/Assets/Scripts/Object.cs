@@ -9,8 +9,6 @@ using System.Linq;
 
 public class Object : MonoBehaviour
 {
-
-
     public List<Value> values;
 
     public bool isRunning = false;
@@ -30,10 +28,10 @@ public class Object : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-
-        
+    private void Start(){
+        if(ObjectManager.Instance.isRunning){
+            BeginAll();
+        }
     }
 
     public void AddEffect(Type effect, bool addValues = true)

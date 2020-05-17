@@ -17,7 +17,6 @@ public class SpritesListAdapter : ListAdapter
     }
 
     public override void OnItemInsert(ListItemData data){
-        MonoBehaviour.print(data.GetComponent<Text>("text_label"));
         data.GetComponent<Text>("text_label").text = items[data.index].label;
 
         data.GetComponent<Image>("image_sprite").sprite = items[data.index].sprite;
