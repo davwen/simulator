@@ -13,7 +13,7 @@ public class Deck : MonoBehaviour
     [Space(10)]
 
     public Spawning spawningManager;
-    public DeckUI deckUIManager;
+    public ListCreator ListCreator;
 
 
     public InputMaster controls;
@@ -46,16 +46,16 @@ public class Deck : MonoBehaviour
 
         dataToAdd.data = ObjectToTextConverter.ConvertToText(obj);
 
-        dataToAdd.image = GameObjectToSprite.ConvertToSprite(obj.gameObject, deckUIManager.item.transform.localScale);
+        dataToAdd.image = GameObjectToSprite.ConvertToSprite(obj.gameObject, ListCreator.itemPrefab.transform.localScale);
 
         objects.Add(dataToAdd);
-        deckUIManager.UpdateUI();
+        ListCreator.UpdateAll(new DeckAdapter(objects, this));
     }
 
     public void RemoveObject(int index)
     {
         objects.RemoveAt(index);
-        deckUIManager.UpdateUI();
+        //deckUIManager.UpdateUI();
     }
 
     public ObjectData GetObject(int index)
@@ -68,7 +68,21 @@ public class Deck : MonoBehaviour
     public void Select(int index)
     {
         selected = objects[index].data;
-        spawningManager.objectToSpawn = TextToObjectConverter.ConvertToObject(selected);
-        
+        spawningManager.clickSpawnMethod = Spawning.SpawnOptions.Object;
+        spawningManager.objectToSpawn = GetObject(index);
+        print(GetObject(index).values.Count);
+
+        foreach(Value val in GetObject(index).values){
+            print(val.key + ": " + val.value);
+        }
     }
+}
+
+
+[System.Serializable]
+public class DeckItemData
+{
+    public string name;
+    public string data;
+    public Sprite image;
 }

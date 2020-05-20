@@ -131,11 +131,3 @@ public class DeckUI : MonoBehaviour
     }
 
 }
-
-[System.Serializable]
-public class DeckItemData
-{
-    public string name;
-    public string data;
-    public Sprite image;
-}

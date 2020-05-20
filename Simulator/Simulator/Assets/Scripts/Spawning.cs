@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -28,11 +29,9 @@ public class Spawning : MonoBehaviour
 
     [Space(10)]
 
-    public DragDrop dragDropManager;
-
     public InputMaster controls;
 
-    [HideInInspector]
+  
     public SpawnOptions clickSpawnMethod = SpawnOptions.SpawnableObject;
 
     private void Awake()
@@ -76,7 +75,14 @@ public class Spawning : MonoBehaviour
 
     public void SelectNewSObj(SpawnableObj obj)
     {
+        clickSpawnMethod = SpawnOptions.SpawnableObject;
         sObjToSpawn = obj;
+    }
+
+    public void SelectNewObj(ObjectData obj)
+    {
+        clickSpawnMethod = SpawnOptions.Object;
+        objectToSpawn = obj;
     }
 
     private IEnumerator SpawnIenu(SpawnOptions method)
@@ -97,6 +103,9 @@ public class Spawning : MonoBehaviour
                 lastObj.AddComponent<PolygonCollider2D>().isTrigger = true; //Adds a collider.
 
                 SelectionManager.Instance.DeselectAll();
+
+print("test3");
+
                 break;
 
             case SpawnOptions.GameObject:
@@ -107,6 +116,8 @@ public class Spawning : MonoBehaviour
                 lastObj.transform.position = new Vector3(mousePos.x, mousePos.y, zLevel);
 
                 SelectionManager.Instance.DeselectAll();
+
+                print("test2");
 
                 break;
 
@@ -119,7 +130,13 @@ public class Spawning : MonoBehaviour
                 objectToSpawn.setValue(Orientation.xPosValueKey, mousePos.x.ToString());
                 objectToSpawn.setValue(Orientation.yPosValueKey, mousePos.y.ToString());
 
-                objComp.values = objectToSpawn.values;
+                print("test");
+
+                foreach(Value val in objectToSpawn.values){
+                    print(val.key + val.value);
+                }
+
+                objComp.values = objectToSpawn.values.Distinct().ToList();
                 objComp.startEffects = objectToSpawn.startEffects;
                 objComp.currentEffects = objectToSpawn.currentEffects;
 
