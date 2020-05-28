@@ -8,4 +8,7 @@ public class ListItem : MonoBehaviour
     public int index;
 
     public List<ListItemComponent> components;
+
+    [HideInInspector]
+    public bool isAnimated;
 }

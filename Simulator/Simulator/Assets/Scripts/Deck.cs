@@ -13,13 +13,18 @@ public class Deck : MonoBehaviour
     [Space(10)]
 
     public Spawning spawningManager;
-    public ListCreator ListCreator;
-
+    public ListCreator listCreator;
 
     public InputMaster controls;
 
+    private DeckAdapter adapter;
+
+    private Coroutine coroutine;
+
     public void Awake()
     {
+        adapter = new DeckAdapter(objects, this);
+
         controls = new InputMaster();
 
         controls.Editor.copy.performed += _ => {
@@ -28,6 +33,24 @@ public class Deck : MonoBehaviour
                 AddObject(obj);
             }
         };
+
+        ModeManager.Instance.onModeChange += delegate
+        {
+            switch (ModeManager.Instance.currentMode)
+            {
+                case ModeManager.MODE_SPAWN:
+                    TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.ScaleIn, "bouncy", 0.3f, 0f);
+                    TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.FadeInWithCanvasGroup, "linear", 0.1f, 0.2f);
+                    break;
+
+                case ModeManager.MODE_EDIT:
+                    TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.ScaleOut, "linear", 0.3f, 0f);
+                    TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.FadeOutWithCanvasGroup, "linear", 0.1f, 0f);
+                    break;
+            }
+        };
+
+        listCreator.UpdateAll(adapter);
     }
 
     private void OnEnable()
@@ -42,20 +65,45 @@ public class Deck : MonoBehaviour
 
     public void AddObject(Object obj)
     {
+        if(coroutine != null){
+            StopCoroutine(coroutine);
+        }
+        
+        coroutine = StartCoroutine(AddObjectIenu(obj));
+    }
+
+    private IEnumerator AddObjectIenu(Object obj){
         DeckItemData dataToAdd = new DeckItemData();
 
         dataToAdd.data = ObjectToTextConverter.ConvertToText(obj);
 
-        dataToAdd.image = GameObjectToSprite.ConvertToSprite(obj.gameObject, ListCreator.itemPrefab.transform.localScale);
+        dataToAdd.image = GameObjectToSprite.ConvertToSprite(obj.gameObject, listCreator.itemPrefab.transform.localScale);
 
         objects.Add(dataToAdd);
-        ListCreator.UpdateAll(new DeckAdapter(objects, this));
+        
+        adapter.items = objects;
+
+        if(ModeManager.Instance.currentMode == ModeManager.MODE_EDIT){
+            TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.ScaleIn, "bouncy", 0.3f, 0f);
+            TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.FadeInWithCanvasGroup, "linear", 0.1f, 0.2f);
+            yield return new WaitForSeconds(0.5f);
+        }
+        
+        listCreator.UpdateAll(adapter);
+
+        if(ModeManager.Instance.currentMode == ModeManager.MODE_EDIT){
+            yield return new WaitForSeconds(1.4f);
+            TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.ScaleOut, "linear", 0.3f, 0f);
+            TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.FadeOutWithCanvasGroup, "linear", 0.1f, 0f); 
+        }
     }
 
     public void RemoveObject(int index)
     {
         objects.RemoveAt(index);
-        //deckUIManager.UpdateUI();
+        
+        adapter.items = objects;
+        listCreator.UpdateAll(adapter);
     }
 
     public ObjectData GetObject(int index)
@@ -70,11 +118,6 @@ public class Deck : MonoBehaviour
         selected = objects[index].data;
         spawningManager.clickSpawnMethod = Spawning.SpawnOptions.Object;
         spawningManager.objectToSpawn = GetObject(index);
-        print(GetObject(index).values.Count);
-
-        foreach(Value val in GetObject(index).values){
-            print(val.key + ": " + val.value);
-        }
     }
 }
 

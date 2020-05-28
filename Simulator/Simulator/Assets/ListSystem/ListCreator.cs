@@ -36,11 +36,13 @@ public class ListCreator : MonoBehaviour
 
     private List<GameObject> currentItems = new List<GameObject>();
 
+    private int countBefore;
+
     [Space(10)]
 
     public AnimationCurve curve;
 
-    /// <summary>Spawns items onto a parent in order to create a list.</summary>
+    ///<summary>Spawns items onto a parent in order to create a list.</summary>
     public void Create(ListAdapter adapter, bool informAdapter = true)
     {
         int length = adapter.GetCount();
@@ -118,9 +120,13 @@ public class ListCreator : MonoBehaviour
                 adapter.OnItemInsert(new ListItemData(i, itemData.components));
             }
 
-            lastItem.transform.localScale = new Vector3(0, 0, 0);
-            LeanTween.scale(lastItem.GetComponent<RectTransform>(), new Vector3(1, 1, 1), 0.5f).setDelay((i + 1) * 0.1f).setEase(curve);
+            if(i > countBefore - 1){
+                lastItem.transform.localScale = new Vector3(0, 0, 0);
+                LeanTween.scale(lastItem.GetComponent<RectTransform>(), new Vector3(1, 1, 1), 0.5f).setDelay((i + 1) * 0.1f).setEase(curve);
+            }
         }
+
+        countBefore = length;
     }
 
     /// <summary>Removes one item at a specified index.</summary>
@@ -172,16 +178,15 @@ public class ListCreator : MonoBehaviour
         }
         else
         {
-            RemoveAll(adapter);
-            Create(adapter);
+            RecreateAll(adapter);
         }
     }
 
     /// <summary>Calls RemoveAll(), the Create() immediately after.</summary>
     public void RecreateAll(ListAdapter adapter, bool informAdapter = true)
     {
-         RemoveAll(adapter, informAdapter);
-         Create(adapter, informAdapter);
+        RemoveAll(adapter, informAdapter);
+        Create(adapter, informAdapter);
     }
 }
 
@@ -189,6 +194,7 @@ public class ListItemData
 {
     public int index;
     public List<ListItemComponent> components;
+    public bool isAnimated = false;
 
     public ListItemData(int _index, List<ListItemComponent> _components)
     {

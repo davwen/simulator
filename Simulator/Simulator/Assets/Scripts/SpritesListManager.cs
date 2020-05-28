@@ -13,7 +13,7 @@ public class SpritesListManager : MonoBehaviour
     {
         UpdateList();
 
-          ModeManager.Instance.onModeChange += delegate
+        ModeManager.Instance.onModeChange += delegate
         {
             switch (ModeManager.Instance.currentMode)
             {
@@ -30,15 +30,9 @@ public class SpritesListManager : MonoBehaviour
         };
     }
 
-
-    void Update()
-    {
-        
-    }
-
     void UpdateList(){
         ListAdapter adapter = new SpritesListAdapter(availableObjects);
 
-        listCreator.Create(adapter);
+        listCreator.UpdateAll(adapter);
     }
 }

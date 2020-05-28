@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using MoreLinq;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -129,18 +130,16 @@ print("test3");
 
                 objectToSpawn.setValue(Orientation.xPosValueKey, mousePos.x.ToString());
                 objectToSpawn.setValue(Orientation.yPosValueKey, mousePos.y.ToString());
-
-                print("test");
-
-                foreach(Value val in objectToSpawn.values){
-                    print(val.key + val.value);
-                }
-
-                objComp.values = objectToSpawn.values.Distinct().ToList();
+                
+                //objComp.values = objectToSpawn.values;
                 objComp.startEffects = objectToSpawn.startEffects;
                 objComp.currentEffects = objectToSpawn.currentEffects;
 
                 yield return new WaitForEndOfFrame();
+
+                foreach(Value val in objectToSpawn.values){
+                    objComp.values.Find(x => x.key == val.key).value = val.value;
+                }
 
                 lastObj.GetComponent<SpriteRenderer>().sprite = objectToSpawn.sprite;
 

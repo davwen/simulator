@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DeckAdapter : ListAdapter
 {
-    private List<DeckItemData> items = new List<DeckItemData>();
+    public List<DeckItemData> items = new List<DeckItemData>();
 
     private Deck deck;
 
@@ -22,6 +23,8 @@ public class DeckAdapter : ListAdapter
         data.GetComponent<Image>("image_sprite").sprite = items[data.index].image;
 
         data.GetComponent<Button>("button_select").onClick.AddListener(delegate{deck.Select(data.index);});
+
+        data.GetComponent<Button>("button_remove").onClick.AddListener(delegate{deck.RemoveObject(data.index);});
     }
 
     public override void OnItemUpdate(ListItemData data){
