@@ -12,7 +12,7 @@ public abstract class Effect : MonoBehaviour
 
     public abstract List<Value> GetNecessaryValues();
 
-    public bool isRunning;
+    public static bool isRunning {get; set;}
 
     public Object objectComp;
 
@@ -112,11 +112,19 @@ public abstract class Effect : MonoBehaviour
         }
     }
 
-    public abstract void Begin();
+    public virtual void Begin(){
+        isRunning = true;
+    }
 
-    public abstract void Stop();
+    public virtual void Stop(){
+        isRunning = false;
+    }
 
-    public virtual void Pause() { }
+    public virtual void Pause() { 
+        isRunning = false;
+    }
 
-    public virtual void Resume() { }
+    public virtual void Resume() { 
+        isRunning = true;
+    }
 }

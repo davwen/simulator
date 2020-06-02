@@ -50,9 +50,9 @@ public class ObjectToTextConverter : Conversion
 
         sb.Append("Effects" + arrayBegin);
 
-        for (int i = 0; i < obj.currentEffects.Count; i++)
+        for (int i = 0; i < obj.effects.Count; i++)
         {
-            sb.Append(obj.currentEffects[i] + arrayItemSeparator);
+            sb.Append(obj.effects[i] + arrayItemSeparator);
         }
 
         sb.Append(arrayEnd);

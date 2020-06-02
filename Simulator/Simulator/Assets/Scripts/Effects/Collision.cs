@@ -33,9 +33,9 @@ public class Collision : Effect
 
     [Header("Keys")]
     public const string triggerValueKey = EFFECT_KEY + "_is_trigger";
+ 
 
-
-    private Collider2D coll;
+    public Collider2D coll;
     public bool isTrigger = false;
 
     public override List<Value> GetNecessaryValues()
@@ -65,6 +65,9 @@ public class Collision : Effect
         //Do loops here if needed
         if (isRunning)
         {
+            if(coll == null){
+                coll = GetComponent<Collider2D>();
+            }
             coll.isTrigger = !isTrigger;
         }
     }

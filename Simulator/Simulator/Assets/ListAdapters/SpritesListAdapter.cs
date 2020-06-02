@@ -17,8 +17,6 @@ public class SpritesListAdapter : ListAdapter
     }
 
     public override void OnItemInsert(ListItemData data){
-        data.GetComponent<Text>("text_label").text = items[data.index].label;
-
         data.GetComponent<Image>("image_sprite").sprite = items[data.index].sprite;
 
         data.GetComponent<Button>("button_select").onClick.AddListener(delegate{Spawning.Instance.SelectNewSObj(items[data.index]);});

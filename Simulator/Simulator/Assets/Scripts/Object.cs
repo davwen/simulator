@@ -59,7 +59,8 @@ public class Object : MonoBehaviour
                 BeginAll();
             }
 
-            currentEffects.Add(effect.GetType());
+            currentEffects.Add(effect);
+            effects.Add(effect.Name);
         }
 
     }
@@ -69,17 +70,14 @@ public class Object : MonoBehaviour
         if (GetComponent(effect) != null) //checks if object even has the effect/component.
         {
             currentEffects.Remove(effect);
+            effects.Remove(effect.Name);
 
             FindObjectOfType<ValuesListManager>().UpdateAdapter();
             FindObjectOfType<ValuesListManager>().UpdateList();
 
             Destroy(GetComponent(effect));
 
-            RemoveValues(effect.GetField("EFFECT_KEY").GetValue(effect).ToString());
-
-
-
-            
+            RemoveValues(effect.GetField("EFFECT_KEY").GetValue(effect).ToString()); 
         }
 
     }

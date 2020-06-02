@@ -105,8 +105,6 @@ public class Spawning : MonoBehaviour
 
                 SelectionManager.Instance.DeselectAll();
 
-print("test3");
-
                 break;
 
             case SpawnOptions.GameObject:
@@ -117,8 +115,6 @@ print("test3");
                 lastObj.transform.position = new Vector3(mousePos.x, mousePos.y, zLevel);
 
                 SelectionManager.Instance.DeselectAll();
-
-                print("test2");
 
                 break;
 
@@ -135,16 +131,35 @@ print("test3");
                 objComp.startEffects = objectToSpawn.startEffects;
                 objComp.currentEffects = objectToSpawn.currentEffects;
 
-                yield return new WaitForEndOfFrame();
-
-                foreach(Value val in objectToSpawn.values){
-                    objComp.values.Find(x => x.key == val.key).value = val.value;
+                int length = objectToSpawn.currentEffects.Count;
+                
+                for(int i = 0; i < length; i++){
+                    objComp.AddEffect(objectToSpawn.currentEffects[i], addValues: true);
                 }
+                
+                //set width and height
+                lastObj.transform.localScale = new Vector3(float.Parse(objectToSpawn.values.Find(x => x.key == Orientation.widthValueKey).value), 
+                                                           float.Parse(objectToSpawn.values.Find(x => x.key == Orientation.heightValueKey).value), 
+                                                           lastObj.transform.localScale.z);
+               
+               
+                lastObj.AddComponent<PolygonCollider2D>();
 
                 lastObj.GetComponent<SpriteRenderer>().sprite = objectToSpawn.sprite;
 
-                lastObj.AddComponent<PolygonCollider2D>();
+                yield return new WaitForEndOfFrame();
 
+                foreach(Value val in objectToSpawn.values){
+                    try{
+
+                        Value valueToChange = objComp.values.Find(x => x.key == val.key);
+
+                        if(valueToChange.key != Orientation.widthValueKey || valueToChange.key != Orientation.heightValueKey){
+                            objComp.values.Find(x => x.key == val.key).value = val.value;
+                        }
+                        
+                    }catch(System.NullReferenceException){}
+                }
                 break;
         }
         
@@ -158,5 +173,3 @@ print("test3");
         Object
     }
 }
-
-

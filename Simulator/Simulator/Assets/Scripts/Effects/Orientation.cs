@@ -159,44 +159,30 @@ public class Orientation : Effect
             transform.localScale = new Vector3(transform.localScale.x, height, transform.localScale.z);
 
             heightChecker = height;
-
         }
-        
-
 
         frame++;
-
     }
 
     public override void Begin()
     {
-        //set isRunning variable
-        isRunning = true;
-
-        //Then do needed tasks
+        base.Begin();
     }
 
     public override void Stop()
     {
-        //set isRunning variable
-        isRunning = false;
+        base.Stop();
 
-        //Then do needed tasks
+isRunning = true;
     }
 
     public override void Pause()
     {
-        //set isRunning variable
-        isRunning = false;
-
-        //Then do needed tasks
+        base.Pause();
     }
 
     public override void Resume()
     {
-        //set isRunning variable
-        isRunning = true;
-
-        //Then do needed tasks
+        base.Resume();
     }
 }

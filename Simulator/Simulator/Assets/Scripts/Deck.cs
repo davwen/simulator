@@ -96,6 +96,13 @@ public class Deck : MonoBehaviour
             TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.ScaleOut, "linear", 0.3f, 0f);
             TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.FadeOutWithCanvasGroup, "linear", 0.1f, 0f); 
         }
+
+        yield return new WaitForSeconds(0.3f);
+
+        if(ModeManager.Instance.currentMode == ModeManager.MODE_SPAWN){
+            TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.ScaleIn, "bouncy", 0.3f, 0f);
+            TweeningManager.Instance.Animate(listCreator.canvasGroup.gameObject, AnimationType.FadeInWithCanvasGroup, "linear", 0.1f, 0.2f);
+        }
     }
 
     public void RemoveObject(int index)
