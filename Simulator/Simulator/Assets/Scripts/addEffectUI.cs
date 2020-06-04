@@ -31,7 +31,7 @@ public class AddEffectUI : MonoBehaviour
         availableEffects.Clear();
         for (int i = 0; i < availableEffectsString.Count; i++)
         {
-            availableEffects.Add(Type.GetType(availableEffectsString[i].Substring(0, 1).ToUpper() + availableEffectsString[i].Substring(1).ToLower() /*Capitalizes*/));
+            availableEffects.Add(Type.GetType(availableEffectsString[i]));
         }
 
         for (int i = 0; i < availableEffects.Count; i++)

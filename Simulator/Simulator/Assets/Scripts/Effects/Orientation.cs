@@ -102,21 +102,32 @@ public class Orientation : Effect
         {
             if (transScaleChecker != transform.localScale)
             {
-                objectComp.SetValue(widthValueKey, transform.localScale.x.ToString("f1"));
-                objectComp.SetValue(heightValueKey, transform.localScale.y.ToString("f1"));
+                objectComp.SetValue(widthValueKey, FloatToString(transform.localScale.x));
+                objectComp.SetValue(heightValueKey, FloatToString(transform.localScale.y));
                 transScaleChecker = transform.localScale;
             }
 
             if (transRotChecker != transform.eulerAngles)
             {
-                objectComp.SetValue(rotValueKey, transform.eulerAngles.z.ToString("f1"));
+                if(GetComponent<Rigidbody2D>().angularVelocity != 0f){
+                    objectComp.SetValue(rotValueKey, transform.eulerAngles.z.ToString("f1"));
+                }else{
+                    objectComp.SetValue(rotValueKey, FloatToString(transform.eulerAngles.z));
+                }
+
                 transRotChecker = transform.eulerAngles;
             }
 
             if (transPosChecker != transform.position)
             {
-                objectComp.SetValue(xPosValueKey, transform.position.x.ToString("f3"));
-                objectComp.SetValue(yPosValueKey, transform.position.y.ToString("f3"));
+                if(DragDrop.Instance.isDragging){
+                    objectComp.SetValue(xPosValueKey, transform.position.x.ToString("f3"));
+                    objectComp.SetValue(yPosValueKey, transform.position.y.ToString("f3"));
+                }else{
+                    objectComp.SetValue(xPosValueKey, FloatToString(transform.position.x));
+                    objectComp.SetValue(yPosValueKey, FloatToString(transform.position.y));
+                }
+
                 transPosChecker = transform.position;
             }
         }
@@ -126,8 +137,6 @@ public class Orientation : Effect
             transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
 
             xPosChecker = xPos;
-
-            
         }
 
         if (yPosChecker != yPos) //yPos was changed
@@ -172,8 +181,6 @@ public class Orientation : Effect
     public override void Stop()
     {
         base.Stop();
-
-isRunning = true;
     }
 
     public override void Pause()
@@ -184,5 +191,17 @@ isRunning = true;
     public override void Resume()
     {
         base.Resume();
+    }
+
+    private string FloatToString(float input){
+        string output = "";
+
+        if(input == 0){
+            output = "";
+        }else{
+            output = input.ToString();
+        }
+
+        return output;
     }
 }

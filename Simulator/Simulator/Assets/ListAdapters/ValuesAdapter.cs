@@ -49,7 +49,7 @@ public class ValuesAdapter : ListAdapter
             {
                 effects.Add(effectName);
                
-                values.Insert(i, new Value("", TYPE_TITLE, "", Effect.GetFromType(Type.GetType(effectName), assignedObjects[0].gameObject).GetEffectDisplayName()));
+                values.Insert(i, new Value(effectName, TYPE_TITLE, "", Effect.GetFromType(Type.GetType(effectName), assignedObjects[0].gameObject).GetEffectDisplayName()));
                 
             }
         }
@@ -120,7 +120,7 @@ public class ValuesAdapter : ListAdapter
 
         if (values[data.index].type.Equals(TYPE_TITLE))
         {
-            Type effect = Type.GetType(values[data.index].displayName);
+            Type effect = Type.GetType(values[data.index].key);
 
             if (Effect.GetFromType(effect, assignedObjects[0].gameObject).GetEffectRemovable())
             {
