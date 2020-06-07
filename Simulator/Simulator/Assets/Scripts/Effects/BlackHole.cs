@@ -47,8 +47,8 @@ public class BlackHole : Effect
     public override List<Value> GetNecessaryValues()
     {
         return new List<Value>(3) { new Value(strengthValueKey, Value.FLOAT_TYPE_KEY, "10", "Strength"),
-        new Value(rangeValueKey, Value.FLOAT_TYPE_KEY, "5", "Range"),
-        new Value(destroyOnCollisionValueKey, Value.BOOL_TYPE_KEY, "true", "Destroy on impact") };
+        new Value(rangeValueKey, Value.FLOAT_TYPE_KEY, "25", "Range"),
+        new Value(destroyOnCollisionValueKey, Value.BOOL_TYPE_KEY, Value.FALSE_STRING, "Destroy on impact") };
     }
 
     void Start()
@@ -86,12 +86,20 @@ public class BlackHole : Effect
             }
 
             for(int i = 0; i < objectsWithinRange.Count; i++) {
-                float dist = Vector3.Distance(objectsWithinRange[i].transform.position, transform.position);
+                try{
+                    float dist = Vector3.Distance(objectsWithinRange[i].transform.position, transform.position);
                 
-                Vector2 v = objectsWithinRange[i].transform.position - transform.position;
-                objectsWithinRange[i].GetComponent<Rigidbody2D>().AddForce(v.normalized * (float)(1.0 - dist) * strength);
+                    Vector2 v = objectsWithinRange[i].transform.position - transform.position;
+                    objectsWithinRange[i].GetComponent<Rigidbody2D>().AddForce(v.normalized * (float)(1.0 - dist) * strength);
+                }catch(MissingReferenceException){}
                 
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D coll){
+        if(coll.gameObject.GetComponent<Object>() != null && destroyOnCollision && isRunning){
+            Destroy(coll.gameObject);
         }
     }
 

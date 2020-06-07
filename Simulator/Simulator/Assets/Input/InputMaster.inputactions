@@ -132,6 +132,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "freeRelease",
+                    "type": "Button",
+                    "id": "743ff649-7150-4b1a-96d4-52608e878613",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -330,6 +338,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "multiSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1ac1d4d-3e94-4975-81d4-d5059ae63ebd",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "freeRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

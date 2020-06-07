@@ -3896,6 +3896,7 @@ MonoBehaviour:
   - Colour
   - Rotation
   - BlackHole
+  - Portal
   dropDown: {fileID: 567884310}
 --- !u!114 &1613167188
 MonoBehaviour:

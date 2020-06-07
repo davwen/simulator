@@ -16,6 +16,8 @@ public class DragDrop : MonoBehaviour
     private bool isMouseDown;
     private bool isMouseDownCheck;
 
+    private bool isFreeReleaseDown;
+
     public Vector3[] offsets;
     public Rigidbody2D[] bodies;
 
@@ -25,8 +27,11 @@ public class DragDrop : MonoBehaviour
     {
         controls = new InputMaster();
 
-        controls.Editor.drag.performed += ctx => isMouseDown = true;
-        controls.Editor.drag.canceled += ctx => isMouseDown = false;
+        controls.Editor.drag.performed += _ => isMouseDown = true;
+        controls.Editor.drag.canceled += _ => isMouseDown = false;
+
+        controls.Editor.freeRelease.performed += _ => isFreeReleaseDown = true;
+        controls.Editor.freeRelease.canceled += _ => isFreeReleaseDown = false;
 
         if (Instance == null)
         {
@@ -92,11 +97,12 @@ public class DragDrop : MonoBehaviour
                     body.constraints = RigidbodyConstraints2D.FreezeAll;
                 }
                 else{
-                    body.velocity = Vector3.zero;
+                    if(!isFreeReleaseDown){
+                        body.velocity = Vector3.zero;
+                    }
+                    
                     body.constraints = constraintsBeforeDrag[i];
                 }
-               
-
 
                 body.isKinematic = false;
                 i++;

@@ -145,6 +145,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""freeRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""743ff649-7150-4b1a-96d4-52608e878613"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -345,6 +353,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""multiSelect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1ac1d4d-3e94-4975-81d4-d5059ae63ebd"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""freeRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -386,6 +405,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Editor_zoom = m_Editor.FindAction("zoom", throwIfNotFound: true);
         m_Editor_copy = m_Editor.FindAction("copy", throwIfNotFound: true);
         m_Editor_multiSelect = m_Editor.FindAction("multiSelect", throwIfNotFound: true);
+        m_Editor_freeRelease = m_Editor.FindAction("freeRelease", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -451,6 +471,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Editor_zoom;
     private readonly InputAction m_Editor_copy;
     private readonly InputAction m_Editor_multiSelect;
+    private readonly InputAction m_Editor_freeRelease;
     public struct EditorActions
     {
         private @InputMaster m_Wrapper;
@@ -471,6 +492,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @zoom => m_Wrapper.m_Editor_zoom;
         public InputAction @copy => m_Wrapper.m_Editor_copy;
         public InputAction @multiSelect => m_Wrapper.m_Editor_multiSelect;
+        public InputAction @freeRelease => m_Wrapper.m_Editor_freeRelease;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -528,6 +550,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @multiSelect.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnMultiSelect;
                 @multiSelect.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnMultiSelect;
                 @multiSelect.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnMultiSelect;
+                @freeRelease.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnFreeRelease;
+                @freeRelease.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnFreeRelease;
+                @freeRelease.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnFreeRelease;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -580,6 +605,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @multiSelect.started += instance.OnMultiSelect;
                 @multiSelect.performed += instance.OnMultiSelect;
                 @multiSelect.canceled += instance.OnMultiSelect;
+                @freeRelease.started += instance.OnFreeRelease;
+                @freeRelease.performed += instance.OnFreeRelease;
+                @freeRelease.canceled += instance.OnFreeRelease;
             }
         }
     }
@@ -611,5 +639,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnZoom(InputAction.CallbackContext context);
         void OnCopy(InputAction.CallbackContext context);
         void OnMultiSelect(InputAction.CallbackContext context);
+        void OnFreeRelease(InputAction.CallbackContext context);
     }
 }

@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 792243928679230451}
   - component: {fileID: 4522350418664738488}
   - component: {fileID: 5220070766000957086}
+  - component: {fileID: 3884420190158658117}
   m_Layer: 5
   m_Name: Title
   m_TagString: UIListTitle
@@ -185,7 +186,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 221, y: -50}
-  m_SizeDelta: {x: 2891.6, y: 332}
+  m_SizeDelta: {x: 2891.6, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &792243928679230451
 CanvasRenderer:
@@ -220,10 +221,10 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
-    m_Alignment: 6
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Title
@@ -242,6 +243,20 @@ MonoBehaviour:
   text: {fileID: 4522350418664738488}
   fontKey: default
   font: {fileID: 0}
+--- !u!114 &3884420190158658117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413313471969360354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &6285959816352427112
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +351,7 @@ MonoBehaviour:
     Object: {fileID: 1413313471969360354}
   - key: input
     Object: {fileID: 1397829406546661044}
+  isAnimated: 0
 --- !u!1 &6973977086181827212
 GameObject:
   m_ObjectHideFlags: 0
